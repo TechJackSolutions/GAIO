@@ -1,4 +1,14 @@
-# Ensure consistent line endings for text files
+# Encoding
+*.md working-tree-encoding=UTF-8
+*.html working-tree-encoding=UTF-8
+*.css working-tree-encoding=UTF-8
+*.js working-tree-encoding=UTF-8
+*.json working-tree-encoding=UTF-8
+*.yml working-tree-encoding=UTF-8
+*.yaml working-tree-encoding=UTF-8
+*.txt working-tree-encoding=UTF-8
+
+# Line endings
 *.md text eol=lf
 *.html text eol=lf
 *.css text eol=lf
@@ -8,20 +18,19 @@
 *.yaml text eol=lf
 *.txt text eol=lf
 
-# Mark binary files
+# Binary files
 *.docx binary
 *.png binary
 *.jpg binary
 *.gif binary
 
-# SVG is text-based
+# SVG is text
 *.svg text
 
-# Mark license files as text
+# License files
 LICENSE-CODE text eol=lf
 LICENSE-CONTENT text eol=lf
 
 # GitHub linguist overrides
-# Classify the widget as code, everything else as documentation
 *.html linguist-detectable=true
 *.md linguist-documentation=true
