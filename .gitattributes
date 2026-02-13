@@ -1,0 +1,27 @@
+# Ensure consistent line endings for text files
+*.md text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.txt text eol=lf
+
+# Mark binary files
+*.docx binary
+*.png binary
+*.jpg binary
+*.gif binary
+
+# SVG is text-based
+*.svg text
+
+# Mark license files as text
+LICENSE-CODE text eol=lf
+LICENSE-CONTENT text eol=lf
+
+# GitHub linguist overrides
+# Classify the widget as code, everything else as documentation
+*.html linguist-detectable=true
+*.md linguist-documentation=true
