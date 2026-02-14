@@ -1119,7 +1119,7 @@ function showStep(i) {
   document.querySelectorAll('.gaio-step').forEach(s => s.classList.remove('active'));
   document.querySelector(`.gaio-step[data-step="${i}"]`).classList.add('active');
   renderProgress();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.querySelector('.gaio-widget').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   // Populate dynamic content when entering certain steps
   if (i === 1) populateSubDomains();

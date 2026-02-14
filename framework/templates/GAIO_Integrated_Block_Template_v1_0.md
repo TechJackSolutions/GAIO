@@ -18,9 +18,9 @@ The output weight is determined automatically from three configuration inputs:
 
 | Condition | Weight | Estimated Output |
 |-----------|--------|------------------|
-| Mode A + Regulated domain (Healthcare, Financial Services, Legal) | Full | ~320—380 lines |
-| Mode A + Elevated-risk domain (Cybersecurity, AI Governance) | Full | ~320—380 lines |
-| Mode A + Standard domain (Education, Software/Technology, General, Custom) | Standard | ~260—320 lines |
+| Mode A + Regulated domain (Healthcare, Financial Services, Legal, Government & Public Sector) | Full | ~320—380 lines |
+| Mode A + Elevated-risk domain (Cybersecurity, AI & Machine Learning) | Full | ~320—380 lines |
+| Mode A + Standard domain (Education, Technology & Software, General / Cross-Industry, Custom) | Standard | ~260—320 lines |
 | Mode B (Integrity Lock) + any domain | Compact | ~200—250 lines |
 
 ### Section Weight Map
