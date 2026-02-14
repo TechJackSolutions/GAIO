@@ -605,7 +605,7 @@
             <option value="">— Select —</option>
           </select>
         </div>
-        <div class="gaio-field" id="secondarySubDomainCard" class="hidden">
+        <div class="gaio-field hidden" id="secondarySubDomainCard">
           <label class="gaio-label">Secondary Specialization</label>
           <p class="gaio-hint">Select up to 3 specializations.</p>
           <div id="secondarySubDomain" class="gaio-checkbox-group"></div>
@@ -880,6 +880,14 @@ const state = {
 
 const STEPS = ['Purpose', 'Specialize', 'Authority', 'Sources', 'Scope', 'Generate'];
 const TOTAL_STEPS = STEPS.length;
+
+// ---- Security: HTML entity escaping for innerHTML contexts ----
+function esc(str) {
+  if (!str) return '';
+  const div = document.createElement('div');
+  div.textContent = String(str);
+  return div.innerHTML;
+}
 
 // ---- Domain Data ----
 const DOMAINS = {
@@ -1380,13 +1388,33 @@ function removeUrlRow(btn) {
   else { row.querySelector('.url-topic').value = ''; row.querySelector('.url-value').value = ''; }
 }
 
+function isReasonableUrl(str) {
+  try {
+    const url = new URL(str);
+    return ['http:', 'https:'].includes(url.protocol);
+  } catch {
+    return false;
+  }
+}
+
 function collectUrls() {
   state.urls = [];
+  let hasInvalidUrl = false;
   document.querySelectorAll('.gaio-repeater-row').forEach(row => {
     const topic = row.querySelector('.url-topic').value.trim();
     const url = row.querySelector('.url-value').value.trim();
-    if (topic && url) state.urls.push({ topic, url });
+    if (topic && url) {
+      state.urls.push({ topic, url });
+      const urlInput = row.querySelector('.url-value');
+      if (!isReasonableUrl(url)) {
+        hasInvalidUrl = true;
+        urlInput.style.borderColor = 'var(--warning)';
+      } else {
+        urlInput.style.borderColor = '';
+      }
+    }
   });
+  if (hasInvalidUrl) showToast('⚠ One or more URLs may not be valid. Please double-check.');
 }
 
 function showToast(msg) {
@@ -1425,7 +1453,7 @@ function buildSummary() {
   rows.push(['Verified URLs', state.urls.length > 0 ? state.urls.length + ' configured' : 'None']);
   rows.push(['Output Weight', weight.charAt(0).toUpperCase() + weight.slice(1)]);
 
-  c.innerHTML = rows.map(r => `<div class="gaio-summary-item"><span class="gaio-summary-key">${r[0]}</span><span class="gaio-summary-val">${r[1]}</span></div>`).join('');
+  c.innerHTML = rows.map(r => `<div class="gaio-summary-item"><span class="gaio-summary-key">${esc(r[0])}</span><span class="gaio-summary-val">${esc(r[1])}</span></div>`).join('');
 
   const we = document.getElementById('weightExplanation');
   const explanations = {
@@ -1463,6 +1491,7 @@ function getRigorLevel() {
 
 // ---- Assembly Engine ----
 function generateOutput() {
+  try {
   saveStepData(4);
   collectUrls();
 
@@ -1957,14 +1986,18 @@ When two rules give conflicting guidance:
   const lineCount = output.split('\n').length;
   const charCount = output.length;
   document.getElementById('outputMeta').innerHTML = `
-    <span class="gaio-output-badge">${lineCount} lines</span>
-    <span class="gaio-output-badge">${(charCount / 1024).toFixed(1)} KB</span>
-    <span class="gaio-output-badge">Weight: ${weight}</span>
+    <span class="gaio-output-badge">${esc(lineCount + ' lines')}</span>
+    <span class="gaio-output-badge">${esc((charCount / 1024).toFixed(1) + ' KB')}</span>
+    <span class="gaio-output-badge">Weight: ${esc(weight)}</span>
     <span class="gaio-output-badge">GAIO v1.0</span>
   `;
 
   document.getElementById('finalNav').classList.add('hidden');
   document.getElementById('outputWrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } catch (e) {
+    console.error('GAIO generation error:', e);
+    showToast('⚠ Configuration generation failed. Please check your inputs and try again.');
+  }
 }
 
 // ---- Copy + Download ----
