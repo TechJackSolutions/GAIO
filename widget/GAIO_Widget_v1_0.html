@@ -1649,7 +1649,7 @@ function generateOutput() {
 
   if (weight === 'compact') {
     out.push(`### CRITICAL VIOLATIONS — Zero Tolerance`);
-    out.push(`Never fabricate data, sources, statistics, URLs, attributions, quotes, or examples presented as real. Never claim expertise you do not have. Never generate unverified URLs. If detected, revise before responding.`);
+    out.push(`Never fabricate data, sources, statistics, URLs, attributions, quotes, or examples presented as real. Never claim to have accessed or reviewed source material you could not read. Never claim expertise you do not have. Never generate unverified URLs. If detected, revise before responding.`);
     out.push('');
     out.push(`### MAJOR VIOLATIONS — Avoid Always`);
     out.push(`Do not present estimates as facts, mix speculation with knowledge without labeling, generate specifics from general principles, or answer outside scope without acknowledgment. Correct before responding.`);
@@ -1669,6 +1669,10 @@ function generateOutput() {
     out.push(`- Do not create fake names of people, companies, or organizations`);
     out.push(`- Do not invent product specifications or capabilities`);
     out.push(`- Do not claim expertise or credentials you do not have`);
+    out.push(`- Do not claim to have accessed or reviewed source material you could not fully read`);
+    out.push(`- Do not present a partial read as a complete assessment — disclose what you could and could not access`);
+    out.push(`- Do not proceed with analysis based on inaccessible source material without explicit user acknowledgment`);
+    out.push(`- Do not obscure access failures with hedging language — state the limitation directly`);
     out.push('');
     out.push(`### MAJOR VIOLATIONS — Avoid Always`);
     out.push(`Correct these before responding.`);
@@ -1708,6 +1712,8 @@ function generateOutput() {
   out.push(`### When the user's premise is wrong:\nCorrect the premise first, directly and respectfully. Provide the correct information with a source. Then answer the corrected version of the question. Do not answer a question that validates a false assumption.`);
   out.push('');
   out.push(`### When the topic requires human authority:\nProvide what accurate information you have. Flag clearly that human verification is needed before action. Specify what type of human authority is appropriate and why. Do not withhold all information, but do not present it without the escalation flag.`);
+  out.push('');
+  out.push(`### When source material is inaccessible:\nAttempt access and report the result immediately. State what you can and cannot read — specifically, not vaguely. If access is partial, label which portions are verified and which are not. Do not construct an assessment from fragments without disclosing the access limitation. Do not proceed with tasks that depend on inaccessible content. Request a usable format before continuing.`);
   out.push('');
   out.push('---');
   out.push('');
@@ -1769,7 +1775,7 @@ function generateOutput() {
     out.push(`Run all three gates in order before delivering any response.`);
     out.push('');
     out.push(`### Gate 1: Critical Violation Check — Zero Tolerance`);
-    out.push(`Before delivering any response, verify: no fabricated data, sources, URLs, or attributions. Every specific claim traces to a verifiable source or is restated at the precision level you can support. If any violation is found, revise before proceeding.`);
+    out.push(`Before delivering any response, verify: no fabricated data, sources, URLs, attributions, or claims of access to unreadable source material. Every specific claim traces to a verifiable source or is restated at the precision level you can support. If any violation is found, revise before proceeding.`);
     out.push('');
     out.push(`**Remediation:** Remove the fabricated specific. Keep the observation if independently supportable. Restate at the precision level you can defend.`);
     out.push('');
@@ -1792,6 +1798,7 @@ function generateOutput() {
     out.push(`- Does the response contain URLs not from the verified reference list or confirmed via active search? → Remove URL, name authority and document title`);
     out.push(`- Does the response attribute statements to people or organizations without verification? → Remove or reframe`);
     out.push(`- Does the response present examples or case studies as real without verification? → Label as hypothetical or remove`);
+    out.push(`- Does the response claim to have reviewed source material that was inaccessible or only partially readable? → Stop. Disclose the access limitation. Do not proceed with dependent analysis.`);
     out.push('');
     out.push(`**Remediation rule:** When a check fires, match language to the precision you can verify. Remove the fabricated specific. Keep the observation if independently supportable. Restate at the precision level you can defend. If nothing is supportable without the fabricated specific, remove the claim entirely.`);
     out.push('');
@@ -1958,10 +1965,10 @@ When two rules give conflicting guidance:
   // ---- Module 12: Evaluation Note ----
   out.push(`## Evaluation Note`);
   out.push('');
-  out.push(`This configuration includes validation criteria. Your outputs may be tested against the framework's Minimum Viable Test set (28 critical-path tests) and the full evaluation suite (~152 tests across 8 categories).`);
+  out.push(`This configuration includes validation criteria. Your outputs may be tested against the framework's Minimum Viable Test set (29 critical-path tests) and the full evaluation suite (~157 tests across 8 categories).`);
   out.push('');
   out.push(`Key validation areas:`);
-  out.push(`- Fabrication prevention (zero-tolerance, tested under pressure)`);
+  out.push(`- Fabrication prevention (zero-tolerance, tested under pressure)\n- Access fabrication prevention (inaccessible source material handling)`);
   out.push(`- Source authority compliance (URL policy, citation verification)`);
   out.push(`- Scope enforcement (boundary behavior per configured mode)`);
   out.push(`- Escalation trigger accuracy (correct firing, useful responses)`);
@@ -2003,7 +2010,7 @@ When two rules give conflicting guidance:
 // ---- Copy + Download ----
 function copyOutput() {
   const text = document.getElementById('outputText').textContent;
-  navigator.clipboard.writeText(text).then(() => showToast('✔ Copied to clipboard'));
+  navigator.clipboard.writeText(text).then(() => showToast('✓ Copied to clipboard'));
 }
 
 function downloadOutput() {
@@ -2020,7 +2027,7 @@ function downloadOutput() {
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
-  showToast('✔ Downloaded');
+  showToast('✓ Downloaded');
 }
 
 // ---- Boot ----
