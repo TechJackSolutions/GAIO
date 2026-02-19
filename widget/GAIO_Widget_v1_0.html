@@ -1490,6 +1490,44 @@ function getRigorLevel() {
 }
 
 // ---- Assembly Engine ----
+// ---- GAIO Hash Utilities ----
+let gaioHashes = { canonicalHash: '', normalizedHash: '' };
+
+function normalizeForHash(text) {
+  let s = text;
+  s = s.replace(/^\uFEFF/, '').replace(/^\uFFFE/, '');           // 1. Strip BOM
+  s = s.replace(/\r\n/g, '\n').replace(/\r/g, '\n');             // 2. Normalize line endings to LF
+  s = s.replace(/\u2014/g, '--');                                 // 3. Em dash -> --
+  s = s.replace(/\u2013/g, '-');                                  // 4. En dash -> -
+  s = s.replace(/[\u201C\u201D]/g, '"');                          // 5. Smart double quotes -> straight
+  s = s.replace(/[\u2018\u2019]/g, "'");                          // 6. Smart single quotes -> straight
+  s = s.replace(/\u2192/g, '-->');                                // 7. Right arrow -> -->
+  s = s.replace(/\u2190/g, '<--');                                // 8. Left arrow -> <--
+  s = s.replace(/\u2194/g, '<-->');                               // 9. Bidirectional arrow -> <-->
+  s = s.replace(/[\u2713\u2714]/g, '[x]');                        // 10. Checkmark -> [x]
+  s = s.replace(/\u2022/g, '-');                                  // 11. Bullet -> -
+  s = s.replace(/[ \t]+$/gm, '');                                 // 12. Trailing whitespace per line
+  s = s.replace(/\n{3,}/g, '\n\n');                               // 13. Multiple blank lines -> single
+  s = s.replace(/^\s+/, '');                                      // 14. Leading file whitespace
+  s = s.replace(/\s+$/, '');                                      // 15. Trailing file whitespace
+  return s;
+}
+
+async function computeGaioHashes(outputText) {
+  const encoder = new TextEncoder();
+  const canonicalBuffer = await crypto.subtle.digest('SHA-256', encoder.encode(outputText));
+  const canonicalHash = Array.from(new Uint8Array(canonicalBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+  const normalized = normalizeForHash(outputText);
+  const normalizedBuffer = await crypto.subtle.digest('SHA-256', encoder.encode(normalized));
+  const normalizedHash = Array.from(new Uint8Array(normalizedBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+  return { canonicalHash, normalizedHash };
+}
+
+function getHashHeaderLines() {
+  if (!gaioHashes.canonicalHash) return '';
+  return `# Canonical Hash (SHA-256): ${gaioHashes.canonicalHash}\n# Normalized Hash (SHA-256): ${gaioHashes.normalizedHash}\n# Normalization Spec: v1\n`;
+}
+
 function generateOutput() {
   try {
   saveStepData(4);
@@ -1965,7 +2003,7 @@ When two rules give conflicting guidance:
   // ---- Module 12: Evaluation Note ----
   out.push(`## Evaluation Note`);
   out.push('');
-  out.push(`This configuration includes validation criteria. Your outputs may be tested against the framework's Minimum Viable Test set (29 critical-path tests) and the full evaluation suite (~157 tests across 8 categories).`);
+  out.push(`This configuration includes validation criteria. Your outputs may be tested against the framework's Minimum Viable Test set (33 critical-path tests) and the full evaluation suite (~170 tests across 9 categories).`);
   out.push('');
   out.push(`Key validation areas:`);
   out.push(`- Fabrication prevention (zero-tolerance, tested under pressure)\n- Access fabrication prevention (inaccessible source material handling)`);
@@ -1975,8 +2013,61 @@ When two rules give conflicting guidance:
   out.push(`- Validation gate integrity (three-gate sequence, rigor scaling)`);
   out.push(`- Drift resistance (long-conversation enforcement consistency)`);
   out.push(`- Conflict resolution (decision hierarchy application when rules conflict)`);
+  out.push(`- Configuration tag integrity (provenance attestation, hash reference accuracy)`);
   out.push('');
   out.push(`You are not responsible for running these tests. You are responsible for producing outputs that pass them.`);
+  out.push('');
+
+  // ---- Module 13: Configuration Tag ----
+  out.push('---');
+  out.push('');
+  out.push(`## Configuration Tag`);
+  out.push('');
+  out.push(`This configuration supports provenance tagging. When the user requests a`);
+  out.push(`GAIO Configuration Tag (trigger: "generate GAIO tag" or equivalent), produce`);
+  out.push(`a structured attestation block containing configuration metadata and`);
+  out.push(`hash references.`);
+  out.push('');
+  out.push(`**This capability is request-activated only.** Do not generate tags`);
+  out.push(`automatically. Do not append tag data to responses unless explicitly asked.`);
+  out.push(`Do not reference the tag system in normal responses.`);
+  out.push('');
+  out.push(`**Tag generation follows a two-tier process:**`);
+  out.push('');
+  out.push(`Tier 1 -- Tag Generation (always attempt):`);
+  out.push(`- Identify GAIO structural markers in session context (decision hierarchy,`);
+  out.push(`  gate references, violation tiers, version stamps, enforcement mode).`);
+  out.push(`- Extract: GAIO version, enforcement mode, primary domain, secondary`);
+  out.push(`  domain(s), sub-domain(s), authority level, weight, URL policy,`);
+  out.push(`  configuration date, purpose statement (if present).`);
+  out.push(`- Generate Tag ID: GAIO-TAG-YYYYMMDD-XXXXXXXX (date from generation`);
+  out.push(`  timestamp + 8-character unique hex identifier for this tagging event).`);
+  out.push(`- If minimum fields (version, mode, domain) cannot be extracted, state that`);
+  out.push(`  a valid GAIO configuration was not detected. Do not produce a partial tag.`);
+  out.push('');
+  out.push(`Tier 2 -- Hash References (additive, never blocks Tier 1):`);
+  out.push(`- Check the configuration header for Canonical Hash, Normalized Hash, and`);
+  out.push(`  Normalization Spec version lines.`);
+  out.push(`- If present, include them in the tag as reference values. Label them as`);
+  out.push(`  widget-generated.`);
+  out.push(`- If not present, note their absence: hashes are generated by the GAIO`);
+  out.push(`  widget at configuration creation time and may not be available if the`);
+  out.push(`  config was deployed without preserving the header hash lines.`);
+  out.push(`- Never compute, estimate, or fabricate hash values. Hashes are a widget`);
+  out.push(`  responsibility, not an AI responsibility.`);
+  out.push('');
+  out.push(`**Output format:** Markdown table (default) or plain text on request.`);
+  out.push(`Tag ID appears above the table. Verification guidance and scope-of-attestation`);
+  out.push(`caveat appear below.`);
+  out.push('');
+  out.push(`**Scope of attestation caveat (always include):** This tag certifies the`);
+  out.push(`configuration loaded in this session. It does not certify compliance with`);
+  out.push(`that configuration. For compliance assessment, request a GAIO Self-Audit.`);
+  out.push('');
+  out.push(`**Critical rule:** Never fabricate tag field values. A field that cannot be`);
+  out.push(`extracted is marked [not detected]. A hash that is not embedded in the`);
+  out.push(`configuration header is marked as not available. A tag with gaps is honest.`);
+  out.push(`A tag with invented values is a Critical Violation.`);
   out.push('');
 
   // ---- Footer ----
@@ -1986,18 +2077,47 @@ When two rules give conflicting guidance:
 
   const output = out.join('\n');
 
-  // Display
+  // Display output immediately (hashes computed async, don't block)
   document.getElementById('outputText').textContent = output;
   document.getElementById('outputWrap').classList.add('visible');
 
   const lineCount = output.split('\n').length;
   const charCount = output.length;
-  document.getElementById('outputMeta').innerHTML = `
+
+  // Show initial badges without hashes
+  const metaEl = document.getElementById('outputMeta');
+  metaEl.innerHTML = `
     <span class="gaio-output-badge">${esc(lineCount + ' lines')}</span>
     <span class="gaio-output-badge">${esc((charCount / 1024).toFixed(1) + ' KB')}</span>
     <span class="gaio-output-badge">Weight: ${esc(weight)}</span>
     <span class="gaio-output-badge">GAIO v1.0</span>
+    <span class="gaio-output-badge" id="hashBadgeCanonical" style="display:none"></span>
+    <span class="gaio-output-badge" id="hashBadgeNormalized" style="display:none"></span>
   `;
+
+  // Compute hashes async
+  computeGaioHashes(output).then(hashes => {
+    gaioHashes = hashes;
+    const truncHash = (h) => h.substring(0, 12) + '...';
+    const canonBadge = document.getElementById('hashBadgeCanonical');
+    const normBadge = document.getElementById('hashBadgeNormalized');
+    if (canonBadge) {
+      canonBadge.textContent = 'Canonical: ' + truncHash(hashes.canonicalHash);
+      canonBadge.title = 'Click to copy full hash: ' + hashes.canonicalHash;
+      canonBadge.style.display = '';
+      canonBadge.style.cursor = 'pointer';
+      canonBadge.onclick = () => { navigator.clipboard.writeText(hashes.canonicalHash).then(() => showToast('\u2713 Canonical hash copied')); };
+    }
+    if (normBadge) {
+      normBadge.textContent = 'Normalized: ' + truncHash(hashes.normalizedHash);
+      normBadge.title = 'Click to copy full hash: ' + hashes.normalizedHash;
+      normBadge.style.display = '';
+      normBadge.style.cursor = 'pointer';
+      normBadge.onclick = () => { navigator.clipboard.writeText(hashes.normalizedHash).then(() => showToast('\u2713 Normalized hash copied')); };
+    }
+  }).catch(err => {
+    console.warn('GAIO hash computation failed:', err);
+  });
 
   document.getElementById('finalNav').classList.add('hidden');
   document.getElementById('outputWrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -2009,12 +2129,20 @@ When two rules give conflicting guidance:
 
 // ---- Copy + Download ----
 function copyOutput() {
-  const text = document.getElementById('outputText').textContent;
-  navigator.clipboard.writeText(text).then(() => showToast('✓ Copied to clipboard'));
+  let text = document.getElementById('outputText').textContent;
+  if (gaioHashes.canonicalHash) {
+    const hashLines = getHashHeaderLines();
+    text = text.replace(/^(# Weight: [^\n]*\n)/m, '$1' + hashLines);
+  }
+  navigator.clipboard.writeText(text).then(() => showToast('\u2713 Copied to clipboard'));
 }
 
 function downloadOutput() {
-  const text = document.getElementById('outputText').textContent;
+  let text = document.getElementById('outputText').textContent;
+  if (gaioHashes.canonicalHash) {
+    const hashLines = getHashHeaderLines();
+    text = text.replace(/^(# Weight: [^\n]*\n)/m, '$1' + hashLines);
+  }
   const blob = new Blob([text], { type: 'text/plain' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
