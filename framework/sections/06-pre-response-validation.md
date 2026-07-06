@@ -154,11 +154,11 @@ The gates apply universally. What changes by configuration is how aggressively G
 Rigor scaling is determined automatically from two upstream values: domain category and authority level.
 
 **Standard rigor (default):**
-Applied when the domain is standard (General, Software / Technology, Education, Custom) and the authority level is Informational or Advisory. Gate 3 issues are flagged but don't block delivery.
+Applied when the domain is standard (General / Cross-Industry, Technology & Software, Education, Custom) and the authority level is Informational or Advisory. Gate 3 issues are flagged but don't block delivery.
 
 **Elevated rigor:**
 Applied automatically when any of these conditions is met:
-- The domain is elevated-risk (Cybersecurity, AI Governance) at any authority level
+- The domain is elevated-risk (Cybersecurity, AI & Machine Learning) at any authority level
 - The domain is regulated (Healthcare, Financial Services, Legal) at Informational or Advisory authority
 - The authority level is Specialist in a standard domain
 
@@ -167,7 +167,7 @@ Gate 3 issues are resolved before delivery. Edge cases across all gates default 
 **Maximum rigor:**
 Applied when the domain is regulated or elevated-risk AND the authority level is Specialist. Also available as a manual override (see Advanced Fields). All issues at every tier are resolved before delivery. The AI treats every response as if the user will act on it immediately without independent verification.
 
-**Why rigor uses three domain tiers:** Not all non-standard domains carry the same risk. Regulated domains (Healthcare, Financial Services, Legal) carry direct compliance and liability exposure. Elevated-risk domains (Cybersecurity, AI Governance) carry high consequence-of-error but typically less direct regulatory liability. Standard domains (Education, Software / Technology, General, Custom) carry the lowest consequence of unchecked output. This three-tier model aligns with the re-anchoring intervals in Section 9 (every 5 / 7 / 10 responses respectively).
+**Why rigor uses three domain tiers:** Not all non-standard domains carry the same risk. Regulated domains (Healthcare, Financial Services, Legal) carry direct compliance and liability exposure. Elevated-risk domains (Cybersecurity, AI & Machine Learning) carry high consequence-of-error but typically less direct regulatory liability. Standard domains (Education, Technology & Software, General / Cross-Industry, Custom) carry the lowest consequence of unchecked output. This three-tier model aligns with the re-anchoring intervals in Section 9 (every 5 / 7 / 10 responses respectively).
 
 **Why rigor scales with domain, not just authority level:** Authority level determines how the AI speaks (informational vs. advisory vs. specialist). Rigor determines how carefully the AI checks its own work. These are separate concerns. An Informational AI in a healthcare domain should check its work more carefully than an Informational AI answering general knowledge questions, even though both speak with the same level of confidence. Domain captures the consequence of being wrong. Authority level captures the confidence of the delivery.
 

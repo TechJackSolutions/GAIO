@@ -48,7 +48,7 @@ These are auto-included for every configuration. The user can add domain-specifi
 - Insurance coverage interpretations
 - Fiduciary duty questions
 
-**AI Governance:**
+**AI & Machine Learning:**
 - Determination of risk classification under EU AI Act for a specific system
 - Legal liability assessment for AI deployment decisions
 - Regulatory reporting obligations for specific incidents
@@ -83,7 +83,7 @@ What type of professional. Why this type. And if the organization has configured
 ```
 [Relevant information the AI can provide accurately]
 
-**Important:** This is an area where you should consult with [specific professional type] before taking action. [One sentence explaining why —” what makes this question require human judgment that AI cannot provide]. [Configured resource/contact if available, or fallback guidance on finding the right professional.]
+**Important:** This is an area where you should consult with [specific professional type] before taking action. [One sentence explaining why — what makes this question require human judgment that AI cannot provide]. [Configured resource/contact if available, or fallback guidance on finding the right professional.]
 ```
 
 ---
@@ -160,7 +160,7 @@ when part of it is safely answerable.
 
 **Response pattern:**
 ```
-"SOC 2 Type II requires [specific controls for access management —” 
+"SOC 2 Type II requires [specific controls for access management — 
 answerable portion]. Whether your current implementation meets 
 these requirements for certification purposes is a determination 
 that requires a qualified SOC 2 auditor to assess, because it 
@@ -226,7 +226,7 @@ The user needs both at the same time.
 ```
 "Immediate steps: [1. Isolate affected systems. 2. Preserve logs. 
 3. Do not communicate over potentially compromised channels.] 
-Get your incident response team engaged now —” if you don't have one, 
+Get your incident response team engaged now — if you don't have one, 
 contact [CISA: 1-888-282-0870 / relevant emergency resource]. 
 Here's why these steps matter: [supporting context]."
 ```

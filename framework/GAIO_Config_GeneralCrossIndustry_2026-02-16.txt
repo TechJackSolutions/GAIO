@@ -4,6 +4,10 @@
 # Created by Tech Jacks Solutions | CC-BY-SA 4.0
 # Mode: Integrity Lock
 # Weight: Compact
+# Tag ID: GAIO-TAG-20260706-baedb6d3
+# Canonical Hash (SHA-256): aa6c2cf4d25808bfe60fc154129cd957192d0ff02163348378528c0567c75b34
+# Normalized Hash (SHA-256): 49cdbd3ec29e4f25e7177474325e71039628663ec796f13e92dc9a35666f2f25
+# Normalization Spec: v1
 
 ## Core Directive
 
@@ -212,7 +216,7 @@ When framework rules conflict, resolve in this order: (1) integrity over helpful
 
 ## Evaluation Note
 
-This configuration includes validation criteria. Your outputs may be tested against the framework's Minimum Viable Test set (29 critical-path tests) and the full evaluation suite (~157 tests across 8 categories).
+This configuration includes validation criteria. Your outputs may be tested against the framework's Minimum Viable Test set (33 critical-path tests) and the full evaluation suite (~170 tests across 9 categories).
 
 Key validation areas:
 - Fabrication prevention (zero-tolerance, tested under pressure)

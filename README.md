@@ -67,15 +67,16 @@ The widget bridges the two layers. You answer questions → the widget generates
 | Core Directive | Sets the AI's mission, decision hierarchy, and persistence rules |
 | Scope Definition | Defines the domain, approved sources, topic boundaries, and URL policy |
 | Violation Hierarchy | Classifies violations into Critical (zero tolerance), Major (avoid always), and Minor (minimize) |
-| Required Behaviors | Templates for 7 scenarios: when the AI knows, partially knows, doesn't know, is asked to fabricate, needs to flag a hypothetical, encounters a wrong premise, or should defer to a human |
+| Required Behaviors | Templates for 8 scenarios: when the AI knows, partially knows, doesn't know, is asked to fabricate, needs to flag a hypothetical, encounters a wrong premise, should defer to a human, or cannot access a provided source |
 | Escalation Protocol | Triggers and routing for "this needs human review" situations |
 | Pre-Response Validation | Three-gate check the AI runs before every response, aligned to violation severity |
 | Edge Case Handling | Cross-cutting edge cases + an extensibility framework for community contributions |
-| Domain Configuration | 38 sub-domain profiles across 9 domains that auto-populate sources, triggers, and scope |
+| Domain Configuration | 9 named parent domains (plus Custom) with 38 sub-domain profiles that auto-populate sources, triggers, and scope |
 | Drift Prevention | Detects and corrects validation degradation over long conversations |
 | Session Persistence | Separates integrity rules (always enforced) from operational rules (configurable by use case) |
 | Implementation Priority | Resolves conflicts when framework rules contradict each other |
-| Evaluation Hooks | ~152 validation tests with a 28-test minimum viable set |
+| Evaluation Hooks | 184 per-section validation tests (~170 unique) with a 33-test minimum viable set across 9 categories |
+| Configuration Tag | Tamper-evident provenance: dual SHA-256 hashes over the config, computed by the widget — never by the AI |
 
 ### Enforcement Modes
 
@@ -85,7 +86,7 @@ The widget bridges the two layers. You answer questions → the widget generates
 
 ### Configuration Scale
 
-The widget supports 9 parent domains, 38 sub-domain profiles (multi-select, up to 3 per domain), primary + secondary domain combinations, 3 authority levels, 2 enforcement modes, 3 URL policies, and configurable scope, sources, and escalation routing. This produces an estimated 707,000+ unique configurations before manual edits.
+The widget supports 9 named parent domains plus a Custom option, 38 sub-domain profiles (multi-select, up to 3 per domain), primary + secondary domain combinations, 3 authority levels, 2 enforcement modes, 3 URL policies, and configurable scope, sources, and escalation routing. This produces an estimated 707,000+ unique configurations before manual edits.
 
 ---
 
@@ -125,19 +126,24 @@ Speed-optimized inference modes may deprioritize system prompt instruction follo
 ```
 GAIO/
 ├── README.md
+├── CHANGELOG.md
+├── LICENSE                             # Dual-license pointer
 ├── LICENSE-CODE                        # Apache 2.0 (widget)
 ├── LICENSE-CONTENT                     # CC-BY-SA 4.0 (framework, guides)
 │
 ├── framework/
 │   ├── canonical/
-│   │   └── GAIO_Canonical_v1_0.md      # Complete standard (~3,750 lines)
+│   │   └── GAIO_Canonical_v1_0.md      # Complete standard (~4,840 lines)
 │   ├── sections/
 │   │   ├── 01-core-directive.md        # Individual section files
 │   │   ├── 02-scope-definition.md
-│   │   └── ...through 12
-│   └── templates/
-│       ├── GAIO_Integrated_Block_Template_v1_0.md
-│       └── GAIO_Modular_Section_Output_v1_0.md
+│   │   └── ...through 13
+│   ├── templates/
+│   │   ├── GAIO_Integrated_Block_Template_v1_0.md
+│   │   ├── GAIO_Modular_Section_Output_v1_0.md
+│   │   └── 13-configuration-tag-modular.md
+│   ├── manifest.json                   # Authoritative version + framework statistics
+│   └── GAIO_Config_GeneralCrossIndustry_2026-02-16.txt   # Example config
 │
 ├── guides/
 │   ├── GAIO_Setup_Guide_Claude_Projects.md
@@ -148,19 +154,20 @@ GAIO/
 │   └── GAIO_FAQ_Context_Window.md
 │
 ├── widget/
-│   └── GAIO_Widget_v1_0.html           # Single-file widget (~1,890 lines)
+│   └── GAIO_Widget_v1_0.html           # Single-file widget (~2,170 lines)
 │
 └── docs/
-    └── platform-compatibility-report.md
+    ├── platform-compatibility-report.md
+    └── GAIO_Verification_Guide.md      # Tag verification: Normalization Spec v1 + JSON Schema + procedure
 ```
 
 ---
 
 ## Versioning
 
-Repository releases (e.g., v0.9.0) represent the overall framework version. Individual sections carry their own draft numbers (e.g., Draft 1.3) reflecting internal revision history. The repository release version is the authoritative reference for compatibility and citation.
+Repository releases represent the overall framework version. Individual sections carry their own draft numbers (e.g., Draft 1.3) reflecting internal revision history. The repository release version — recorded in `framework/manifest.json` and as a git tag — is the authoritative reference for compatibility and citation. See [CHANGELOG.md](CHANGELOG.md) for release history.
 
-This project uses [Semantic Versioning](https://semver.org/). GAIO is currently in pre-release (v0.x.x), meaning the framework is functional and tested but still undergoing validation and refinement. Expect the interface and structure to stabilize at v1.0.0.
+This project uses [Semantic Versioning](https://semver.org/). Current release: **v1.0.0**. Framework statistics (test counts, domain counts, section counts) are maintained in `framework/manifest.json` — that file is the single source of truth; any conflicting count elsewhere in the repository is an error.
 
 ---
 
@@ -218,4 +225,4 @@ All contributions must use verifiable sources only. No fabricated authorities, s
 
 ---
 
-*GAIO v0.9.0 — Created and maintained by Tech Jacks Solutions. Framework licensed under CC-BY-SA 4.0. Widget licensed under Apache 2.0.*
+*GAIO v1.0.0 — Created and maintained by Tech Jacks Solutions. Framework licensed under CC-BY-SA 4.0. Widget licensed under Apache 2.0.*

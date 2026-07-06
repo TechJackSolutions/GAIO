@@ -82,6 +82,39 @@ print(response.text)
 
 ---
 
+## Cost: Cache the Config Prefix (Strongly Recommended)
+
+A GAIO config adds roughly 1,500–3,500 tokens to every request (see the Context Window FAQ). In any application making repeated calls, that prefix is identical every time — pay for it once, not on every call. Providers offer prompt caching for exactly this pattern:
+
+### Anthropic (Claude API)
+
+Mark the system prompt as cacheable with `cache_control`. Cached reads are billed at a fraction of the normal input rate:
+
+```python
+response = client.messages.create(
+    model="claude-sonnet-4-5-20250929",
+    max_tokens=4096,
+    system=[
+        {
+            "type": "text",
+            "text": gaio_config,
+            "cache_control": {"type": "ephemeral"}
+        }
+    ],
+    messages=[{"role": "user", "content": "Your question here"}]
+)
+```
+
+### OpenAI (GPT API)
+
+Prompt caching is automatic for repeated prefixes above the provider's minimum length — no code change needed, but structure requests so the GAIO config is always the FIRST content (system message before anything variable), or the prefix match breaks.
+
+### Why this matters for GAIO specifically
+
+GAIO's value comes from being present in *every* call. Without caching, that means paying the full config token cost on every call; with caching, the config becomes nearly free after the first request in each cache window. If you meter LLM spend, treat an uncached GAIO prefix in a high-volume pipeline as a cost defect. The weight tiers (Full / Standard / Compact, roughly 3,500 / 2,500 / 1,500 tokens) are the second cost lever: use the lightest weight that meets your enforcement needs, and cache whichever you choose.
+
+---
+
 ## Local / Open-Source Models
 
 ### Ollama
@@ -221,7 +254,7 @@ This is the enterprise pattern — users never see or manage the config, it's ap
 
 **Don't modify configs by hand unless you know the framework.** The widget generates internally consistent configurations — changing one rule can create conflicts with others. If you need to customize, start from the widget output and make targeted edits following the canonical documentation.
 
-**Test after every config change.** Use the Minimum Viable Test set (28 tests in Section 12) or at minimum, the four basic checks: factual question, out-of-scope question, fabrication request, uncertainty admission.
+**Test after every config change.** Use the Minimum Viable Test set (33 tests in Section 12) or at minimum, the four basic checks: factual question, out-of-scope question, fabrication request, uncertainty admission.
 
 **Monitor compliance in production.** Log model responses alongside the GAIO config version that was active. If you detect fabrication or scope violations in production, you can trace whether the config was loaded, which model was used, and whether drift prevention triggered.
 

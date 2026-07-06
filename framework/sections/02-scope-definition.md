@@ -43,10 +43,10 @@ Options:
 - Cybersecurity / Information Security
 - Healthcare / Medical
 - Financial Services
-- AI Governance / Compliance
+- AI & Machine Learning
 - Legal
 - Education
-- Software / Technology
+- Technology & Software
 - Custom (define your own)
 
 *Default if blank:* General / No specific domain.
@@ -59,7 +59,7 @@ Additional fields the AI needs to draw on to support the primary work. Secondary
 
 *Default if blank:* None. The AI operates within the primary domain only.
 
-*Guidance for users:* Select secondary domains when your work regularly crosses into other fields. A cloud engineer whose primary domain is Software / Technology might add Cybersecurity as a secondary domain to get cloud security authority sources and scope coverage. A healthcare IT professional whose primary domain is Healthcare might add Software / Technology to cover system integration and technical architecture work.
+*Guidance for users:* Select secondary domains when your work regularly crosses into other fields. A cloud engineer whose primary domain is Technology & Software might add Cybersecurity as a secondary domain to get cloud security authority sources and scope coverage. A healthcare IT professional whose primary domain is Healthcare might add Technology & Software to cover system integration and technical architecture work.
 
 *Cap at two:* Adding more than two secondary domains dilutes the source prioritization that makes domain selection valuable. If you need three or more domains, consider whether "General / No specific domain" with manually configured authority tiers better matches your use case.
 
@@ -67,15 +67,15 @@ Additional fields the AI needs to draw on to support the primary work. Secondary
 
 | Configuration Aspect | Primary Domain | Secondary Domains |
 |---------------------|---------------|-------------------|
-| Authority tiers —” Primary sources | Full defaults | Added to Secondary sources tier |
-| Authority tiers —” Secondary sources | Full defaults | Merged with existing Secondary sources |
+| Authority tiers — Primary sources | Full defaults | Added to Secondary sources tier |
+| Authority tiers — Secondary sources | Full defaults | Merged with existing Secondary sources |
 | Escalation triggers | Full defaults | Added to primary's trigger list (union) |
-| Scope hints —” In-scope | Full defaults | Extended (union of all domains) |
-| Scope hints —” Out-of-scope | Full defaults | Narrowed (only topics excluded by ALL selected domains remain hard-excluded) |
-| Rigor scaling | Drives rigor level | No effect —” rigor follows primary domain |
-| Authority Level | Set once, applies to all | No effect —” single authority level |
+| Scope hints — In-scope | Full defaults | Extended (union of all domains) |
+| Scope hints — Out-of-scope | Full defaults | Narrowed (only topics excluded by ALL selected domains remain hard-excluded) |
+| Rigor scaling | Drives rigor level | No effect — rigor follows primary domain |
+| Authority Level | Set once, applies to all | No effect — single authority level |
 
-*Why secondary domain sources enter the Secondary tier:* The primary domain's sources are where the AI looks first. Secondary domain sources extend coverage without competing for priority. A cloud engineer with primary Software / Technology and secondary Cybersecurity gets OWASP and NIST as available sources but still prioritizes vendor documentation and official language/framework references for their core work. If the user wants a secondary domain's sources treated as primary, they can manually promote them —” the override chain still applies.
+*Why secondary domain sources enter the Secondary tier:* The primary domain's sources are where the AI looks first. Secondary domain sources extend coverage without competing for priority. A cloud engineer with primary Technology & Software and secondary Cybersecurity gets OWASP and NIST as available sources but still prioritizes vendor documentation and official language/framework references for their core work. If the user wants a secondary domain's sources treated as primary, they can manually promote them — the override chain still applies.
 
 *Why out-of-scope topics narrow:* If the primary domain excludes "application code review" but the secondary domain includes it, the exclusion doesn't make sense anymore. Out-of-scope defaults only persist when all selected domains agree that a topic is out of scope. The user can still manually add any exclusion they want.
 
@@ -104,7 +104,7 @@ When the user selects domains in Step 1, this populates automatically. Primary d
 - Secondary: Basel Committee publications, FASB
 - Regulatory: Dodd-Frank provisions, SOX compliance documentation
 
-**AI Governance defaults:**
+**AI & Machine Learning defaults:**
 - Primary: NIST AI RMF, EU AI Act (official text), ISO/IEC 42001
 - Secondary: OECD AI Principles, IEEE standards
 - Regulatory: Jurisdiction-specific AI regulations
@@ -132,7 +132,7 @@ When the user selects domains in Step 1, this populates automatically. Primary d
 
 **Authority tier merge example:**
 
-If the user selects Primary: Software / Technology, Secondary: Cybersecurity, the assembled authority tier is:
+If the user selects Primary: Technology & Software, Secondary: Cybersecurity, the assembled authority tier is:
 
 *Primary sources:*
 - Official language/framework documentation
@@ -174,7 +174,7 @@ AI can provide URLs it has actively found and verified through web search, in ad
 
 *Best for:* General knowledge, technical support, research assistance, and any context where the AI platform can actively search the web.
 
-*Labeling requirement:* When the AI provides a search-retrieved URL, it must indicate this clearly. Example: "Source: NIST SP 800-53 Rev 5 (retrieved via search —” verify before relying on this link): [URL]"
+*Labeling requirement:* When the AI provides a search-retrieved URL, it must indicate this clearly. Example: "Source: NIST SP 800-53 Rev 5 (retrieved via search — verify before relying on this link): [URL]"
 
 **Option C: No URL restrictions**
 AI provides links as it normally would with no special handling or labeling. Not recommended for professional, regulated, or high-stakes use cases. Acceptable for casual, low-risk interactions where link accuracy is not critical.
@@ -208,7 +208,7 @@ List the topics this AI is authorized to address. Specific enough that a borderl
 
 When secondary domains are selected, the widget auto-populates scope hints from all selected domains (primary + secondary). The user sees a combined list and can edit freely.
 
-*Example (primary: Software / Technology, secondary: Cybersecurity):*
+*Example (primary: Technology & Software, secondary: Cybersecurity):*
 - Software architecture and design patterns
 - API design and integration
 - Cloud infrastructure and deployment
@@ -291,7 +291,7 @@ What should the AI do when its authorities disagree with each other?
 
 *Default if blank:* Option A.
 
-*Note on multi-domain configurations:* When primary and secondary domain sources conflict, Option B applies the domain hierarchy —” primary domain sources take precedence over secondary domain sources. This is separate from the authority tier hierarchy (Primary tier > Secondary tier within a domain). Both hierarchies apply: a primary domain's primary tier source outranks everything, and a primary domain's secondary tier source outranks a secondary domain's primary tier source when they conflict.
+*Note on multi-domain configurations:* When primary and secondary domain sources conflict, Option B applies the domain hierarchy — primary domain sources take precedence over secondary domain sources. This is separate from the authority tier hierarchy (Primary tier > Secondary tier within a domain). Both hierarchies apply: a primary domain's primary tier source outranks everything, and a primary domain's secondary tier source outranks a secondary domain's primary tier source when they conflict.
 
 **5.3 Source Staleness Acknowledgment**
 
@@ -327,25 +327,25 @@ The [configuration date] is auto-stamped by the widget when the output is genera
 
 ---
 
-## Model-Consumed Output (Assembled Example —” Multi-Domain)
+## Model-Consumed Output (Assembled Example — Multi-Domain)
 
-When a user selects Primary: Software / Technology, Secondary: Cybersecurity:
+When a user selects Primary: Technology & Software, Secondary: Cybersecurity:
 
 ```
 ## Scope Definition
 
 **Purpose:** This AI assists with cloud infrastructure design, API development, and security architecture for a cloud engineering team.
 
-**Primary Domain:** Software / Technology
+**Primary Domain:** Technology & Software
 **Secondary Domain:** Cybersecurity
-**Authority Level:** Advisory —” provides information and qualified recommendations.
+**Authority Level:** Advisory — provides information and qualified recommendations.
 **Configuration Date:** February 12, 2026
 
 ## Source Authority
 
 **Primary Sources (prioritize these):**
 - Official language/framework documentation
-- Vendor-specific technical documentation (AWS, Azure, GCP —” official docs only)
+- Vendor-specific technical documentation (AWS, Azure, GCP — official docs only)
 - NIST cybersecurity frameworks (when security topics arise)
 
 **Secondary Sources (acceptable when primary unavailable):**
@@ -364,7 +364,7 @@ When a user selects Primary: Software / Technology, Secondary: Cybersecurity:
 
 **Source Rules:**
 - Prefer verified reference URLs over search-retrieved URLs.
-- When primary and secondary domain sources conflict, defer to primary domain sources (Software / Technology).
+- When primary and secondary domain sources conflict, defer to primary domain sources (Technology & Software).
 - When sources within the same tier conflict, flag the discrepancy and present both positions.
 - Reference URLs were verified as of February 12, 2026. Standards and sources may have been updated since this configuration was created.
 
@@ -394,7 +394,7 @@ When a user selects Primary: Software / Technology, Secondary: Cybersecurity:
 **Scope Rule:** If a question is ambiguous about whether it falls in-scope, default to the more restrictive interpretation. It is better to redirect unnecessarily than to answer outside your boundaries.
 ```
 
-## Model-Consumed Output (Assembled Example —” Single Domain, unchanged from 1.2)
+## Model-Consumed Output (Assembled Example — Single Domain, unchanged from 1.2)
 
 When a user selects only a primary domain with no secondary domains, the output is identical to the Draft 1.2 format. No multi-domain merge logic applies.
 
@@ -413,11 +413,11 @@ When a user selects only a primary domain with no secondary domains, the output 
 8. **Conflict test:** Present a scenario where authorities disagree. Does the AI handle it per the configured resolution method?
 
 ### Multi-Domain Tests (new in 1.3)
-9. **Authority tier merge test:** Configure primary Software / Technology with secondary Cybersecurity. Ask a cybersecurity question. Does the AI cite cybersecurity sources from the secondary tier?
-10. **Primary domain priority test:** Present a scenario where a Software / Technology source and a Cybersecurity source give different guidance. Does the AI prioritize the primary domain source?
-11. **Scope extension test:** Configure primary Software / Technology with secondary Cybersecurity. Ask about cloud IAM policy (covered by Cybersecurity scope hints). Does the AI treat it as in-scope?
-12. **Out-of-scope narrowing test:** Configure primary Software / Technology (which excludes "application vulnerability assessment" via some sub-domain scope hints) with secondary Cybersecurity/Application Security (which includes it). Is "application vulnerability assessment" no longer excluded?
+9. **Authority tier merge test:** Configure primary Technology & Software with secondary Cybersecurity. Ask a cybersecurity question. Does the AI cite cybersecurity sources from the secondary tier?
+10. **Primary domain priority test:** Present a scenario where a Technology & Software source and a Cybersecurity source give different guidance. Does the AI prioritize the primary domain source?
+11. **Scope extension test:** Configure primary Technology & Software with secondary Cybersecurity. Ask about cloud IAM policy (covered by Cybersecurity scope hints). Does the AI treat it as in-scope?
+12. **Out-of-scope narrowing test:** Configure primary Technology & Software (which excludes "application vulnerability assessment" via some sub-domain scope hints) with secondary Cybersecurity/Application Security (which includes it). Is "application vulnerability assessment" no longer excluded?
 13. **Single-domain equivalence test:** Configure a primary domain with no secondary domains. Is the output identical to Draft 1.2 single-domain format?
 14. **Secondary domain cap test:** Attempt to select 3 secondary domains. Does the widget enforce the 2-domain cap?
 15. **Secondary domain removal test:** Add a secondary domain, let authority tiers merge, then remove it. Do the secondary domain's contributed sources disappear cleanly?
-16. **Cross-domain escalation merge test:** Configure primary Software / Technology with secondary Healthcare. Do both domains' escalation triggers appear in the combined trigger list?
+16. **Cross-domain escalation merge test:** Configure primary Technology & Software with secondary Healthcare. Do both domains' escalation triggers appear in the combined trigger list?

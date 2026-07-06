@@ -1,0 +1,22 @@
+{
+  "name": "GAIO",
+  "full_name": "Guardrail Architecture for Informed Output",
+  "version": "1.0.0",
+  "release_date": "2026-07-06",
+  "canonical_document": "framework/canonical/GAIO_Canonical_v1_0.md",
+  "statistics": {
+    "sections": 13,
+    "design_decisions": 23,
+    "tests_per_section_total": 184,
+    "tests_unique_after_dedup": "~170",
+    "minimum_viable_test_set": 33,
+    "evaluation_categories": 9,
+    "subdomain_profiles": 38,
+    "parent_domains": "9 named + Custom (verified against widget DOMAINS list 2026-07-06)",
+    "behavioral_scenarios": 8,
+    "conflict_types_mapped": 6,
+    "edge_cases_launch": "5 cross-cutting + 7 escalation-specific"
+  },
+  "normalization_spec": "v1",
+  "notes": "This manifest is the single source of truth for version and framework statistics. Any conflicting count in README, configs, templates, or the canonical document is an error against this file. Source: canonical Appendix B (Framework Statistics)."
+}

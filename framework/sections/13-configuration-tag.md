@@ -248,7 +248,11 @@ After `generateOutput()` produces the configuration text:
 4. Display both hashes in the metadata badges area alongside existing badges (line count, KB, weight, version).
 5. Embed both hashes and normalization version in the .txt file header when the user downloads.
 
+**Hash-line exclusion (verification-critical):** Both hashes are computed over the configuration text BEFORE the hash header lines are inserted. The hash lines are not part of the hashed region. A verifier must remove the embedded hash header lines (and the Tag ID line, if present) from the file before recomputing — hashing the downloaded file as-is will always mismatch. See the GAIO Verification Guide for the full procedure.
+
 ### Updated Header Block (downloaded .txt file)
+
+The hash lines are inserted immediately after the `# Weight:` line. Domain and authority fields appear in the Module 02 (Scope Definition) body, not in this header. *(Corrected 2026-07-06 to match the widget's actual output; an earlier draft of this example showed domain/authority header lines the widget does not emit.)*
 
 ```
 # GAIO Configuration
@@ -257,9 +261,6 @@ After `generateOutput()` produces the configuration text:
 # Created by Tech Jacks Solutions | CC-BY-SA 4.0
 # Mode: [Mode A: Full Enforcement / Mode B: Integrity Lock]
 # Weight: [Full / Standard / Compact]
-# Primary Domain: [domain]
-# Secondary Domain(s): [secondary_domains | "None"]
-# Authority Level: [authority_level]
 # Canonical Hash (SHA-256): [canonical_hash]
 # Normalized Hash (SHA-256): [normalized_hash]
 # Normalization Spec: v1
