@@ -67,7 +67,7 @@ The widget bridges the two layers. You answer questions → the widget generates
 | Core Directive | Sets the AI's mission, decision hierarchy, and persistence rules |
 | Scope Definition | Defines the domain, approved sources, topic boundaries, and URL policy |
 | Violation Hierarchy | Classifies violations into Critical (zero tolerance), Major (avoid always), and Minor (minimize) |
-| Required Behaviors | Templates for 8 scenarios: when the AI knows, partially knows, doesn't know, is asked to fabricate, needs to flag a hypothetical, encounters a wrong premise, should defer to a human, or cannot access a provided source |
+| Required Behaviors | Templates for 9 scenarios: when the AI knows, partially knows, doesn't know, is asked to fabricate, needs to flag a hypothetical, encounters a wrong premise, should defer to a human, cannot access a provided source, or produces assessments/scores/compliance outputs — plus cross-scenario source rules |
 | Escalation Protocol | Triggers and routing for "this needs human review" situations |
 | Pre-Response Validation | Three-gate check the AI runs before every response, aligned to violation severity |
 | Edge Case Handling | Cross-cutting edge cases + an extensibility framework for community contributions |
@@ -75,8 +75,10 @@ The widget bridges the two layers. You answer questions → the widget generates
 | Drift Prevention | Detects and corrects validation degradation over long conversations |
 | Session Persistence | Separates integrity rules (always enforced) from operational rules (configurable by use case) |
 | Implementation Priority | Resolves conflicts when framework rules contradict each other |
-| Evaluation Hooks | 184 per-section validation tests (~170 unique) with a 33-test minimum viable set across 9 categories |
+| Evaluation & Enforcement Hooks | 184-test baseline (~170 unique, 33-test MVT, 9 categories) plus v2 additions; tests exist to be run, and Section 15 classifies which are machine-decidable |
 | Configuration Tag | Tamper-evident provenance: dual SHA-256 hashes over the config, computed by the widget — never by the AI |
+| Composition & External Authority *(v2)* | How GAIO behaves alongside a host system prompt, a second config, or when spawning delegated agents — channel-bound authority, no config-from-chat |
+| Enforcement Architecture & Honest Limits *(v2)* | What the framework can deterministically enforce vs. only encourage — the two-layer model, a three-tier control classification, and a research-grounded statement of the framework's own limits |
 
 ### Enforcement Modes
 
@@ -86,7 +88,11 @@ The widget bridges the two layers. You answer questions → the widget generates
 
 ### Configuration Scale
 
-The widget supports 9 named parent domains plus a Custom option, 38 sub-domain profiles (multi-select, up to 3 per domain), primary + secondary domain combinations, 3 authority levels, 2 enforcement modes, 3 URL policies, and configurable scope, sources, and escalation routing. This produces an estimated 707,000+ unique configurations before manual edits.
+The widget supports 9 named parent domains plus a Custom option, 38 sub-domain profiles (multi-select, up to 3 per domain), primary + secondary domain combinations, 3 authority levels, 2 enforcement modes (independent of size), 4 weight tiers (Full / Standard / Compact / Micro), 3 URL policies, and configurable scope, sources, and escalation routing. This produces an estimated 707,000+ unique configurations before manual edits.
+
+### Fitting Platform Instruction Fields
+
+Real platforms cap instruction fields (Copilot Studio and Custom GPTs around 8,000 characters; ChatGPT Custom Instructions at 1,500 per box). The widget's platform-fit system — a deployment-target picker with a dated limits registry, a live size meter, and a never-truncate guard — makes sure what you deploy is what you configured. The **Micro** tier renders every integrity rule in kernel form (~7,800–7,950 characters); when a budget is smaller still, whole optional rule groups are removed in a published drop order with every removal disclosed on the configuration's `# Weight Omissions:` line — never by cutting text mid-rule. Surfaces below the integrity-core floor get an honestly de-badged Integrity Excerpt instead of a fake deployment. Details: the Context Window FAQ's platform table.
 
 ---
 
@@ -127,6 +133,9 @@ Speed-optimized inference modes may deprioritize system prompt instruction follo
 GAIO/
 ├── README.md
 ├── CHANGELOG.md
+├── CONTRIBUTING.md
+├── SECURITY.md
+├── CITATION.cff
 ├── LICENSE                             # Dual-license pointer
 ├── LICENSE-CODE                        # Apache 2.0 (widget)
 ├── LICENSE-CONTENT                     # CC-BY-SA 4.0 (framework, guides)
@@ -137,10 +146,11 @@ GAIO/
 │   ├── sections/
 │   │   ├── 01-core-directive.md        # Individual section files
 │   │   ├── 02-scope-definition.md
-│   │   └── ...through 13
+│   │   └── ...through 15  (14 Composition, 15 Enforcement Architecture added in v2)
 │   ├── templates/
 │   │   ├── GAIO_Integrated_Block_Template_v1_0.md
 │   │   ├── GAIO_Modular_Section_Output_v1_0.md
+│   │   ├── GAIO_Distilled_Rendition_v2_0.md    # Kernel-form source for the Micro tier + Integrity Excerpt
 │   │   └── 13-configuration-tag-modular.md
 │   ├── manifest.json                   # Authoritative version + framework statistics
 │   └── GAIO_Config_GeneralCrossIndustry_2026-02-16.txt   # Example config
@@ -167,7 +177,7 @@ GAIO/
 
 Repository releases represent the overall framework version. Individual sections carry their own draft numbers (e.g., Draft 1.3) reflecting internal revision history. The repository release version — recorded in `framework/manifest.json` and as a git tag — is the authoritative reference for compatibility and citation. See [CHANGELOG.md](CHANGELOG.md) for release history.
 
-This project uses [Semantic Versioning](https://semver.org/). Current release: **v1.0.0**. Framework statistics (test counts, domain counts, section counts) are maintained in `framework/manifest.json` — that file is the single source of truth; any conflicting count elsewhere in the repository is an error.
+This project uses [Semantic Versioning](https://semver.org/). Current tagged release: **v1.0.0**. The main branch carries the **v2.0.0 draft** (15 sections, the Micro tier and platform-fit system, and the enforcement-architecture module), pending its final validation steps listed in `CHANGELOG.md` before tagging. Framework statistics (test counts, domain counts, section counts) are maintained in `framework/manifest.json` — that file is the single source of truth; any conflicting count elsewhere in the repository is an error. Breaking, per this project's SemVer policy, means a change that alters what the framework blocks or permits for an unchanged configuration.
 
 ---
 
@@ -191,12 +201,7 @@ This project uses a dual-license structure:
 
 GAIO is designed for community extension. Section 7 (Edge Case Handling) includes a submission template and intake process for new edge cases. Section 8 (Domain Configuration Profiles) includes a contribution template for new sub-domain profiles.
 
-**How to contribute:**
-
-1. Fork the repository
-2. Create a branch for your contribution
-3. Follow the relevant submission template (Section 7 for edge cases, Section 8 for domain profiles)
-4. Submit a pull request with a clear description of what you're adding and why
+**How to contribute:** see [CONTRIBUTING.md](CONTRIBUTING.md) — contribution types, the framework's integrity rules as they apply to PRs, and the propagation chain (sections → canonical → templates → widget) every rule change must respect. Security reports: see [SECURITY.md](SECURITY.md).
 
 All contributions must use verifiable sources only. No fabricated authorities, statistics, or references.
 
@@ -225,4 +230,4 @@ All contributions must use verifiable sources only. No fabricated authorities, s
 
 ---
 
-*GAIO v1.0.0 — Created and maintained by Tech Jacks Solutions. Framework licensed under CC-BY-SA 4.0. Widget licensed under Apache 2.0.*
+*GAIO v2.0.0 (draft; latest tag v1.0.0) — Created and maintained by Tech Jacks Solutions. Framework licensed under CC-BY-SA 4.0. Widget licensed under Apache 2.0.*

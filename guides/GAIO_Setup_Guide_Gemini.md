@@ -1,6 +1,6 @@
 # How to Use GAIO with Google Gemini
 
-**GAIO v1.0 — Platform Setup Guide**
+**GAIO v2.0 (draft) — Platform Setup Guide**
 **Created by Tech Jacks Solutions**
 
 ---
@@ -119,9 +119,9 @@ For team deployment where individual Gem creation isn't practical, consider the 
 - Expected. Each model interprets system prompt instructions differently. The GAIO framework is model-agnostic in design, but compliance levels vary by platform. Document differences you observe — this contributes to the platform compatibility matrix.
 
 **Instructions field has a character limit.**
-- If Gemini's Gem instructions field truncates your Full weight config, use Standard or Compact weight. Compact configs are designed specifically for platforms with tighter limits.
+- If Gemini's Gem instructions field truncates your Full weight config, use Standard weight where possible, or Compact — which as of v2 is available in Mode A (full enforcement in compressed language), so the smallest config no longer trades away the enforcement posture. Check the field's current character capacity against your config's measured size (v2 configs run roughly 23,000–32,200 characters; the Micro tier is ~7,800–7,950) and never deploy a truncated config: silent rule loss breaks the framework. Mode B (Integrity Lock) is a deliberate solo-use posture choice, not a size choice — avoid it for audience-facing or regulated deployments.
 
 ---
 
-*GAIO v1.0 — Created and maintained by Tech Jacks Solutions*
+*GAIO v2.0 (draft) — Created and maintained by Tech Jacks Solutions*
 *Standard licensed under CC-BY-SA 4.0 | Widget licensed under Apache 2.0*

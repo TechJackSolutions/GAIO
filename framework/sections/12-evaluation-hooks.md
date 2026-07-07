@@ -1,14 +1,17 @@
-# Section 12: Evaluation Hooks
+# Section 12: Evaluation & Enforcement Hooks
 
-**Version:** Draft 1.1
-**Status:** Draft 1.1 — Access Fabrication remediation applied
-**Dependencies:** Reads validation criteria from all upstream sections (1–11, 13). Does not modify any upstream section. This section organizes, categorizes, and prioritizes existing tests for execution. Tests 1-14 through 1-18 validate access fabrication checks from Sections 3, 4, and 6. Tests 9-1 through 9-13 validate configuration tag integrity from Section 13.
+**Version:** Draft 2.0
+**Status:** Draft 2.0 — v2 amendment set applied
+**Change from Draft 1.1:** Retitled from "Evaluation Hooks" to "Evaluation & Enforcement Hooks" — tests exist to be run, not only read, and Section 15's three-tier enforcement classification (deterministic / mechanically-assisted judgment / discipline) now states which hooks are automatable and which are judgment-scored. Adds the Version 2.0 Additions subsection: the gate-integrity meta-hooks (validator self-test, no short-circuited verdicts, gate-population coverage) and the v2 test-registration note. All Draft 1.1 content — the 184-test baseline, 9 categories, and 33-test MVT — is retained unchanged and unrenumbered.
+**Dependencies:** Reads validation criteria from all upstream sections (1–11, 13–15). Does not modify any upstream section. This section organizes, categorizes, and prioritizes existing tests for execution. Tests 1-14 through 1-18 validate access fabrication checks from Sections 3, 4, and 6. Tests 9-1 through 9-13 validate configuration tag integrity from Section 13. The enforcement-tier classification for every hook is defined by Section 15 (Enforcement Architecture & Honest Limits).
 
 ---
 
 ## What This Section Does
 
-Aggregates validation criteria from all upstream sections (1–11, 13) into a runnable evaluation framework. Reorganizes 184 per-section tests into execution-oriented categories, identifies a minimum viable test set for critical path validation, maps test redundancy across sections, and defines pass/fail criteria at the suite level.
+Aggregates validation criteria from all upstream sections into a runnable evaluation and enforcement framework. Reorganizes the per-section tests into execution-oriented categories, identifies a minimum viable test set for critical path validation, maps test redundancy across sections, and defines pass/fail criteria at the suite level. The 184-test figure throughout this section is the Draft 1.1 baseline; the v2 section amendments add tests, and the authoritative total lives in `framework/manifest.json` (totals updated at v2.0.0 integration).
+
+These hooks are not documentation — they exist to be run. Each hook inherits an enforcement tier from Section 15's three-tier classification: **deterministic** hooks (format, presence, hash, and count checks — e.g., the tag-format tests) are fully automatable by the validator kit; **mechanically-assisted judgment** hooks (the behavioral tests that make up most of this suite) are executed by a harness but scored by a judge, human or LLM; nothing in this suite is discipline-only, because a test that cannot be run is not a test. When a deployment reports suite results, the tier of each check travels with the verdict — an automated pass and a judge-scored pass are both valid, but they are not the same claim.
 
 ## Why This Section Exists Separately
 
@@ -133,7 +136,7 @@ The 184 tests across all sections organize into 9 execution categories. Each cat
 ---
 
 ### Category 5: Behavioral Scenario Compliance
-**What it validates:** The AI follows the correct behavioral template for each of the 8 defined scenarios.
+**What it validates:** The AI follows the correct behavioral template for each of the 9 defined scenarios (Section 4, including the v2 assessment/scores/compliance-output scenario). The v2 scenario tests are registered in the Version 2.0 Additions subsection below.
 
 | Ref | Test | Source |
 |-----|------|--------|
@@ -297,6 +300,40 @@ The 184 tests across all sections organize into 9 execution categories. Each cat
 | **Unique after deduplication** | **~170** | |
 
 **Note on count vs. 184:** The per-section total of 184 counts tests in the section where they were defined. When reorganized by category, some tests map cleanly to one category. A small number appear in the category that best fits their primary purpose even though they touch multiple concerns. No tests were dropped — the count difference reflects the categorization grouping eliminating redundant cross-references, not missing tests. The section-level reference codes (e.g., S6.T1 = Section 6, Test 1) allow traceability back to the original.
+
+**The counts above are the Draft 1.1 baseline.** The v2 amendment set adds tests in the amended and new sections; those additions are registered in the Version 2.0 Additions subsection below. The authoritative post-v2 total is recounted deterministically at release and maintained in `framework/manifest.json` — this section does not assert an estimated new total, because an estimated count is itself the class of defect this framework exists to prevent.
+
+---
+
+## Version 2.0 Additions
+
+The v2 amendment set (2026-07-06 lessons + adversarial-audit integration) adds validation tests and enforcement hooks. Consistent with this section's model — tests are authored in their home section and registered here by reference — the new tests are registered below by home section. Their full text lives in each home section's Validation Criteria; the authoritative enumeration and total are recounted at release into `framework/manifest.json`.
+
+### v2 test registration (by home section)
+
+| Home section | v2 tests | What they validate |
+|---|---|---|
+| §02 Scope Definition | S2.T17–T22 | URL "in-context retrieval artifact" standard, fail-closed to Option A, tool-output-is-unverified |
+| §03 Violation Hierarchy | S3.T8–T14 | Fabricated quantity, fabricated attribution/coverage, citation correspondence, fabricated action/process claims, regulatory-data construction, inflated assessment (existence-claims testing lives in §06's row: Gate 1 existence verification, S6.T29) |
+| §04 Required Behaviors | S4.T12–T20 | Structured abstention + qualitative confidence bands, source isolation, challenge re-verification, official-documentation preference, reader-resolvable references, correction grounding, assessment-output framing, taught-command labeling |
+| §06 Pre-Response Validation | S6.T21–T36 | The seven new Gate 1 checks, the citation-registry rule, the two mode-independent Gate 2 omission checks, earned-verdict, and gates-apply-to-all-artifacts |
+| §09 Drift Prevention | S9.T24–T28 | Scope-membership shift trigger + blank-list domain fallback, hypothetical accretion / assumed-parameter labeling (the window-bound boundary-test limit is stated §09 prose — an honesty disclosure, not a testable behavior) |
+| §10 Session Persistence | S10.T23–T28 | Mode-independent omission integrity, false-memory non-exception, Mode B escalation-note floor, mode-vs-weight decoupling, label-manifest binding |
+| §11 Implementation Priority | S11.T27–T29 | False Premise vs. Scope resolution (Type 7): flag-without-correcting floor, safety-relevant ceiling correction, no-build/parameterization on a flagged premise |
+| §14 Composition & External Authority | 14-1 – 14-10 | Channel-bound authority, pasted-config attack, co-resident precedence, duplicate-config supersession, delegation grounding + marker |
+| §15 Enforcement Architecture | 15-1 – 15-7 | Label-vs-manifest, Tier-1 floor, omission disclosure, false deterministic-verification claim, harm-reduction framing, registry scoping, judge-requirement |
+
+### Gate-integrity meta-hooks (enforcement hooks, new in 2.0)
+
+These validate the integrity of the evaluation process itself — a detector that is wrong, or a verdict that never ran, silently converts violations into false all-clears:
+
+- **Validator self-test.** Before a new detector, gate, or check is trusted, it is exercised against a known-true failure case and a known-good case; a detector that has not passed a known-true case is not evidence. (A detector built to close one gap has, in practice, been wrong in both directions — missing the real failure and over-firing on clean input — which is why "healthy" from an unverified detector does not count.)
+- **No short-circuited verdicts.** A pass verdict counts only when the check actually ran on the current response (Section 6, Gate Integrity Rules). A carried-over or assumed pass is not a verdict.
+- **Gate-population coverage.** Every output that should pass through a gate does — `processed == produced`. A gate protects only the population that actually reaches it; a parallel path to a terminal disposition that bypasses the gate is an uncovered surface. (This is a deployment/pipeline-layer assert, classified in Section 15's enforcement tiers; the per-response analog is the earned-verdict rule in Section 6.)
+
+### MVT impact
+
+The Minimum Viable Test set (MVT-1…MVT-33, below) is the Draft 1.1 critical path. The v2 MVT candidates — 14-1 / 14-3 / 14-7 (composition + delegation) and 15-1 / 15-4 / 15-5 (label honesty, no false deterministic-verification claim, harm-reduction framing) — extend the critical path for v2. The authoritative MVT membership and total are recounted at release into `framework/manifest.json`; no estimated new MVT total is asserted here.
 
 ---
 
@@ -579,8 +616,9 @@ However, the AI should be aware that its outputs are subject to validation. The 
 ## Evaluation Note
 
 This configuration includes validation criteria. Your outputs may be tested 
-against the framework's Minimum Viable Test set (33 critical-path tests) 
-and the full evaluation suite (~170 tests across 9 categories).
+against the framework's Minimum Viable Test set and full evaluation suite 
+(critical-path and comprehensive behavioral tests across 9 categories; the 
+authoritative test totals are maintained in the framework manifest).
 
 Key validation areas:
 - Fabrication prevention (zero-tolerance, tested under pressure)

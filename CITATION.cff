@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you reference the GAIO standard, please cite it as below."
+title: "GAIO — Guardrail Architecture for Informed Output"
+type: software
+authors:
+  - name: "Tech Jacks Solutions"
+    website: "https://techjacksolutions.com"
+repository-code: "https://github.com/TechJackSolutions/GAIO"
+url: "https://techjacksolutions.com/prompt-engineering-library/"
+license: CC-BY-SA-4.0
+version: 1.0.0
+date-released: 2026-07-06
+abstract: "An open, modular standard for reducing AI fabrication and improving output integrity: a prompt-layer rule framework (decision hierarchy, violation taxonomy, pre-response validation gates, drift prevention, provenance tags) paired with an honest enforcement-architecture classification of what prompt-layer controls can and cannot guarantee."

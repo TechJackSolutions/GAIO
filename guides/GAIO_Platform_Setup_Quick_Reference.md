@@ -1,20 +1,25 @@
 # GAIO Platform Setup Guides — Quick Reference
 
-**GAIO v1.0 — Guardrail Architecture for Informed Output**
+**GAIO v2.0 (draft) — Guardrail Architecture for Informed Output**
 **Created by Tech Jacks Solutions**
 
 ---
 
 ## Which Guide Do I Need?
 
-| I use... | Guide | Setup Time | Config Weight Supported |
+| I use... | Guide | Setup Time | What fits (measured; verify your field at deploy) |
 |----------|-------|------------|------------------------|
-| **Claude** (claude.ai) | Claude Projects Guide | ~3 minutes | Full, Standard, Compact |
-| **ChatGPT** (personal) | ChatGPT Guide — Option A | ~2 minutes | Compact only (~1,500 char limit) |
-| **ChatGPT** (team) | ChatGPT Guide — Option B (Custom GPT) | ~5 minutes | Full, Standard, Compact |
-| **Gemini** | Gemini Gems Guide | ~3 minutes | Full, Standard, Compact |
-| **API** (any provider) | API & Open-Source Guide | ~10 minutes | Full, Standard, Compact |
-| **Local models** (Ollama, LM Studio) | API & Open-Source Guide | ~10 minutes | Full, Standard, Compact |
+| **Claude** (claude.ai) | Claude Projects Guide | ~3 minutes | Any weight (no field limit documented) |
+| **ChatGPT** (personal Custom Instructions) | ChatGPT Guide — Option A | ~2 minutes | **Integrity Excerpt only** (1,500-char boxes; no GAIO deployment fits) |
+| **ChatGPT** (team, Custom GPT) | ChatGPT Guide — Option B | ~5 minutes | **Micro** (~7,800–7,950 chars vs the ~8,000-char Instructions field — tight; uncheck the tag reserve) |
+| **Microsoft Copilot Studio / M365 Copilot agents** | FAQ § Instruction-Field Limits + widget platform-fit | ~5 minutes | **Micro via the instructions-only recipe** (~7,800 chars vs the verified 8,000/field: no embedded tag, nothing else in the field, ALL topic prompts empty — an undocumented ~5,300 combined budget may still reject it; run the truncation check). If rejected: **Integrity Excerpt** (the combined-safe ~5,000 budget is below the Micro floor of 6,966). Never offload instructions to knowledge files on Microsoft surfaces |
+| **Gemini** | Gemini Gems Guide | ~3 minutes | Any weight reported to fit (no documented limit — verify; use the widget's Custom limit if the field rejects) |
+| **API** (any provider) | API & Open-Source Guide | ~10 minutes | Any weight (context-window bounded) — use prompt caching |
+| **Local models** (Ollama, LM Studio) | API & Open-Source Guide | ~10 minutes | Any weight |
+
+**Use the widget's deployment-target picker and size meter** — it measures your generated config against the surface's usable budget and blocks over-budget output instead of letting the platform silently truncate it (silent truncation = silent rule loss). After deploying to any field-limited surface: confirm the `# End of GAIO Configuration` tail marker survived and ask the assistant to state its loaded domain and mode.
+
+**Weight and mode are independent in v2.** Weight (Full ~8,050 / Standard ~6,800 / Compact ~5,750–6,000 / Micro ~1,950 tokens, measured post-compression) is a token-size choice; enforcement mode is a posture choice, and Compact is available in Mode A (full enforcement, compressed). Mode B (Integrity Lock) keeps every anti-fabrication rule — including omission integrity, which never relaxes — but makes scope and escalation advisory; it is a deliberate solo-use posture, inappropriate for audience-facing or regulated deployments, and the widget requires explicit confirmation (and refuses it for regulated multi-user configurations).
 
 ---
 
@@ -69,5 +74,5 @@ Regardless of platform, the process is always:
 
 ---
 
-*GAIO v1.0 — Created and maintained by Tech Jacks Solutions*
+*GAIO v2.0 (draft) — Created and maintained by Tech Jacks Solutions*
 *Standard licensed under CC-BY-SA 4.0 | Widget licensed under Apache 2.0*

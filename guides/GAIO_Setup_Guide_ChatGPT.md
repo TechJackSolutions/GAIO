@@ -1,6 +1,6 @@
 # How to Use GAIO with ChatGPT (Custom GPTs)
 
-**GAIO v1.0 — Platform Setup Guide**
+**GAIO v2.0 (draft) — Platform Setup Guide**
 **Created by Tech Jacks Solutions**
 
 ---
@@ -34,12 +34,12 @@ This method applies your GAIO config to every conversation you have. Simple but 
 
 ### Limitations
 
-- The Custom Instructions field has a **~1,500 character limit** — this only fits GAIO Compact weight configs (Mode B)
-- Full weight and Standard weight configs will be truncated, which breaks the framework
+- The Custom Instructions field has a hard character limit (~1,500 characters per box). **No full GAIO configuration fits it** — even a v2 Micro config measures roughly 7,800 characters (Compact ~23,000). A config pasted into Custom Instructions will be truncated, and a truncated config silently drops rules, which breaks the framework. (An earlier revision of this guide claimed Compact fit this field; that claim did not match the shipped generator and is corrected here.)
+- If Custom Instructions is your only option, the honest ceiling is a hand-distilled excerpt of the integrity core (decision hierarchy + Critical Violations + the "when you don't know" behavior). That is a useful behavioral nudge — it is NOT a GAIO deployment, carries no tag/manifest, and must not be represented as one.
 - Applies to ALL conversations, not just specific topics — if you sometimes use ChatGPT for casual tasks where guardrails aren't needed, this may feel restrictive
 - You can toggle Custom Instructions on/off per conversation, but it's all-or-nothing
 
-**Verdict:** Good for quick personal use with Compact configs. For anything more, use a Custom GPT.
+**Verdict:** Not a full-GAIO surface. For actual GAIO deployment on ChatGPT, use a Custom GPT (Option B) and check its current Instructions capacity against your config's measured size — or use a platform that accepts a full system prompt (API, Claude Projects).
 
 ---
 
@@ -49,7 +49,7 @@ A Custom GPT is a purpose-built ChatGPT instance with its own system prompt, upl
 
 ### Step 1: Generate Your GAIO Configuration
 
-Complete the widget's 6-step setup, click Generate, and copy the full output. The Custom GPT system prompt field supports much longer text than Custom Instructions, so Full weight configs work here.
+Complete the widget's setup with the deployment target set to ChatGPT Custom GPT, click Generate, and copy the output. The Instructions field's ~8,000-character capacity holds the **Micro** tier (~7,800–7,950 characters — uncheck the tag reserve if the size meter is tight); Full/Standard/Compact configs (23,000–32,200 characters) do NOT fit and must not be pasted for the platform to truncate.
 
 ### Step 2: Create a Custom GPT
 
@@ -104,10 +104,10 @@ For organizations with different departments, create one Custom GPT per domain c
 
 | Team | GPT Name | GAIO Domain | Mode |
 |------|----------|-------------|------|
-| Security | SecOps Advisor | Cybersecurity > SecOps/IR | Mode A (Full) |
-| Legal | Legal Research Assistant | Legal > Privacy/Data Protection | Mode A (Full) |
-| Marketing | Content Writer | Education or General | Mode B (Integrity Lock) |
-| Engineering | Dev Assistant | Software/Technology > Software Dev | Mode A (Standard) |
+| Security | SecOps Advisor | Cybersecurity > SecOps/IR | Mode A (Micro — the field limit governs) |
+| Legal | Legal Research Assistant | Legal > Privacy/Data Protection | Mode A (Micro) |
+| Marketing | Content Writer | Education or General | Mode B (Micro; Integrity Lock is solo-posture — for a shared team GPT prefer Mode A) |
+| Engineering | Dev Assistant | Technology & Software > Software Dev | Mode A (Micro) |
 
 Share each GPT link with the relevant team. Team members click the link, and they're immediately working with a guardrailed AI — no setup on their end.
 
@@ -131,7 +131,7 @@ Share each GPT link with the relevant team. Team members click the link, and the
 - This may indicate drift — exactly what GAIO's Section 9 (Drift Prevention) is designed to catch. If the model has a drift re-anchoring instruction in the config, it should self-correct at the configured interval. If it doesn't, try starting a new conversation.
 
 **The Instructions field seems to truncate my config.**
-- The Custom GPT Instructions field supports approximately 8,000 characters. Full weight GAIO configs (~15,000 characters) may exceed this. Use Standard or Compact weight, or contact Tech Jacks Solutions for guidance on optimizing config length for this platform.
+- The Custom GPT Instructions field has historically supported approximately 8,000 characters. Measured v2 configs run roughly 23,000 characters (Compact) to 32,200 (Full) — larger than that historical limit — but the **Micro tier (~7,800–7,950 characters) fits it**: select the Custom GPT deployment target in the widget and use Micro (uncheck the tag reserve if the meter is tight). If even Micro does not fit your field's current capacity, do not deploy a truncated config (silent rule loss breaks the framework and its label honesty); alternatives are a Knowledge-file attachment with an Instructions excerpt (test compliance — knowledge-file adherence is weaker) or a surface that accepts a full system prompt (API, Claude Projects).
 
 **Team members see different behavior from the same GPT.**
 - Confirm they're using the same model (GPT-4o vs. GPT-4o-mini can behave differently)
@@ -139,5 +139,5 @@ Share each GPT link with the relevant team. Team members click the link, and the
 
 ---
 
-*GAIO v1.0 — Created and maintained by Tech Jacks Solutions*
+*GAIO v2.0 (draft) — Created and maintained by Tech Jacks Solutions*
 *Standard licensed under CC-BY-SA 4.0 | Widget licensed under Apache 2.0*

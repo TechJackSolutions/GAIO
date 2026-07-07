@@ -1,6 +1,6 @@
 # How to Use GAIO with APIs and Open-Source Models
 
-**GAIO v1.0 — Platform Setup Guide**
+**GAIO v2.0 (draft) — Platform Setup Guide**
 **Created by Tech Jacks Solutions**
 
 ---
@@ -84,7 +84,7 @@ print(response.text)
 
 ## Cost: Cache the Config Prefix (Strongly Recommended)
 
-A GAIO config adds roughly 1,500–3,500 tokens to every request (see the Context Window FAQ). In any application making repeated calls, that prefix is identical every time — pay for it once, not on every call. Providers offer prompt caching for exactly this pattern:
+A GAIO v2 config adds roughly 1,950 (Micro) to 8,050 (Full) tokens to every request (measured from generated output — see the Context Window FAQ). In any application making repeated calls, that prefix is identical every time — pay for it once, not on every call. Providers offer prompt caching for exactly this pattern:
 
 ### Anthropic (Claude API)
 
@@ -111,7 +111,7 @@ Prompt caching is automatic for repeated prefixes above the provider's minimum l
 
 ### Why this matters for GAIO specifically
 
-GAIO's value comes from being present in *every* call. Without caching, that means paying the full config token cost on every call; with caching, the config becomes nearly free after the first request in each cache window. If you meter LLM spend, treat an uncached GAIO prefix in a high-volume pipeline as a cost defect. The weight tiers (Full / Standard / Compact, roughly 3,500 / 2,500 / 1,500 tokens) are the second cost lever: use the lightest weight that meets your enforcement needs, and cache whichever you choose.
+GAIO's value comes from being present in *every* call. Without caching, that means paying the full config token cost on every call; with caching, the config becomes nearly free after the first request in each cache window. If you meter LLM spend, treat an uncached GAIO prefix in a high-volume pipeline as a cost defect. The weight tiers (Full / Standard / Compact / Micro — measured at roughly 8,050 / 6,800 / 5,750–6,000 / 1,950 tokens in v2, post-compression) are the second cost lever: use the lightest weight that meets your enforcement needs, and cache whichever you choose. As of v2, weight and mode are independent: Compact-Mode-A provides full enforcement in compressed language, so choosing the small config no longer trades away the enforcement posture. Mode B (Integrity Lock) remains a deliberate posture choice for solo use — not a size choice — and is inappropriate for audience-facing or regulated pipelines.
 
 ---
 
@@ -275,5 +275,5 @@ Compliance varies by model capability. More capable models follow system prompt 
 
 ---
 
-*GAIO v1.0 — Created and maintained by Tech Jacks Solutions*
+*GAIO v2.0 (draft) — Created and maintained by Tech Jacks Solutions*
 *Standard licensed under CC-BY-SA 4.0 | Widget licensed under Apache 2.0*

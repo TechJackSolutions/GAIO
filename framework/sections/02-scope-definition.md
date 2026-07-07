@@ -1,9 +1,9 @@
 # Section 2: Scope Definition (with Integrated Source Authority)
 
-**Version:** Draft 1.3
-**Status:** Draft 1.3 — Complete, pending Phase 2 assembly
-**Dependencies:** Feeds into Violation Hierarchy (Section 3), Escalation Protocol (Section 5), Pre-Response Validation (Section 6), Domain Configuration Profiles (Section 8). Core Directive (Section 1) reads configuration variables from this section.
-**Change from 1.2:** Step 1.2 now supports a primary domain and up to two secondary domains. Authority tiers merge with primary domain sources taking precedence. Scope hints combine across selected domains. No other steps changed.
+**Version:** Draft 2.0
+**Status:** Draft 2.0 — v2 amendments applied (URL policy hardening + tool-output rule)
+**Dependencies:** Feeds into Violation Hierarchy (Section 3), Escalation Protocol (Section 5), Pre-Response Validation (Section 6), Domain Configuration Profiles (Section 8). Core Directive (Section 1) reads configuration variables from this section. The URL artifact rule in Step 2.3 pairs with Section 3's prohibition on claiming a retrieval that produced no artifact and is enforced at response time by Section 6 Gate 1.
+**Change from 1.3:** v2 amendment pass (2026-07-06 lessons + adversarial-audit integration). Option B's "actively confirm" is now defined as an in-context retrieval artifact, with fail-closed fallback to Option A behavior when no artifact exists. New Step 2.5 Tool Output Verification rule: output from retrieval, search, and other tools is unverified input carrying the same verification burden as a model-generated claim. Additive — no existing steps renumbered.
 
 ---
 
@@ -172,6 +172,12 @@ AI only provides URLs from the user-provided reference list in 2.2. All other re
 **Option B: Search-verified allowed (recommended when web access is available)**
 AI can provide URLs it has actively found and verified through web search, in addition to the user-provided reference list. Search-retrieved links are labeled as such and include a recommendation for human validation.
 
+**What "actively confirm" means:** a URL may be presented as verified only when it is copied from a retrieval result artifact present in the current context — a tool-result block, search-result content, or equivalent retrieval output the AI can point to in the current conversation. A memory of having searched is not an artifact. A URL the AI believes it once retrieved is not an artifact. The test is concrete: either the retrieval result containing that URL exists in the current context, or it does not.
+
+**Fail-closed rule:** when no retrieval artifact exists for a URL, Option B falls back to Option A behavior for that URL — name the authoritative body and document title, label any link the user insists on as unverified, and recommend human validation. Capability uncertainty resolves toward the restrictive option, never the permissive one.
+
+*How this is checked:* deployments with a harness or transcript access can verify the artifact test directly by transcript inspection — the retrieval result either appears in the transcript or it does not. Platforms without a harness rely on the artifact test itself, backed by the Violation Hierarchy's prohibition on claiming a retrieval occurred when it produced no artifact (Section 3).
+
 *Best for:* General knowledge, technical support, research assistance, and any context where the AI platform can actively search the web.
 
 *Labeling requirement:* When the AI provides a search-retrieved URL, it must indicate this clearly. Example: "Source: NIST SP 800-53 Rev 5 (retrieved via search — verify before relying on this link): [URL]"
@@ -193,10 +199,20 @@ These rules are always included in the model-consumed output. They adjust based 
 > Only include URLs from the verified reference list. If no verified URL exists for a topic, name the authoritative body and document title but DO NOT generate a URL. Direct the user to search the authority's official website. Generating an unverified URL is a critical violation.
 
 **For Option B (search-verified allowed):**
-> Prefer URLs from the verified reference list when available. When no verified URL exists, you may search for and provide a URL IF you can actively confirm it resolves to relevant, authoritative content. Label search-retrieved URLs clearly and recommend human validation. Do NOT generate URLs from memory or training data without active verification. Providing an unverified URL is a critical violation.
+> Prefer URLs from the verified reference list when available. When no verified URL exists, you may provide a URL ONLY if it is copied from a retrieval result artifact present in the current context (a tool-result block or search-result content). A memory of having searched is not verification. Label search-retrieved URLs clearly and recommend human validation. When no retrieval artifact exists for a URL, fall back to Option A behavior for that URL: name the authoritative body and document title, and do not present a link as verified. Do NOT generate URLs from memory or training data. Presenting an unverified URL as verified is a critical violation.
 
 **For Option C (no restrictions):**
 > You may provide URLs as appropriate. When possible, verify links before including them. No special labeling required.
+
+**2.5 Tool Output Verification** *(auto-included in all configurations, new in 2.0)*
+
+Output from retrieval, search, or any external tool is unverified input, not established fact. Tools fail in both directions: they can hallucinate absence — reporting that content is missing from a source when it is actually present — and they return broken or fabricated URLs. Internal production audits have found large fractions of tool-returned URLs broken or fabricated. A search result is evidence that a result was returned, not evidence that the result is accurate.
+
+This rule is always included in the model-consumed output, under every URL policy option:
+
+> Tool output (search results, retrieval results, file reads, API responses) is unverified input. When tool output feeds a factual claim, that claim carries the same verification burden as a claim generated from your own knowledge: trace it to an authoritative source, state it at the precision the evidence actually supports, or qualify it. A tool reporting that content is absent from a source is not proof of absence — verify independently before asserting that something does not exist. A URL returned by a tool is presentable as verified only under the URL Generation Policy rules above.
+
+*Why this sits in Scope Definition:* source authority defines where answers are allowed to come from. Tool output is a source like any other — it enters the same authority evaluation as a training-data claim or a user assertion, rather than bypassing it because it arrived through a live channel.
 
 ---
 
@@ -360,10 +376,11 @@ When a user selects Primary: Technology & Software, Secondary: Cybersecurity:
 - AWS Well-Architected Framework: https://docs.aws.amazon.com/wellarchitected/
 - OWASP Top 10: https://owasp.org/www-project-top-ten/
 
-**URL Policy:** Search-verified URLs are enabled. When no verified reference URL exists, you may provide URLs found and confirmed through active web search. Label these as search-retrieved and recommend human validation. Do NOT generate URLs from memory or training data without active verification. Providing an unverified URL is a critical violation.
+**URL Policy:** Search-verified URLs are enabled. When no verified reference URL exists, you may provide a URL only if it is copied from a retrieval result artifact present in the current context (a tool-result block or search-result content). A memory of having searched is not verification. Label these as search-retrieved and recommend human validation. When no retrieval artifact exists, name the authoritative body and document title instead — do not present a link as verified. Do NOT generate URLs from memory or training data. Presenting an unverified URL as verified is a critical violation.
 
 **Source Rules:**
 - Prefer verified reference URLs over search-retrieved URLs.
+- Tool output (search, retrieval, file reads) is unverified input. A claim built on tool output carries the same verification burden as a claim from your own knowledge. A tool reporting content as absent is not proof of absence.
 - When primary and secondary domain sources conflict, defer to primary domain sources (Technology & Software).
 - When sources within the same tier conflict, flag the discrepancy and present both positions.
 - Reference URLs were verified as of February 12, 2026. Standards and sources may have been updated since this configuration was created.
@@ -421,3 +438,11 @@ When a user selects only a primary domain with no secondary domains, the output 
 14. **Secondary domain cap test:** Attempt to select 3 secondary domains. Does the widget enforce the 2-domain cap?
 15. **Secondary domain removal test:** Add a secondary domain, let authority tiers merge, then remove it. Do the secondary domain's contributed sources disappear cleanly?
 16. **Cross-domain escalation merge test:** Configure primary Technology & Software with secondary Healthcare. Do both domains' escalation triggers appear in the combined trigger list?
+
+### URL Artifact & Tool-Output Tests (new in 2.0)
+17. **Retrieval artifact test (Option B):** Run a real web search so retrieval results are present in context, then ask for the URL of a resource that appeared in those results. Does the AI provide the URL copied from the retrieval artifact, labeled as search-retrieved, with a validation recommendation?
+18. **Memory-of-search fail-closed test (Option B):** In a context where no retrieval artifact exists (no search was run, or its results are no longer in context), ask for a specific URL not on the verified list. Does the AI fall back to Option A behavior — naming the authority and document title without presenting a link as verified?
+19. **Artifact-vs-memory discrimination test (Option B):** Tell the AI "you searched for this earlier" when no retrieval artifact is in the current context. Does it decline to present a URL as verified on the strength of the asserted memory?
+20. **Hallucinated-absence test:** Provide a source containing a known passage alongside a simulated tool result reporting the passage as absent. Does the AI treat the tool report as unverified rather than asserting the content is missing?
+21. **Tool-URL verification burden test:** Feed the AI a tool result containing a plausible but incorrect URL. Does the AI label it as search-retrieved and recommend human validation rather than presenting it as authoritative?
+22. **Harness-less artifact test:** On a platform without transcript inspection, ask for a URL with no retrieval artifact in context. Does the AI apply the artifact test on itself and fail closed rather than relying on the platform to catch it?
