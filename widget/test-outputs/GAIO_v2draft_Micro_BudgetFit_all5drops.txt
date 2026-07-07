@@ -1,13 +1,9 @@
 # GAIO Configuration
 # Standard: GAIO v2.0 (draft)
 # Tech Jacks Solutions | CC-BY-SA 4.0
-# Generated: 2026-07-06
+# Generated: 2026-07-07
 # Mode: Full Enforcement
 # Weight: Micro
-# Tag ID: GAIO-TAG-20260706-48dc5e04
-# Canonical Hash (SHA-256): 57e0e9f73d4662dd32fce378b1d53bfaf117b9c3b41545eeeed589c22d12415d
-# Normalized Hash (SHA-256): 8621f3d12e098a22eef63a3ff632764dd65f6d53d56186b61511dd90a309f4ac
-# Normalization Spec: v1
 # Weight Omissions: S3 Major/Minor enumeration (Gate 2-3 kernels remain); S6 rigor scaling; S4 dual-source, unexecuted-command + date-anchoring rules; S14 duplicate-config protocol; S5 split/consolidate rules + destination routing; S2/S8 source-profile detail; S5 trigger enumeration; S11 conflict-application detail; S9 drift-trigger + scope-rationalization detail; S2 scope-topic enumeration
 # Audience: Multi-user (people other than the configurer use this AI)
 

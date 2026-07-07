@@ -1,8 +1,8 @@
-# Module 13: Configuration Tag — Modular Section Output
+# Module 13: Configuration Tag (Modular Section Output)
 
 **Include:** Always
 **Variants:** None
-**Dependencies:** Reads metadata from Header Block, Module 02 (Scope Definition), Module 10 (Session Persistence). Reads the Weight Omissions disclosure from the config header when present (optional tag field, new in 2.0 — Section 13 schema). Does not modify upstream modules. Produces Tag ID consumed by future Module 16 (Self-Audit Report).
+**Dependencies:** Reads metadata from Header Block, Module 02 (Scope Definition), Module 10 (Session Persistence). Reads the Weight Omissions disclosure from the config header when present (optional tag field, new in 2.0, Section 13 schema). Does not modify upstream modules. Produces Tag ID consumed by future Module 16 (Self-Audit Report).
 **Estimated lines:** 47
 **Weight rule:** Always full (capability definition, not compressible)
 
@@ -59,7 +59,7 @@ A tag with invented values is a Critical Violation.
 
 ---
 
-**Note (v2 schema):** Section 13 Draft 2.0 adds the optional **Weight Omissions** tag field, sourced from the config header's weight-omissions disclosure — included when the rule-coverage manifest omits any rule class for weight, omitted when nothing is omitted (Section 15, Per-Weight Rule-Coverage Manifest). The model-consumed output block above is unchanged at Draft 2.0 and does not list the field in its extraction list; mirror any Section 13 update here when made.
+**Note (v2 schema):** Section 13 Draft 2.0 adds the optional **Weight Omissions** tag field, sourced from the config header's weight-omissions disclosure: included when the rule-coverage manifest omits any rule class for weight, omitted when nothing is omitted (Section 15, Per-Weight Rule-Coverage Manifest). The model-consumed output block above is unchanged at Draft 2.0 and does not list the field in its extraction list; mirror any Section 13 update here when made.
 
 **Assembly position:** After Module 12 (Evaluation Note), before Module 14 (Composition & External Authority).
 

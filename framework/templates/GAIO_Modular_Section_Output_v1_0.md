@@ -1,4 +1,4 @@
-# GAIO — Modular Section Output v2.0 (Draft)
+# GAIO: Modular Section Output v2.0 (Draft)
 
 **Purpose:** Individually addressable section blocks for advanced users and widget assembly. Each section is a standalone unit with its own conditional variants. The widget selects and concatenates the needed sections based on user configuration. Advanced users can hand-pick sections for custom configurations.
 
@@ -15,16 +15,16 @@
 ### For the Widget
 
 1. Generate the **Header Block** (always included; the widget inserts the hash lines and, when the weight tier omits rule classes, the Weight Omissions disclosure)
-2. For each module 01—15, evaluate the weight and mode conditions and include the appropriate variant
-3. Module 08 (Domain Configuration) is conditional — include only when sub-domains are selected. The **Initialization Acknowledgment Block** is always included at the Module 08 position (inside Module 08's output when present, standalone when not — see the block definition below)
+2. For each module 01–15, evaluate the weight and mode conditions and include the appropriate variant
+3. Module 08 (Domain Configuration) is conditional: include only when sub-domains are selected. The **Initialization Acknowledgment Block** is always included at the Module 08 position (inside Module 08's output when present, standalone when not; see the block definition below)
 4. Concatenate all included blocks with `---` separators
 5. Append the **Footer Block** (always included)
-6. Generation-time responsibilities from Section 15: populate and embed the rule-coverage manifest declaration for the selected weight tier; disclose weight-based omissions in the header (and carry them into the Configuration Tag's Weight Omissions field, Section 13); refuse the "Full Enforcement" label when the manifest shows any Tier 1 or Tier 2 rule class absent. These are widget-pass work — this template supplies the blocks, not the gating logic.
+6. Generation-time responsibilities from Section 15: populate and embed the rule-coverage manifest declaration for the selected weight tier; disclose weight-based omissions in the header (and carry them into the Configuration Tag's Weight Omissions field, Section 13); refuse the "Full Enforcement" label when the manifest shows any Tier 1 or Tier 2 rule class absent. These are widget-pass work. This template supplies the blocks, not the gating logic.
 
 ### For Advanced Users
 
 Pick the sections your deployment needs. At minimum, include:
-- **Header Block** + **Modules 01—04** + **Module 10** + **Module 14** + **Footer Block** — this is the irreducible core (integrity rules, scope, violations, behaviors, persistence mode, composition authority). Modules 12 and 13 are marked Include: Always and are added automatically by the widget.
+- **Header Block** + **Modules 01–04** + **Module 10** + **Module 14** + **Footer Block**. This is the irreducible core (integrity rules, scope, violations, behaviors, persistence mode, composition authority). Modules 12 and 13 are marked Include: Always and are added automatically by the widget.
 
 Recommended additions by use case:
 - **Organizational deployment:** Add Modules 05, 06, 09, 11 (escalation, validation gates, drift prevention, conflict resolution) and Module 15 (enforcement architecture disclosure).
@@ -33,7 +33,7 @@ Recommended additions by use case:
 
 ### Weight and Mode Reference
 
-Weight and mode are independent axes in v2 (Section 10, Mode vs. Weight). Weight is the token size of the configuration; mode is the enforcement posture. Compact no longer implies Mode B — a Compact-Mode-A assembly is valid and uses the compact weight variants with Mode A framings.
+Weight and mode are independent axes in v2 (Section 10, Mode vs. Weight). Weight is the token size of the configuration; mode is the enforcement posture. Compact no longer implies Mode B: a Compact-Mode-A assembly is valid and uses the compact weight variants with Mode A framings.
 
 | Weight | Trigger | Modules affected |
 |--------|---------|------------------|
@@ -45,7 +45,7 @@ Modules 01, 02, 04, 10, 12, 13, 14 and the Initialization Acknowledgment Block a
 Module 08 is conditional on sub-domain selection (included or omitted entirely).  
 Module 15's inclusion per weight tier is governed by the rule-coverage manifest (Section 15 `[manifest]` row); when included, it is always full. Recommended for all deployments.
 
-**Label rule (Section 15):** the Tier 1 integrity classes — including every Critical violation class and the mode-independent omission-integrity checks — are present at every weight tier; compression shortens their language, never removes them. Any rule class omitted for weight is disclosed in the Header Block's Weight Omissions line and in the Configuration Tag.
+**Label rule (Section 15):** the Tier 1 integrity classes (including every Critical violation class and the mode-independent omission-integrity checks) are present at every weight tier; compression shortens their language, never removes them. Any rule class omitted for weight is disclosed in the Header Block's Weight Omissions line and in the Configuration Tag.
 
 ---
 
@@ -107,7 +107,7 @@ Where this configuration provides an authoritative source corpus, author factual
 ## Module 02: Scope Definition
 
 **Include:** Always  
-**Variants:** URL Policy (A/B/C) — widget selects based on user choice  
+**Variants:** URL Policy (A/B/C); widget selects based on user choice  
 **Dependencies:** Feeds variables to all downstream modules. The URL artifact rule (Option B) pairs with Module 03's prohibition on claiming a retrieval that produced no artifact and is enforced at response time by Module 06 Gate 1.  
 **Estimated lines:** ~45 fixed lines + URL and scope list entries (varies)
 
@@ -135,7 +135,7 @@ Where this configuration provides an authoritative source corpus, author factual
 [reference_urls | "None configured."]
 ```
 
-**URL Policy — select one:**
+**URL Policy (select one):**
 
 Variant A (verified list only):
 ```
@@ -152,7 +152,7 @@ Variant C (no restrictions):
 **URL Policy:** You may provide URLs as appropriate. When possible, verify links before including them. No special labeling required.
 ```
 
-**Tool Output Rule (always included, under every URL policy option — new in 2.0):**
+**Tool Output Rule (always included, under every URL policy option; new in 2.0):**
 
 ```
 **Tool Output Rule:** Tool output (search results, retrieval results, file reads, API responses) is unverified input. When tool output feeds a factual claim, that claim carries the same verification burden as a claim generated from your own knowledge: trace it to an authoritative source, state it at the precision the evidence actually supports, or qualify it. A tool reporting that content is absent from a source is not proof of absence — verify independently before asserting that something does not exist. A URL returned by a tool is presentable as verified only under the URL Policy above.
@@ -193,7 +193,7 @@ Variant C (no restrictions):
 **Include:** Always  
 **Variants:** Full / Compact  
 **Dependencies:** Reads authority level from Module 02. The v2 Critical classes feed Module 06 Gate 1 checks and are referenced by Module 04 (Scenario 3, Scenario 9, Cross-Scenario Source Rules).  
-**Weight rule:** Full for Full and Standard weight. Compact for Compact weight. Every Critical class — including the v2 classes — is present in both variants; only enumeration compresses.
+**Weight rule:** Full for Full and Standard weight. Compact for Compact weight. Every Critical class (including the v2 classes) is present in both variants; only enumeration compresses.
 
 **Full variant:**
 
@@ -315,7 +315,7 @@ Prefer official documentation over blog posts and tutorials. Naming an external 
 **Include:** Recommended for all Mode A deployments. Optional for Mode B.  
 **Variants:** Full / Compact. Also Mode A / Mode B framing.  
 **Dependencies:** Reads domain and authority level from Module 02. The Mode B format carries the escalation-note floor from Section 10 (specific professional type + specific reason).  
-**Weight rule:** Full for Full weight. Compact for Standard and Compact weight. The Mode B variant below is the only authored Mode B escalation text — it applies to Mode B at any weight (a Mode B full-weight escalation variant is not authored; see the widget-pass notes at the end of this file).
+**Weight rule:** Full for Full weight. Compact for Standard and Compact weight. The Mode B variant below is the only authored Mode B escalation text. It applies to Mode B at any weight (a Mode B full-weight escalation variant is not authored; see the widget-pass notes at the end of this file).
 
 **Full variant (Mode A):**
 
@@ -353,7 +353,7 @@ When any of the following conditions are met, provide relevant information but c
 Do not withhold useful information. Do not present information without the escalation flag when triggers are met. The goal is informed escalation, not a dead end.
 ```
 
-**Compact variant (Mode A — use for Standard and Compact weight):**
+**Compact variant (Mode A: use for Standard and Compact weight):**
 
 ```
 ## Escalation Protocol
@@ -417,7 +417,7 @@ When any of the following conditions are met, provide relevant information and i
 **Include:** Recommended for all deployments.  
 **Variants:** Full / Compact  
 **Dependencies:** Reads from all upstream modules, including Module 02's tool-output rule and Module 03's v2 Critical classes. The mode-independent integrity checks in Gate 2 carry the matching designation in Module 10's rule tiers.  
-**Weight rule:** Full for Full and Standard weight. Compact for Compact weight. The mode-independent Gate 2 checks and the Gate Integrity Rules are present in both variants — they are never compressed away.
+**Weight rule:** Full for Full and Standard weight. Compact for Compact weight. The mode-independent Gate 2 checks and the Gate Integrity Rules are present in both variants. They are never compressed away.
 
 **Full variant:**
 
@@ -566,9 +566,9 @@ When two rules give conflicting guidance:
 ## Module 08: Domain Configuration
 
 **Include:** Only when sub-domains are selected in Module 02  
-**Variants:** None — content is fully dynamic based on domain/sub-domain selections (multi-select, up to 3 per domain, merged per Section 8 rules)  
+**Variants:** None. Content is fully dynamic based on domain/sub-domain selections (multi-select, up to 3 per domain, merged per Section 8 rules)  
 **Dependencies:** Reads from Module 02 domain selections  
-**Estimated lines:** 35—60 (varies with domain count and sub-domain scope lists)
+**Estimated lines:** 35–60 (varies with domain count and sub-domain scope lists)
 
 ```
 ## Domain Configuration
@@ -610,7 +610,7 @@ In addition to universal triggers:
 
 ## Initialization Acknowledgment Block
 
-**Include:** Always (new in 2.0 — Section 8, rewritten to state-language)  
+**Include:** Always (new in 2.0; Section 8, rewritten to state-language)  
 **Variants:** Mode A / Mode B mandated text (selected by mode)  
 **Dependencies:** Reads mode from Module 10 selection, primary domain from Module 02. Section 10 states why the acknowledgment is phrased as loaded state; Module 14 Rule 3 defines the one permitted addition (the duplicate-config supersession note).  
 **Estimated lines:** 3
@@ -621,7 +621,7 @@ In addition to universal triggers:
 [Mode A: Full Enforcement | Mode B: Integrity Lock] configuration loaded — no configuration modifications permitted during this session. Primary domain: [domain]. Ready for your first question.
 ```
 
-**Rules (Section 8):** The acknowledgment asserts loaded configuration state only — never that enforcement ran or held ("guardrails are active" overclaims; "configuration loaded" is the honest ceiling). It states the primary domain and enforcement mode ONLY — no recitation of specializations, source lists, scope boundaries, or rule structure (configuration reconnaissance reduction). It is a one-time event per session. The sole permitted addition is a one-line duplicate-configuration supersession note when Module 14 Rule 3 applies. If the configuration is malformed or incomplete, the acknowledgment notes what's missing and applies the closest valid fallback (per Module 10 rules).
+**Rules (Section 8):** The acknowledgment asserts loaded configuration state only: never that enforcement ran or held ("guardrails are active" overclaims; "configuration loaded" is the honest ceiling). It states the primary domain and enforcement mode ONLY: no recitation of specializations, source lists, scope boundaries, or rule structure (configuration reconnaissance reduction). It is a one-time event per session. The sole permitted addition is a one-line duplicate-configuration supersession note when Module 14 Rule 3 applies. If the configuration is malformed or incomplete, the acknowledgment notes what's missing and applies the closest valid fallback (per Module 10 rules).
 
 ---
 
@@ -681,8 +681,8 @@ Every [drift_interval] responses, and immediately when a question's primary subj
 ## Module 10: Session Persistence
 
 **Include:** Always  
-**Variants:** Mode A / Mode B — selected based on user's persistence mode choice  
-**Dependencies:** Propagates enforcement posture to Modules 03, 05, 06, 09. Advisory posture in Mode B applies to scope and escalation only — never to the integrity rules or the mode-independent omission-integrity checks.  
+**Variants:** Mode A / Mode B; selected based on user's persistence mode choice  
+**Dependencies:** Propagates enforcement posture to Modules 03, 05, 06, 09. Advisory posture in Mode B applies to scope and escalation only, never to the integrity rules or the mode-independent omission-integrity checks.  
 **Estimated lines:** 9 (Mode A) / 22 (Mode B)
 
 **Mode A variant:**
@@ -796,7 +796,7 @@ Key validation areas:
 You are not responsible for running these tests. You are responsible for producing outputs that pass them.
 ```
 
-**Note:** This block mirrors Section 12's model-consumed output, which retains the Draft 1.1 test statistics by design — the v2 test additions are registered by home section in Section 12's Version 2.0 Additions, and the authoritative post-v2 totals are recounted deterministically at release into `framework/manifest.json`. If Section 12 updates its model-consumed output at the recount, regenerate this block.
+**Note:** This block mirrors Section 12's model-consumed output, which retains the Draft 1.1 test statistics by design. The v2 test additions are registered by home section in Section 12's Version 2.0 Additions, and the authoritative post-v2 totals are recounted deterministically at release into `framework/manifest.json`. If Section 12 updates its model-consumed output at the recount, regenerate this block.
 
 ---
 
@@ -804,7 +804,7 @@ You are not responsible for running these tests. You are responsible for produci
 
 **Include:** Always  
 **Variants:** None  
-**Dependencies:** Reads metadata from Header Block, Module 02 (Scope Definition), Module 10 (Session Persistence). Reads the Weight Omissions disclosure from the config header when present (optional tag field, new in 2.0 — Section 13 schema). Does not modify upstream modules. Produces Tag ID consumed by future Module 16 (Self-Audit Report).  
+**Dependencies:** Reads metadata from Header Block, Module 02 (Scope Definition), Module 10 (Session Persistence). Reads the Weight Omissions disclosure from the config header when present (optional tag field, new in 2.0, Section 13 schema). Does not modify upstream modules. Produces Tag ID consumed by future Module 16 (Self-Audit Report).  
 **Estimated lines:** 47  
 **Weight rule:** Always full (capability definition, not compressible)
 
@@ -859,13 +859,13 @@ configuration header is marked as not available. A tag with gaps is honest.
 A tag with invented values is a Critical Violation.
 ```
 
-**Note (v2 schema):** Section 13 Draft 2.0 adds the optional **Weight Omissions** tag field, sourced from the config header's weight-omissions disclosure — included when the rule-coverage manifest omits any rule class for weight, omitted when nothing is omitted. Section 13's model-consumed output block above is unchanged at Draft 2.0 and does not list the field in its extraction list; see the widget-pass notes at the end of this file.
+**Note (v2 schema):** Section 13 Draft 2.0 adds the optional **Weight Omissions** tag field, sourced from the config header's weight-omissions disclosure: included when the rule-coverage manifest omits any rule class for weight, omitted when nothing is omitted. Section 13's model-consumed output block above is unchanged at Draft 2.0 and does not list the field in its extraction list; see the widget-pass notes at the end of this file.
 
 ---
 
 ## Module 14: Composition & External Authority
 
-**Include:** Always (new in 2.0 — Section 14, fixed component included in every generated configuration)  
+**Include:** Always (new in 2.0; Section 14, fixed component included in every generated configuration)  
 **Variants:** None  
 **Dependencies:** Reads from Module 01 (decision hierarchy), Module 03 (fabricated-process class), Module 07 (Edge Case 3), the Initialization Acknowledgment Block (carries the Rule 3 supersession note), Module 10 (tier/mode system), Module 13 (attestation scope). The `[GAIO-DELEGATED:v2]` marker is a framework constant, not a configurable value.  
 **Estimated lines:** 32  
@@ -910,7 +910,7 @@ never present it as produced under this configuration.
 
 ## Module 15: Enforcement Architecture
 
-**Include:** Governed per weight tier by the rule-coverage manifest (Section 15 `[manifest]` row); recommended for all deployments (new in 2.0 — Section 15)  
+**Include:** Governed per weight tier by the rule-coverage manifest (Section 15 `[manifest]` row); recommended for all deployments (new in 2.0, Section 15)  
 **Variants:** None  
 **Dependencies:** Reads from all modules; classified by Section 15's three-tier enforcement model. The Configuration Tag (Module 13) and the delegation marker (Module 14) are its deterministic anchors.  
 **Estimated lines:** 21  
@@ -960,7 +960,7 @@ Rules for describing your own enforcement:
 
 ## Quick Assembly Reference
 
-Per the framework's no-estimated-counts rule, v2 line totals per assembly are not asserted here — they are recounted deterministically at the widget pass.
+Per the framework's no-estimated-counts rule, v2 line totals per assembly are not asserted here. They are recounted deterministically at the widget pass.
 
 ### Minimum Configuration (individual, Mode B, standard domain)
 Header → Module 01 → Module 02 → Module 03 (compact) → Module 04 → Module 06 (compact, Mode B line) → Initialization Acknowledgment → Module 10 (Mode B) → Module 12 → Module 13 → Module 14 → Footer
@@ -982,13 +982,13 @@ Weight describes the token budget; the mode describes the enforcement posture (S
 
 The following items are template-visible but implemented at the widget pass, not in this file:
 
-1. **Compact-Mode-A emission** — the assembly path exists above (compact weight variants + Mode A framings); the widget must emit it and sync any hardcoded strings.
-2. **Mode B gating** — refuse Mode B for regulated, multi-user configurations; present the informed-consent trade-off before Mode B is selected (Section 10).
-3. **Rule-coverage manifest emission and label gating** — populate the manifest for the selected weight tier, embed the declaration in the generated configuration, and refuse the "Full Enforcement" label when any Tier 1 or Tier 2 class is absent (Section 15). Where the manifest declaration is embedded in the output is a widget decision — Section 15 requires it be "reproduced in the generated configuration" without fixing a position.
-4. **Weight Omissions plumbing** — emit the header disclosure line and carry it into the Configuration Tag's Weight Omissions field. Section 13's model-consumed output block does not yet list the field in its Tier 1 extraction list; whether that block gains an extraction bullet is a Section 13 decision to mirror here when made.
-5. **Mode B at Full/Standard weight** — v1 only ever emitted Mode B at Compact weight. With weight and mode decoupled, a Mode B full-weight escalation variant is not authored; this template applies the authored Mode B variant (Module 05) at any weight. If a richer Mode B full variant is wanted, it must be authored in Section 5/10 first — not invented here.
+1. **Compact-Mode-A emission:** the assembly path exists above (compact weight variants + Mode A framings); the widget must emit it and sync any hardcoded strings.
+2. **Mode B gating:** refuse Mode B for regulated, multi-user configurations; present the informed-consent trade-off before Mode B is selected (Section 10).
+3. **Rule-coverage manifest emission and label gating:** populate the manifest for the selected weight tier, embed the declaration in the generated configuration, and refuse the "Full Enforcement" label when any Tier 1 or Tier 2 class is absent (Section 15). Where the manifest declaration is embedded in the output is a widget decision. Section 15 requires it be "reproduced in the generated configuration" without fixing a position.
+4. **Weight Omissions plumbing:** emit the header disclosure line and carry it into the Configuration Tag's Weight Omissions field. Section 13's model-consumed output block does not yet list the field in its Tier 1 extraction list; whether that block gains an extraction bullet is a Section 13 decision to mirror here when made.
+5. **Mode B at Full/Standard weight:** v1 only ever emitted Mode B at Compact weight. With weight and mode decoupled, a Mode B full-weight escalation variant is not authored; this template applies the authored Mode B variant (Module 05) at any weight. If a richer Mode B full variant is wanted, it must be authored in Section 5/10 first, not invented here.
 
 ---
 
-*GAIO v2.0 Modular Section Output (draft) — Created and maintained by Tech Jacks Solutions*  
+*GAIO v2.0 Modular Section Output (draft). Created and maintained by Tech Jacks Solutions*  
 *Licensed under CC-BY-SA 4.0. Attribution required for all derivative works.*

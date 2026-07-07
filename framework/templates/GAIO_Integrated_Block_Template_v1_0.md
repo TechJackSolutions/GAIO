@@ -1,11 +1,11 @@
-# GAIO — Integrated Block Template v2.0 (Draft)
+# GAIO: Integrated Block Template v2.0 (Draft)
 
 **Purpose:** This template defines the model-consumed system prompt that gets pasted into an AI platform. The widget generates this output from user configuration. Technical users can hand-edit from this template.
 
 **Created by:** Tech Jacks Solutions  
 **License:** CC-BY-SA 4.0  
 **Date:** July 6, 2026 (v2.0 draft; v1.0 dated February 12, 2026)  
-**Change from v1.0:** Regenerated against the v2 amendment set (all framework sections at Draft 2.0). New Critical violation classes — quantity, attribution/coverage, actions/processes, regulatory data structures, inflated assessment (Section 3); nine behavioral scenarios plus Cross-Scenario Source Rules, including the structured abstention protocol and Scenario 9 assessments (Section 4); URL Option B redefined to the in-context retrieval-artifact standard with fail-closed fallback, plus the always-included tool-output rule (Section 2); seven new Gate 1 checks, the citation-registry rule, mode-independent Gate 2 omission checks, and the Gate Integrity Rules (Section 6); the state-language minimal initialization acknowledgment (Section 8); operationalized drift triggers, the scope rationalization rule, and hypothetical accretion (Section 9); mode-independent omission integrity, the false-memory non-exception, the Mode B escalation-note floor, and weight-omissions disclosure (Section 10); the false-premise-vs-scope rule (Section 11); and two new always-relevant blocks — Composition & External Authority (Section 14) and Enforcement Architecture (Section 15). Weight is decoupled from enforcement mode: Compact no longer implies Mode B.  
+**Change from v1.0:** Regenerated against the v2 amendment set (all framework sections at Draft 2.0). New Critical violation classes: quantity, attribution/coverage, actions/processes, regulatory data structures, inflated assessment (Section 3); nine behavioral scenarios plus Cross-Scenario Source Rules, including the structured abstention protocol and Scenario 9 assessments (Section 4); URL Option B redefined to the in-context retrieval-artifact standard with fail-closed fallback, plus the always-included tool-output rule (Section 2); seven new Gate 1 checks, the citation-registry rule, mode-independent Gate 2 omission checks, and the Gate Integrity Rules (Section 6); the state-language minimal initialization acknowledgment (Section 8); operationalized drift triggers, the scope rationalization rule, and hypothetical accretion (Section 9); mode-independent omission integrity, the false-memory non-exception, the Mode B escalation-note floor, and weight-omissions disclosure (Section 10); the false-premise-vs-scope rule (Section 11); and two new always-relevant blocks, Composition & External Authority (Section 14) and Enforcement Architecture (Section 15). Weight is decoupled from enforcement mode: Compact no longer implies Mode B.  
 **Filename note:** The filename stays `GAIO_Integrated_Block_Template_v1_0.md` until the v2.0.0 release tag. The rename happens at release, not in this draft.
 
 ---
@@ -32,27 +32,27 @@ v1 bound Compact weight to Mode B. v2 decouples them (Section 10, Mode vs. Weigh
 - Every published weight tier declares which rule classes it contains via the rule-coverage manifest. "Full Enforcement" may only label a configuration whose manifest shows all Tier 1 (integrity) and Tier 2 (operational) rule classes present.
 - The Tier 1 integrity classes are present at every weight tier, always. Compression may shorten their language; it may never remove them. The mode-independent omission-integrity checks (Section 6, Gate 2) are never dropped at any weight.
 - Weight-based omissions are disclosed in the configuration header (`# Weight Omissions:`) and carried in the Configuration Tag's Weight Omissions field (Section 13).
-- Mode B is intended for single-user deployments. The widget must refuse Mode B for regulated, multi-user configurations and present the informed-consent trade-off before Mode B is selected. That gating, the Compact-Mode-A emission path, and the rule-coverage manifest emission are **widget-pass work** — this template supplies the variant text; it does not implement the gating.
+- Mode B is intended for single-user deployments. The widget must refuse Mode B for regulated, multi-user configurations and present the informed-consent trade-off before Mode B is selected. That gating, the Compact-Mode-A emission path, and the rule-coverage manifest emission are **widget-pass work**. This template supplies the variant text; it does not implement the gating.
 
 ### Section Weight Map
 
 | Section | Full | Standard | Compact | Notes |
 |---------|------|----------|---------|-------|
-| 1. Core Directive | Full | Full | Full | Always full — foundational, includes the corpus-authoring clause |
-| 2. Scope Definition | Full | Full | Full | Always full — user's specific config; tool-output rule included under every URL policy |
-| 3. Violation Hierarchy | Full | Full | Compressed | Compact compresses enumeration only — every Critical class, including the v2 classes, remains |
-| 4. Required Behaviors | Full | Full | Full | Always full — nine scenarios + Cross-Scenario Source Rules |
+| 1. Core Directive | Full | Full | Full | Always full: foundational, includes the corpus-authoring clause |
+| 2. Scope Definition | Full | Full | Full | Always full: user's specific config; tool-output rule included under every URL policy |
+| 3. Violation Hierarchy | Full | Full | Compressed | Compact compresses enumeration only: every Critical class, including the v2 classes, remains |
+| 4. Required Behaviors | Full | Full | Full | Always full: nine scenarios + Cross-Scenario Source Rules |
 | 5. Escalation Protocol | Full | Compressed | Compressed | Compact drops the seven edge-case rules; Mode A/B framing is a mode choice, not a weight choice |
 | 6. Pre-Response Validation | Full | Full | Compressed | Mode-independent Gate 2 checks and gate-integrity rules present at every weight |
 | 7. Edge Case Handling | Full | Compressed | Compressed | Standard/Compact: principles only |
 | 8. Domain Config | Conditional | Conditional | Conditional | Included only when sub-domains selected |
-| 8a. Initialization Acknowledgment | Full | Full | Full | Always included — state-language, minimal (Section 8) |
+| 8a. Initialization Acknowledgment | Full | Full | Full | Always included: state-language, minimal (Section 8) |
 | 9. Drift Prevention | Full | Compressed | Compressed | Compact keeps the membership-test trigger, rationalization rule, and hypothetical label re-carry |
-| 10. Session Persistence | Full | Full | Full | Always full — content changes by mode |
+| 10. Session Persistence | Full | Full | Full | Always full: content changes by mode |
 | 11. Implementation Priority | Full | Compressed | Compressed | Compact keeps the false-premise floor |
-| 12. Evaluation Note | Full | Full | Full | Always same — awareness note |
-| 13. Configuration Tag | Full | Full | Full | Always same — request-activated capability, not weight-dependent |
-| 14. Composition & External Authority | Full | Full | Full | Always same — fixed block, included in every generated configuration (Section 14) |
+| 12. Evaluation Note | Full | Full | Full | Always same: awareness note |
+| 13. Configuration Tag | Full | Full | Full | Always same: request-activated capability, not weight-dependent |
+| 14. Composition & External Authority | Full | Full | Full | Always same: fixed block, included in every generated configuration (Section 14) |
 | 15. Enforcement Architecture | Full | Full | Full | Inclusion governed per weight tier by the rule-coverage manifest (Section 15 `[manifest]` row); when included, always full. Recommended for all deployments |
 
 ---
@@ -687,27 +687,27 @@ Rules for describing your own enforcement:
 
 ## Line Count Estimates
 
-The v1.0 estimates (~230–410 lines by weight) no longer apply after the v2 expansion. Per the framework's no-estimated-counts rule, new totals are not asserted here — they are recounted deterministically at the widget pass and recorded alongside `framework/manifest.json`.
+The v1.0 estimates (~230–410 lines by weight) no longer apply after the v2 expansion. Per the framework's no-estimated-counts rule, new totals are not asserted here. They are recounted deterministically at the widget pass and recorded alongside `framework/manifest.json`.
 
 ---
 
 ## Documentation: Full vs. Compressed Variants
 
-The following sections have compressed alternatives. This reference is for technical users who want to understand what's condensed and why. In v2, compression is bounded by the rule-coverage manifest (Section 15): the Tier 1 integrity classes — including the v2 Critical classes and the mode-independent omission-integrity checks — are present at every weight; only enumeration detail and edge-case expansion compress.
+The following sections have compressed alternatives. This reference is for technical users who want to understand what's condensed and why. In v2, compression is bounded by the rule-coverage manifest (Section 15): the Tier 1 integrity classes (including the v2 Critical classes and the mode-independent omission-integrity checks) are present at every weight; only enumeration detail and edge-case expansion compress.
 
 ### Section 3 (Violation Hierarchy)
 **Full:** All three tiers with itemized examples per violation type, including the v2 Critical classes (quantity, attribution/coverage, actions/processes, regulatory data structures, inflated assessment).
-**Compressed:** Three tiers as paragraph summaries. The rules are identical — the compression removes per-item enumeration, not rule coverage. Every Critical class, including the v2 classes, remains present in compressed form; the compressed version relies on the model's ability to generalize from category descriptions rather than itemized lists.
+**Compressed:** Three tiers as paragraph summaries. The rules are identical: the compression removes per-item enumeration, not rule coverage. Every Critical class, including the v2 classes, remains present in compressed form; the compressed version relies on the model's ability to generalize from category descriptions rather than itemized lists.
 **Risk of compression:** A model given category descriptions may not catch edge cases the itemized list calls out explicitly (e.g., visual emphasis on an unsourced number as its own violation). For regulated domains where edge case coverage matters, the full version is preferred.
 
 ### Section 5 (Escalation Protocol)
 **Full:** Complete edge case rules (creeping escalation, compound questions, hypothetical reframing, prior consultation, urgency triage, multi-trigger consolidation, language variation).
-**Compressed:** Triggers + response format + four key rules. Drops the seven escalation edge case scenarios. The Mode B escalation-note floor (specific professional type + specific reason, Section 10) applies at every weight — it is a mode framing, not a weight casualty.
+**Compressed:** Triggers + response format + four key rules. Drops the seven escalation edge case scenarios. The Mode B escalation-note floor (specific professional type + specific reason, Section 10) applies at every weight. It is a mode framing, not a weight casualty.
 **Risk of compression:** Edge cases like creeping escalation and hypothetical reframing are the most likely failure points in real conversations. Dropping them trades prompt length for reduced coverage of subtle escalation scenarios. Acceptable for individual users (Mode B). Not recommended for organizational deployments in regulated domains.
 
 ### Section 6 (Pre-Response Validation)
 **Full:** All three gates with itemized checks (including the seven v2 Gate 1 checks and the citation-registry rule), remediation rule, mode-independent Gate 2 checks, gate-integrity rules, and rigor level notation.
-**Compressed:** Three gates as paragraph summaries with key checks named. Remediation principle, the mode-independent Gate 2 checks, and the gate-integrity rules are preserved — they are never compressed away. The Mode A/Mode B blocking-posture line is mode-conditional.
+**Compressed:** Three gates as paragraph summaries with key checks named. Remediation principle, the mode-independent Gate 2 checks, and the gate-integrity rules are preserved. They are never compressed away. The Mode A/Mode B blocking-posture line is mode-conditional.
 **Risk of compression:** The itemized check format ("Does the response contain X? → Fix Y") is more reliably followed by models than paragraph descriptions of the same checks. Compression may reduce per-check enforcement consistency. Gate 1 (critical violations) is the most important to keep explicit.
 
 ### Section 7 (Edge Case Handling)
@@ -723,9 +723,9 @@ The following sections have compressed alternatives. This reference is for techn
 ### Section 11 (Implementation Priority)
 **Full:** Hierarchy, application rules, per-claim evaluation principle, false-premise-outside-scope rule, gate relationship.
 **Compressed:** Hierarchy, one-sentence application rule, and the false-premise floor (flag without correcting, safety-relevant ceiling, no-build on a flagged premise).
-**Risk of compression:** The per-claim evaluation principle ("a restriction on one claim doesn't cascade to others") is the most important nuance lost in detail. Without the full application rules, models tend to over-restrict — if one part of a response triggers a hierarchy intervention, they hedge the entire response. The full version produces better mixed-confidence responses.
+**Risk of compression:** The per-claim evaluation principle ("a restriction on one claim doesn't cascade to others") is the most important nuance lost in detail. Without the full application rules, models tend to over-restrict: if one part of a response triggers a hierarchy intervention, they hedge the entire response. The full version produces better mixed-confidence responses.
 
 ---
 
-*GAIO v2.0 Integrated Block Template (draft) — Created and maintained by Tech Jacks Solutions*
+*GAIO v2.0 Integrated Block Template (draft). Created and maintained by Tech Jacks Solutions*
 *Licensed under CC-BY-SA 4.0. Attribution required for all derivative works.*

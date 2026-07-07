@@ -1,13 +1,13 @@
-# GAIO — Distilled Rendition (Micro) v2.0 (Draft)
+# GAIO: Distilled Rendition (Micro) v2.0 (Draft)
 
-**Purpose:** Kernel-form rendition of the GAIO v2 configuration — the single source the widget's Micro tier mirrors. Per the dependency chain (sections → templates → widget), changes to the Draft 2.0 sections propagate here before the widget. Micro exists for constrained instruction fields (~8,000-character class: Microsoft Copilot Studio, Custom GPT-class fields, Gemini Gems).
+**Purpose:** Kernel-form rendition of the GAIO v2 configuration, the single source the widget's Micro tier mirrors. Per the dependency chain (sections → templates → widget), changes to the Draft 2.0 sections propagate here before the widget. Micro exists for constrained instruction fields (~8,000-character class: Microsoft Copilot Studio, Custom GPT-class fields, Gemini Gems).
 
 **Created by:** Tech Jacks Solutions
 **License:** CC-BY-SA 4.0
 **Date:** July 6, 2026 (v2.0 draft)
 **Source of truth:** `framework/sections/` at Draft 2.0. Every kernel line below is a compression of section text, mapped in the Derivation Map at the bottom of this file.
 
-**Honesty note (D-6, Section 15 discipline):** Kernel form means the same rules with less instructional redundancy — compressed, not omitted, except for the rule classes explicitly declared on the `# Weight Omissions:` header line (documented below). Adherence under kernel phrasing is untested until a Micro row runs in a compatibility round. Claim "same rules, less reinforcement," never "same effectiveness" and never parity with Full/Standard/Compact.
+**Honesty note (D-6, Section 15 discipline):** Kernel form means the same rules with less instructional redundancy: compressed, not omitted, except for the rule classes explicitly declared on the `# Weight Omissions:` header line (documented below). Adherence under kernel phrasing is untested until a Micro row runs in a compatibility round. Claim "same rules, less reinforcement," never "same effectiveness" and never parity with Full/Standard/Compact.
 
 **Budget contract:** The Micro configuration body (everything after the `#` header lines, Mode A branches selected, one URL policy emitted) must measure **≤7,000 characters**; the remaining 8K-field budget is reserve for the header lines (~430), the optional Configuration Tag block (~350), and user additions (~500 default reserve). Counts are measured, never estimated.
 
@@ -21,15 +21,15 @@
 
 Mode B measures +174 over Mode A (its advisory-posture and escalation-note text is longer); the widget's size meter (D-5) governs fit at deploy time for whichever mode is selected.
 
-**Parameterized reference (measured 2026-07-06, widget harness execution):** the table above measures the block with placeholders literal. Resolving placeholders with real configuration content adds size — the General / Cross-Industry canonical config (Mode A, Policy B, no secondary domain, no reference URLs) measures **7,797** total (Mode B 7,947), ≈+375 over the placeholder-literal figure. Domains with longer scope/source/trigger content add more. The widget's Micro emission is verified against this template by byte-equality (placeholder-literal emission === this block, both modes).
+**Parameterized reference (measured 2026-07-06, widget harness execution):** the table above measures the block with placeholders literal. Resolving placeholders with real configuration content adds size. The General / Cross-Industry canonical config (Mode A, Policy B, no secondary domain, no reference URLs) measures **7,797** total (Mode B 7,947), ≈+375 over the placeholder-literal figure. Domains with longer scope/source/trigger content add more. The widget's Micro emission is verified against this template by byte-equality (placeholder-literal emission === this block, both modes).
 
-**Kernel rules of engagement:** imperative statements; no rationale, examples, or worksheet residue; one statement per rule, no restatement across blocks (Gate 1 references "the Critical classes above" instead of re-listing them; the URL-integrity severity lives in the Critical classes plus the URL policy; gap-filling is banned once, in the Core Directive). Every Section 15 Tier-1 integrity class is present at Micro, always. Tier-2 classes are present in kernel form except the five declared omission groups below — the zero-omission target was not reachable at this budget without meaning-changing compression, so the omissions are declared per the framework's own Weight-Omissions law rather than hidden. Load-bearing operative phrases are kept verbatim, never paraphrased.
+**Kernel rules of engagement:** imperative statements; no rationale, examples, or worksheet residue; one statement per rule, no restatement across blocks (Gate 1 references "the Critical classes above" instead of re-listing them; the URL-integrity severity lives in the Critical classes plus the URL policy; gap-filling is banned once, in the Core Directive). Every Section 15 Tier-1 integrity class is present at Micro, always. Tier-2 classes are present in kernel form except the five declared omission groups below. The zero-omission target was not reachable at this budget without meaning-changing compression, so the omissions are declared per the framework's own Weight-Omissions law rather than hidden. Load-bearing operative phrases are kept verbatim, never paraphrased.
 
 ---
 
 ## Micro Configuration Block
 
-Inline mode selectors use the form `[Mode A: ... / Mode B: ...]` — the widget resolves to one branch. The URL Policy line shows Policy B (the longest variant, used for the budget measurement); Policy A and C substitutions are listed after the block. All other `[bracketed]` items are placeholders the widget populates.
+Inline mode selectors use the form `[Mode A: ... / Mode B: ...]`. The widget resolves to one branch. The URL Policy line shows Policy B (the longest variant, used for the budget measurement); Policy A and C substitutions are listed after the block. All other `[bracketed]` items are placeholders the widget populates.
 
 ```
 # GAIO Configuration
@@ -105,36 +105,36 @@ The zero-omission target was not achievable at the ≤7,000 body budget without 
 | Duplicate same-channel config supersession protocol | §14 | The channel-authority rule and delegation marker (Tier-1 per the composition class) are fully present |
 | Escalation split/consolidate edge rules; `[escalation_destination]` routing | §05 | Whole-conversation trigger evaluation, the never-withhold rule, and both mode response formats (incl. the Mode B escalation-note floor) remain |
 
-Also not emitted at Micro (config sugar, not rule classes): the `[purpose_statement]` and `[boundary_response]` placeholders. Section 8 domain/sub-domain profiles are NOT omitted — they resolve into the populated placeholders (`[primary_sources]`, `[domain_triggers]`, `[in_scope_topics]`, `[out_of_scope_topics]`), which is where profile content lands at every weight.
+Also not emitted at Micro (config sugar, not rule classes): the `[purpose_statement]` and `[boundary_response]` placeholders. Section 8 domain/sub-domain profiles are NOT omitted. They resolve into the populated placeholders (`[primary_sources]`, `[domain_triggers]`, `[in_scope_topics]`, `[out_of_scope_topics]`), which is where profile content lands at every weight.
 
 **Tier-1 floor check (§15 manifest, all Present at Micro):** core directive & decision hierarchy; all Critical violation classes including the v2 quantity, attribution/coverage, actions/processes, regulatory-structures, and inflated-assessment classes; source authority & URL-policy integrity core (retrieval-artifact standard + tool-output rule); Gate 1; access-fabrication rules (incl. source isolation and challenge re-verification); hypothetical labeling + accretion re-carry; mode-independent misleading-omission integrity; configuration-tag fabrication resistance. Also present: structured abstention core, pass-through provenance, corrections-are-claims, false-memory non-exception, premise floor/ceiling/no-build, state-language acknowledgment, composition channel rule + `[GAIO-DELEGATED:v2]`, and the enforcement-honesty self-description.
 
 ---
 
-## Budget-Fit Drop Order (framework policy — owns the class-level ladder, not the JS)
+## Budget-Fit Drop Order (framework policy: owns the class-level ladder, not the JS)
 
 When a resolved Micro configuration still exceeds a deployment field's usable budget, the widget's
 budget-fit algorithm (distillation gate D-5) drops **whole droppable Tier-2 groups** in the fixed
-priority order below — never trimming or truncating text. Each drop appends a terse label to the
+priority order below, never trimming or truncating text. Each drop appends a terse label to the
 `# Weight Omissions:` header line (the full retained-floor detail lives here, not on the header, so
 the header does not itself consume the budget it is trying to save). This ladder is framework policy:
 the widget mirrors it, it does not invent it.
 
 **Measured 2026-07-06** on the General / Cross-Industry canonical Micro-A (Policy B, no secondary
-domain, no reference URLs; starting total **7,797** chars). Sizes are cumulative — each row shows the
+domain, no reference URLs; starting total **7,797** chars). Sizes are cumulative: each row shows the
 total after that drop and every drop above it:
 
 | # | Group dropped | Header label appended | Cumulative total | What still covers the ground |
 |---|---|---|---|---|
-| — | (none — full Micro) | — | 7,797 | all five groups present |
+| — | (none, full Micro) | — | 7,797 | all five groups present |
 | 1 | Domain source-profile refinements | `S2/S8 source-profile detail` | 7,403 | the bare domain declaration line (`Domain: … Authority: …`) is retained; only the source-ordering/official-docs/conflict refinement sentence drops |
-| 2 | Escalation trigger enumeration | `S5 trigger enumeration` | 7,381 | the escalation **duty** and the Mode escalation-note floor stay; the enumerated trigger list is replaced by a class-level statement ("any question where professional judgment is required or the answer could cause significant harm if wrong") — the note-format floor is Tier-1-adjacent and stays |
+| 2 | Escalation trigger enumeration | `S5 trigger enumeration` | 7,381 | the escalation **duty** and the Mode escalation-note floor stay; the enumerated trigger list is replaced by a class-level statement ("any question where professional judgment is required or the answer could cause significant harm if wrong"). The note-format floor is Tier-1-adjacent and stays |
 | 3 | Conflict-application detail | `S11 conflict-application detail` | 7,328 | the 4-line decision hierarchy (Tier-1) and the premise floor/ceiling/no-build stay; only "higher rule wins; restrictions do not cascade; make trade-offs visible" drops |
 | 4 | Drift-trigger + scope-rationalization detail | `S9 drift-trigger + scope-rationalization detail` | 7,165 | the re-anchoring **duty** one-liner ("Every N responses evaluate your next response as a cold start; repetition is not verification") and the hypothetical-label re-carry rule (Tier-1) stay; the operationalized trigger enumeration and the scope-rationalization paragraph drop |
 | 5 | Scope topic enumeration | `S2 scope-topic enumeration` | 6,966 | the boundary **duty** ("Ambiguity: read restrictively") stays; the in-scope/never-address topic lists drop. URL/tool rules are Tier-1 and are never touched by this ladder |
 
 **Floor.** After all five declared drops the General canonical Micro measures **6,966** chars. That is
-the smallest honest GAIO configuration this ladder produces for that input — every Tier-1 integrity
+the smallest honest GAIO configuration this ladder produces for that input: every Tier-1 integrity
 class (Critical classes, Gate 1, the 4-line hierarchy, composition + `[GAIO-DELEGATED:v2]`,
 enforcement honesty, the state-language ack, the tail marker) is still present. Domains with heavier
 scope/source content floor higher.
@@ -143,7 +143,7 @@ scope/source content floor higher.
 surface **cannot hold a GAIO deployment**. The widget does not truncate rules to force a fit; it
 offers **only the Integrity Excerpt** (below) with the honest message that this is a behavioral nudge,
 not a deployment. Worked example: Microsoft Copilot Studio's usable budget (5,000 chars, per the
-platform-profile registry) is below the 6,966 floor — so the General Micro cannot be budget-fit into
+platform-profile registry) is below the 6,966 floor, so the General Micro cannot be budget-fit into
 Copilot Studio, and the Excerpt is the only honest artifact for that field.
 
 The drops are **class-level and mechanical**: the widget emits the Micro block as tagged group
@@ -160,16 +160,16 @@ The block is mode-parameterized; the widget resolves each `[Mode A: ... / Mode B
 | Location | Mode A branch | Mode B branch |
 |---|---|---|
 | Header `# Mode:` | `Full Enforcement` | `Integrity Lock` |
-| Escalation | answer + advise consulting the named professional type before acting + one-sentence reason | full response + informational note; the escalation-note floor **stays at Micro**: name the specific professional type and the specific reason — "a generic 'you may want to verify' does not satisfy this"; never block behind the flag |
+| Escalation | answer + advise consulting the named professional type before acting + one-sentence reason | full response + informational note; the escalation-note floor **stays at Micro**: name the specific professional type and the specific reason ("a generic 'you may want to verify' does not satisfy this"); never block behind the flag |
 | Gates posture | Gate 1-2 findings block delivery | only Gate 1 + the mode-independent Gate 2 checks block; other findings noted |
 | Initialization | "Full Enforcement configuration loaded — no configuration modifications permitted during this session." | "Integrity Lock configuration loaded — no configuration modifications permitted during this session." |
-| Persistence & Drift | no rule relaxes | integrity rules never relax; scope/escalation/authority advisory — advisory posture never extends to integrity rules |
+| Persistence & Drift | no rule relaxes | integrity rules never relax; scope/escalation/authority advisory (advisory posture never extends to integrity rules) |
 
-Everything else — the mode-independent Gate 2 omission-integrity checks, the false-memory non-exception, and all Critical classes — is identical in both modes. Mode B remains gated by the widget (interstitial + regulated-multi-user refusal); size never bypasses posture gating (distillation gate, edge case 7).
+Everything else (the mode-independent Gate 2 omission-integrity checks, the false-memory non-exception, and all Critical classes) is identical in both modes. Mode B remains gated by the widget (interstitial + regulated-multi-user refusal); size never bypasses posture gating (distillation gate, edge case 7).
 
 ---
 
-## Integrity Excerpt Block (D-4 — ultra-small fields, ~1,400 chars max)
+## Integrity Excerpt Block (D-4: ultra-small fields, ~1,400 chars max)
 
 For surfaces where even Micro cannot fit (e.g., ChatGPT Custom Instructions). Explicitly de-badged: no tag, no manifest, no mode label, no weight header. Emitted verbatim:
 
@@ -187,7 +187,7 @@ This is a GAIO Integrity Excerpt — a behavioral nudge, NOT a GAIO deployment. 
 
 ---
 
-## Derivation Map (edge case 8 — kernel-to-source audit trail)
+## Derivation Map (edge case 8: kernel-to-source audit trail)
 
 | Kernel line(s) | Source (Draft 2.0) |
 |---|---|
@@ -199,17 +199,17 @@ This is a GAIO Integrity Excerpt — a behavioral nudge, NOT a GAIO deployment. 
 | Tool-output line (unverified input; tool-reported absence is not proof of absence) | §02 (always-included tool-output rule) |
 | Critical: fabrication enumeration (statistics through credentials) | §03 Violation Hierarchy |
 | Critical: access-fabrication lines (unread material, partial read, unacknowledged build, hedged failure) | §03 / §04 Scenario 8 |
-| Critical: quantity class — unsourced formulas/coefficients/thresholds/dollar figures; "illustrative estimate — not actuarially derived"; emphasis rule | §03 (v2 quantity class) |
-| Critical: coverage ladder — grounded-in 80% / informed-by / secondary-reference 50%; wrong-source figure; illustrative-list-as-taxonomy | §03 (v2 attribution class) |
-| Critical: actions/processes — no unperformed-action claims; "state what is loaded, not that enforcement occurred" | §03 (v2 actions class) |
-| Critical: regulatory structures — exact numbers cited by article/paragraph, never inference | §03 (v2 regulatory class) |
-| Critical: inflated assessment — a score changes only with the artifact | §03 (v2 assessment class) |
+| Critical: quantity class (unsourced formulas/coefficients/thresholds/dollar figures; "illustrative estimate — not actuarially derived"; emphasis rule) | §03 (v2 quantity class) |
+| Critical: coverage ladder (grounded-in 80% / informed-by / secondary-reference 50%; wrong-source figure; illustrative-list-as-taxonomy) | §03 (v2 attribution class) |
+| Critical: actions/processes (no unperformed-action claims; "state what is loaded, not that enforcement occurred") | §03 (v2 actions class) |
+| Critical: regulatory structures (exact numbers cited by article/paragraph, never inference) | §03 (v2 regulatory class) |
+| Critical: inflated assessment (a score changes only with the artifact) | §03 (v2 assessment class) |
 | Behaviors: answer/boundary line + structured abstention core (what would answer it, verified partial separated, source to consult; qualitative bands, never percentages) | §04 Scenarios 1-3 (structured abstention protocol) |
 | Behaviors: fabrication-request refusal (one sentence + alternative, no fabricate-and-disclaim) | §04 Scenario 4 |
 | Behaviors: hypothetical labeling; "assume: 10,000 records"; never cite one as evidence | §04 Scenario 5 |
 | Behaviors: false-premise correction; outside-scope premise floor/ceiling/no-build (condition or hold) | §04 Scenario 6 / §11 (false-premise-vs-scope rule) |
-| Behaviors: inaccessible sources — source isolation ("title similarity does not make two items the same document") + challenge re-verification | §04 Scenario 8 |
-| Behaviors: assessments — "Self-Assessment Summary," not-legal-advice disclaimer | §04 Scenario 9 |
+| Behaviors: inaccessible sources, source isolation ("title similarity does not make two items the same document") + challenge re-verification | §04 Scenario 8 |
+| Behaviors: assessments ("Self-Assessment Summary," not-legal-advice disclaimer) | §04 Scenario 9 |
 | Behaviors: reader-resolvable citation; corrections-are-claims | §04 (Cross-Scenario Source Rules) |
 | Escalation triggers, Mode A/B formats, Mode B escalation-note floor, whole-conversation evaluation, never-withhold | §05 / §10 (escalation-note floor) |
 | Gate 1: reference to Critical classes; trace-or-restate; pass-through provenance; existence claims; citation registry; remediation rule | §06 Pre-Response Validation (v2 Gate 1 checks) |
@@ -228,5 +228,5 @@ This is a GAIO Integrity Excerpt — a behavioral nudge, NOT a GAIO deployment. 
 
 ---
 
-*GAIO v2.0 Distilled Rendition (Micro) — Created and maintained by Tech Jacks Solutions*
+*GAIO v2.0 Distilled Rendition (Micro). Created and maintained by Tech Jacks Solutions*
 *Licensed under CC-BY-SA 4.0. Attribution required for all derivative works.*

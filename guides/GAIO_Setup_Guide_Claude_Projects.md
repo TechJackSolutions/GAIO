@@ -1,6 +1,6 @@
 # How to Use GAIO with Claude Projects
 
-**GAIO v2.0 (draft) — Platform Setup Guide**
+**GAIO v2.0 (draft) | Platform Setup Guide**
 **Created by Tech Jacks Solutions**
 
 ---
@@ -31,14 +31,14 @@ Go to the GAIO widget and complete the 6-step setup:
 5. Review auto-populated scope and escalation settings
 6. Click Generate and copy the output
 
-You now have a block of text — your GAIO configuration. Keep it in your clipboard or save the downloaded .txt file.
+You now have a block of text: your GAIO configuration. Keep it in your clipboard or save the downloaded .txt file.
 
 ### Step 2: Create a New Claude Project
 
 1. Open Claude at claude.ai
 2. In the left sidebar, click **Projects**
 3. Click **Create Project**
-4. Give it a name that reflects the domain (e.g., "Cybersecurity Research — GAIO Protected" or "Marketing Content — Guardrailed")
+4. Give it a name that reflects the domain (e.g., "Cybersecurity Research (GAIO Protected)" or "Marketing Content (Guardrailed)")
 
 ### Step 3: Add GAIO as Project Instructions
 
@@ -56,16 +56,16 @@ If you have reference materials that the AI should draw from (company policies, 
 2. Upload your files (PDF, TXT, MD, DOCX supported)
 3. These files become available to every conversation in the project
 
-This pairs well with GAIO's source authority configuration — the AI now has both the behavioral rules (from GAIO) and the reference material (from your uploads) in the same workspace.
+This pairs well with GAIO's source authority configuration: the AI now has both the behavioral rules (from GAIO) and the reference material (from your uploads) in the same workspace.
 
 ### Step 5: Test It
 
 Start a new conversation in the project and try these checks:
 
-- Ask a factual question in your domain — does the AI cite appropriate authority types?
-- Ask something outside your configured scope — does the AI flag it as out-of-scope?
-- Ask it to make something up — does it refuse and explain why?
-- Ask a question it genuinely cannot answer — does it say "I don't know" rather than fabricating?
+- Ask a factual question in your domain. Does the AI cite appropriate authority types?
+- Ask something outside your configured scope. Does the AI flag it as out-of-scope?
+- Ask it to make something up. Does it refuse and explain why?
+- Ask a question it genuinely cannot answer. Does it say "I don't know" rather than fabricating?
 
 If the AI behaves according to your GAIO configuration, you're set.
 
@@ -75,9 +75,9 @@ If the AI behaves according to your GAIO configuration, you're set.
 
 **One project per domain configuration.** If you work across multiple domains (e.g., cybersecurity during the day, content writing in the evening), create separate projects with different GAIO configs rather than trying to use one config for everything.
 
-**Project Instructions have a character limit.** Claude Projects support substantial instruction fields, but if you're using a Full weight GAIO v2 config (~8,050 tokens / ~32,200 characters, measured) alongside other custom instructions, check that everything fits. Compact weight configs (~5,750 tokens / ~23,000 characters) leave more room — and as of v2, Compact is available in Mode A, so choosing the smaller config no longer changes the enforcement posture. Never deploy a truncated config: silent rule loss breaks the framework.
+**Project Instructions have a character limit.** Claude Projects support substantial instruction fields, but if you're using a Full weight GAIO v2 config (~8,050 tokens / ~32,200 characters, measured) alongside other custom instructions, check that everything fits. Compact weight configs (~5,750 tokens / ~23,000 characters) leave more room. As of v2, Compact is available in Mode A, so choosing the smaller config no longer changes the enforcement posture. Never deploy a truncated config: silent rule loss breaks the framework.
 
-**GAIO + Claude's built-in tools.** Claude Projects support web search, file creation, and other tools. GAIO's URL policy (Option B: Search-verified allowed) pairs naturally with Claude's web search capability — the AI can find and verify URLs in real time, which is exactly what Option B is designed for.
+**GAIO + Claude's built-in tools.** Claude Projects support web search, file creation, and other tools. GAIO's URL policy (Option B: Search-verified allowed) pairs naturally with Claude's web search capability: the AI can find and verify URLs in real time, which is exactly what Option B is designed for.
 
 **Updating your config.** When a new version of GAIO is released or you want to change your domain settings, just regenerate your config from the widget and replace the Project Instructions text. All future conversations in the project will use the new config. Existing conversations keep whatever config was active when they started.
 
@@ -91,14 +91,14 @@ If the AI behaves according to your GAIO configuration, you're set.
 - Check that you're inside the correct project (the project name appears at the top of the conversation)
 
 **The config seems too long / gets cut off.**
-- Use Compact weight if you need a shorter config — as of v2 it is available in Mode A (full enforcement in compressed language), so size no longer trades away the posture. Choose Mode B (Integrity Lock) only as a deliberate solo-use posture decision, never for size, and never for audience-facing or regulated deployments.
+- Use Compact weight if you need a shorter config. As of v2 it is available in Mode A (full enforcement in compressed language), so size no longer trades away the posture. Choose Mode B (Integrity Lock) only as a deliberate solo-use posture decision, never for size, and never for audience-facing or regulated deployments.
 - Remove any trailing whitespace or formatting artifacts from the paste
 
 **The AI references GAIO rules explicitly in its responses.**
-- This is normal behavior in Full Enforcement mode — the AI may cite its own rules when declining requests or flagging scope boundaries
-- If you prefer less visible rule-citing, Integrity Lock mode (Mode B) is less explicit about operational rules — but be aware this is an enforcement change, not a style setting: under Mode B, scope boundaries and escalation triggers are advisory rather than enforced. Do not switch to Mode B for cosmetic reasons in audience-facing or regulated deployments.
+- This is normal behavior in Full Enforcement mode: the AI may cite its own rules when declining requests or flagging scope boundaries
+- If you prefer less visible rule-citing, Integrity Lock mode (Mode B) is less explicit about operational rules, but be aware this is an enforcement change, not a style setting: under Mode B, scope boundaries and escalation triggers are advisory rather than enforced. Do not switch to Mode B for cosmetic reasons in audience-facing or regulated deployments.
 
 ---
 
-*GAIO v2.0 (draft) — Created and maintained by Tech Jacks Solutions*
+*GAIO v2.0 (draft) | Created and maintained by Tech Jacks Solutions*
 *Standard licensed under CC-BY-SA 4.0 | Widget licensed under Apache 2.0*

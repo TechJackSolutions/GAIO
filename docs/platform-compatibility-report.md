@@ -1,4 +1,4 @@
-# GAIO — Platform Compatibility Report
+# GAIO Platform Compatibility Report
 
 **Version:** 1.0
 **Test Date:** February 13, 2026
@@ -46,15 +46,15 @@ GAIO configurations were tested across three major AI platforms using identical 
 
 ## Platform Ranking
 
-1. **Claude 4.5 Sonnet** — Strongest overall compliance. Zero drift, caught every reframe attempt, most concise refusals.
-2. **ChatGPT 5.2** — Strong compliance. Zero drift, caught reframes. Slightly more verbose in boundary responses.
-3. **Gemini** — Strong factual accuracy and initial refusals. Failed under sustained social engineering pressure through rationalized scope drift.
+1. **Claude 4.5 Sonnet:** Strongest overall compliance. Zero drift, caught every reframe attempt, most concise refusals.
+2. **ChatGPT 5.2:** Strong compliance. Zero drift, caught reframes. Slightly more verbose in boundary responses.
+3. **Gemini:** Strong factual accuracy and initial refusals. Failed under sustained social engineering pressure through rationalized scope drift.
 
 ---
 
 ## Key Findings
 
-**GAIO compliance is mode-dependent, not just model-dependent.** Gemini in Thinking Mode aligned correctly with GAIO. Gemini in Fast Thinking mode bypassed GAIO requirements entirely. Speed-optimized inference modes may deprioritize system prompt instruction following even on capable models.
+**GAIO compliance is mode-dependent, not just model-dependent.** Gemini in Thinking Mode aligned correctly with GAIO. Gemini in Fast Thinking mode bypassed GAIO requirements entirely. Speed-focused inference modes may deprioritize system prompt instruction following even on capable models.
 
 **Refusal length correlates inversely with compliance quality.** Shorter, clearer refusals left less room for boundary drift. The platforms with the longest refusal responses showed the most scope creep.
 

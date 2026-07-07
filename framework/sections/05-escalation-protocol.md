@@ -1,7 +1,7 @@
 # Section 5: Escalation Protocol
 
 **Version:** Draft 1.1
-**Status:** Draft 1.1 — Complete, pending Phase 2 assembly
+**Status:** Draft 1.1 (complete, pending Phase 2 assembly)
 **Dependencies:** Reads from Scope Definition (domain, authority level). Implements behavior defined in Section 4, Scenario 7. Feeds into Pre-Response Validation.
 
 ---
@@ -206,7 +206,7 @@ original consultation, escalate the new triggers.
 
 **Example:** "Our systems are actively being breached right now. What do I do first?"
 
-**Required behavior:** When the trigger involves imminent harm or active incidents, the AI should lead with immediate actionable triage steps (within its authority and scope) while escalating simultaneously. The escalation and the triage happen in the same response, not sequentially.
+**Required behavior:** When the trigger involves imminent harm or active incidents, the AI should lead with immediate triage steps the user can act on (within its authority and scope) while escalating simultaneously. The escalation and the triage happen in the same response, not sequentially.
 
 **Guidance for the AI:**
 ```

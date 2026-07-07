@@ -2,7 +2,7 @@
 
 An open, modular standard for making AI outputs more accurate, consistent, and trustworthy.
 
-GAIO gives AI systems a structured set of rules about what they can say, where their information comes from, how they handle uncertainty, and when they should stop and tell the user to consult a human. It works with any platform that accepts text instructions — ChatGPT, Claude, Gemini, open-source models, or API deployments.
+GAIO gives AI systems a structured set of rules about what they can say, where their information comes from, how they handle uncertainty, and when they should stop and tell the user to consult a human. It works with any platform that accepts text instructions: ChatGPT, Claude, Gemini, open-source models, or API deployments.
 
 **Created and maintained by [Tech Jacks Solutions](https://techjacksolutions.com)**
 
@@ -12,7 +12,7 @@ GAIO gives AI systems a structured set of rules about what they can say, where t
 
 AI models fabricate. They invent statistics, generate fake URLs, cite nonexistent studies, and present speculation as fact. They do this confidently and consistently.
 
-Existing solutions are either too technical for most users (prompt engineering documentation), too vague to be actionable ("be careful with AI"), or locked inside specific platforms. There is no open standard that a non-technical user can pick up, configure in five minutes, and paste into their AI platform to meaningfully reduce these problems.
+Existing solutions are either too technical for most users (prompt engineering documentation), too vague to act on ("be careful with AI"), or locked inside specific platforms. There is no open standard that a non-technical user can pick up, configure in five minutes, and paste into their AI platform to meaningfully reduce these problems.
 
 That's what GAIO creates.
 
@@ -20,7 +20,7 @@ That's what GAIO creates.
 
 ## Who It's For
 
-**Non-technical users** (primary audience): People who use AI tools at work but don't write prompts professionally. Configure through the [HTML widget](widget/GAIO_Widget_v1_0.html) — answer a few questions, copy the output, paste it into your AI platform.
+**Non-technical users** (primary audience): People who use AI tools at work but don't write prompts professionally. Configure through the [HTML widget](widget/GAIO_Widget_v1_0.html): answer a few questions, copy the output, paste it into your AI platform.
 
 **Technical users and prompt engineers**: Customize the framework directly from the [markdown documentation](framework/). Fork, modify, and integrate into your own workflows.
 
@@ -56,7 +56,7 @@ GAIO uses a two-layer architecture:
 
 **Layer 1 (What you see):** Plain language questions with sensible defaults. The basic setup is 6-7 questions. Advanced options are hidden until you need them.
 
-**Layer 2 (What the AI sees):** Structured, hierarchical rules optimized for LLM parsing. Generated automatically from your answers. You never have to read or understand this layer unless you choose to.
+**Layer 2 (What the AI sees):** Structured, hierarchical rules tuned for LLM parsing. Generated automatically from your answers. You never have to read or understand this layer unless you choose to.
 
 The widget bridges the two layers. You answer questions → the widget generates a configuration → you paste it into your AI platform. Done.
 
@@ -67,7 +67,7 @@ The widget bridges the two layers. You answer questions → the widget generates
 | Core Directive | Sets the AI's mission, decision hierarchy, and persistence rules |
 | Scope Definition | Defines the domain, approved sources, topic boundaries, and URL policy |
 | Violation Hierarchy | Classifies violations into Critical (zero tolerance), Major (avoid always), and Minor (minimize) |
-| Required Behaviors | Templates for 9 scenarios: when the AI knows, partially knows, doesn't know, is asked to fabricate, needs to flag a hypothetical, encounters a wrong premise, should defer to a human, cannot access a provided source, or produces assessments/scores/compliance outputs — plus cross-scenario source rules |
+| Required Behaviors | Templates for 9 scenarios: when the AI knows, partially knows, doesn't know, is asked to fabricate, needs to flag a hypothetical, encounters a wrong premise, should defer to a human, cannot access a provided source, or produces assessments/scores/compliance outputs, plus cross-scenario source rules |
 | Escalation Protocol | Triggers and routing for "this needs human review" situations |
 | Pre-Response Validation | Three-gate check the AI runs before every response, aligned to violation severity |
 | Edge Case Handling | Cross-cutting edge cases + an extensibility framework for community contributions |
@@ -76,9 +76,9 @@ The widget bridges the two layers. You answer questions → the widget generates
 | Session Persistence | Separates integrity rules (always enforced) from operational rules (configurable by use case) |
 | Implementation Priority | Resolves conflicts when framework rules contradict each other |
 | Evaluation & Enforcement Hooks | 184-test baseline (~170 unique, 33-test MVT, 9 categories) plus v2 additions; tests exist to be run, and Section 15 classifies which are machine-decidable |
-| Configuration Tag | Tamper-evident provenance: dual SHA-256 hashes over the config, computed by the widget — never by the AI |
-| Composition & External Authority *(v2)* | How GAIO behaves alongside a host system prompt, a second config, or when spawning delegated agents — channel-bound authority, no config-from-chat |
-| Enforcement Architecture & Honest Limits *(v2)* | What the framework can deterministically enforce vs. only encourage — the two-layer model, a three-tier control classification, and a research-grounded statement of the framework's own limits |
+| Configuration Tag | Tamper-evident provenance: dual SHA-256 hashes over the config, computed by the widget, never by the AI |
+| Composition & External Authority *(v2)* | How GAIO behaves alongside a host system prompt, a second config, or when spawning delegated agents: channel-bound authority, no config-from-chat |
+| Enforcement Architecture & Honest Limits *(v2)* | What the framework can deterministically enforce vs. only encourage: the two-layer model, a three-tier control classification, and a research-grounded statement of the framework's own limits |
 
 ### Enforcement Modes
 
@@ -92,7 +92,7 @@ The widget supports 9 named parent domains plus a Custom option, 38 sub-domain p
 
 ### Fitting Platform Instruction Fields
 
-Real platforms cap instruction fields (Copilot Studio and Custom GPTs around 8,000 characters; ChatGPT Custom Instructions at 1,500 per box). The widget's platform-fit system — a deployment-target picker with a dated limits registry, a live size meter, and a never-truncate guard — makes sure what you deploy is what you configured. The **Micro** tier renders every integrity rule in kernel form (~7,800–7,950 characters); when a budget is smaller still, whole optional rule groups are removed in a published drop order with every removal disclosed on the configuration's `# Weight Omissions:` line — never by cutting text mid-rule. Surfaces below the integrity-core floor get an honestly de-badged Integrity Excerpt instead of a fake deployment. Details: the Context Window FAQ's platform table.
+Real platforms cap instruction fields (Copilot Studio and Custom GPTs around 8,000 characters; ChatGPT Custom Instructions at 1,500 per box). The widget's platform-fit system (a deployment-target picker with a dated limits registry, a live size meter, and a never-truncate guard) makes sure what you deploy is what you configured. The **Micro** tier renders every integrity rule in kernel form (~7,800–7,950 characters); when a budget is smaller still, whole optional rule groups are removed in a published drop order with every removal disclosed on the configuration's `# Weight Omissions:` line, never by cutting text mid-rule. Surfaces below the integrity-core floor get an honestly de-badged Integrity Excerpt instead of a fake deployment. Details: the Context Window FAQ's platform table.
 
 ---
 
@@ -108,7 +108,7 @@ Real platforms cap instruction fields (Copilot Studio and Custom GPTs around 8,0
 
 5. **Testable.** Every section includes validation criteria. If you can't test whether a guardrail works, the guardrail doesn't work.
 
-6. **Open and forkable.** The standard is meant to be adopted, modified, and extended — with mandatory credit to Tech Jacks Solutions.
+6. **Open and forkable.** The standard is meant to be adopted, modified, and extended, with mandatory credit to Tech Jacks Solutions.
 
 ---
 
@@ -123,7 +123,7 @@ GAIO compliance is mode-dependent, not just model-dependent.
 | Gemini (Thinking Mode) | ✔ Compliant | Aligned correctly |
 | Gemini (Fast Thinking) | ✘ Failed | Bypassed requirements under pressure |
 
-Speed-optimized inference modes may deprioritize system prompt instruction following even on capable models. See the full [Platform Compatibility Report](docs/platform-compatibility-report.md) for details.
+Speed-focused inference modes may deprioritize system prompt instruction following even on capable models. See the full [Platform Compatibility Report](docs/platform-compatibility-report.md) for details.
 
 ---
 
@@ -175,9 +175,9 @@ GAIO/
 
 ## Versioning
 
-Repository releases represent the overall framework version. Individual sections carry their own draft numbers (e.g., Draft 1.3) reflecting internal revision history. The repository release version — recorded in `framework/manifest.json` and as a git tag — is the authoritative reference for compatibility and citation. See [CHANGELOG.md](CHANGELOG.md) for release history.
+Repository releases represent the overall framework version. Individual sections carry their own draft numbers (e.g., Draft 1.3) reflecting internal revision history. The repository release version (recorded in `framework/manifest.json` and as a git tag) is the authoritative reference for compatibility and citation. See [CHANGELOG.md](CHANGELOG.md) for release history.
 
-This project uses [Semantic Versioning](https://semver.org/). Current tagged release: **v1.0.0**. The main branch carries the **v2.0.0 draft** (15 sections, the Micro tier and platform-fit system, and the enforcement-architecture module), pending its final validation steps listed in `CHANGELOG.md` before tagging. Framework statistics (test counts, domain counts, section counts) are maintained in `framework/manifest.json` — that file is the single source of truth; any conflicting count elsewhere in the repository is an error. Breaking, per this project's SemVer policy, means a change that alters what the framework blocks or permits for an unchanged configuration.
+This project uses [Semantic Versioning](https://semver.org/). Current tagged release: **v1.0.0**. The main branch carries the **v2.0.0 draft** (15 sections, the Micro tier and platform-fit system, and the enforcement-architecture module), pending its final validation steps listed in `CHANGELOG.md` before tagging. Framework statistics (test counts, domain counts, section counts) are maintained in `framework/manifest.json`. That file is the single source of truth; any conflicting count elsewhere in the repository is an error. Breaking, per this project's SemVer policy, means a change that alters what the framework blocks or permits for an unchanged configuration.
 
 ---
 
@@ -201,7 +201,7 @@ This project uses a dual-license structure:
 
 GAIO is designed for community extension. Section 7 (Edge Case Handling) includes a submission template and intake process for new edge cases. Section 8 (Domain Configuration Profiles) includes a contribution template for new sub-domain profiles.
 
-**How to contribute:** see [CONTRIBUTING.md](CONTRIBUTING.md) — contribution types, the framework's integrity rules as they apply to PRs, and the propagation chain (sections → canonical → templates → widget) every rule change must respect. Security reports: see [SECURITY.md](SECURITY.md).
+**How to contribute:** see [CONTRIBUTING.md](CONTRIBUTING.md): contribution types, the framework's integrity rules as they apply to PRs, and the propagation chain (sections → canonical → templates → widget) every rule change must respect. Security reports: see [SECURITY.md](SECURITY.md).
 
 All contributions must use verifiable sources only. No fabricated authorities, statistics, or references.
 
@@ -230,4 +230,4 @@ All contributions must use verifiable sources only. No fabricated authorities, s
 
 ---
 
-*GAIO v2.0.0 (draft; latest tag v1.0.0) — Created and maintained by Tech Jacks Solutions. Framework licensed under CC-BY-SA 4.0. Widget licensed under Apache 2.0.*
+*GAIO v2.0.0 (draft; latest tag v1.0.0). Created and maintained by Tech Jacks Solutions. Framework licensed under CC-BY-SA 4.0. Widget licensed under Apache 2.0.*

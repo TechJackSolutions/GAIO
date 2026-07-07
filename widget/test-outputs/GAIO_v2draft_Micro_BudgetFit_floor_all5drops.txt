@@ -1,7 +1,7 @@
 # GAIO Configuration
 # Standard: GAIO v2.0 (draft)
 # Tech Jacks Solutions | CC-BY-SA 4.0
-# Generated: 2026-07-06
+# Generated: 2026-07-07
 # Mode: Full Enforcement
 # Weight: Micro
 # Weight Omissions: S3 Major/Minor enumeration (Gate 2-3 kernels remain); S6 rigor scaling; S4 dual-source, unexecuted-command + date-anchoring rules; S14 duplicate-config protocol; S5 split/consolidate rules + destination routing; S2/S8 source-profile detail; S5 trigger enumeration; S11 conflict-application detail; S9 drift-trigger + scope-rationalization detail; S2 scope-topic enumeration

@@ -4,13 +4,13 @@
 
 GAIO has two very different surfaces, and reports are triaged differently:
 
-**1. The widget (`widget/GAIO_Widget_v1_0.html`) — software.**
+**1. The widget (`widget/GAIO_Widget_v1_0.html`): software.**
 A single-file, client-side HTML/JS tool with no server, no network calls, and no data collection. In-scope vulnerabilities: XSS or injection through user inputs, hash-computation defects (`crypto.subtle` usage), and anything that could make the widget emit a configuration different from what the user selected. Report these privately (below).
 
-**2. The framework (prompt-layer guardrails) — not a security control, by its own definition.**
-Section 15 states it plainly, on the record of OWASP LLM07:2025: a system prompt "should not be considered a secret, nor should it be used as a security control." GAIO configurations are governance instruments — harm-reduction, testable, honest — but a **bypass of GAIO's rules by a model is a compatibility/resilience finding, not a software vulnerability.** We still want these reports: they feed the platform compatibility report and the framework's adversarial test suite. Please include the platform, model and mode, the configuration weight/mode, and a reproducible prompt sequence.
+**2. The framework (prompt-layer guardrails): not a security control, by its own definition.**
+Section 15 states it plainly, on the record of OWASP LLM07:2025: a system prompt "should not be considered a secret, nor should it be used as a security control." GAIO configurations are governance instruments (harm-reduction, testable, honest), but a **bypass of GAIO's rules by a model is a compatibility/resilience finding, not a software vulnerability.** We still want these reports: they feed the platform compatibility report and the framework's adversarial test suite. Please include the platform, model and mode, the configuration weight/mode, and a reproducible prompt sequence.
 
-Out of scope: prompt-injection attacks against deployments that *use* GAIO (that is the deployer's application-security surface — see Section 15's two-layer model and MITRE ATLAS AML.M0020/M0029 for the external controls GAIO expects to compose with).
+Out of scope: prompt-injection attacks against deployments that *use* GAIO (that is the deployer's application-security surface; see Section 15's two-layer model and MITRE ATLAS AML.M0020/M0029 for the external controls GAIO expects to compose with).
 
 ## Reporting
 

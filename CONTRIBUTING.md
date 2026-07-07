@@ -1,15 +1,15 @@
 # Contributing to GAIO
 
-GAIO is an open standard for AI output integrity. Contributions are welcome — and because this is an *integrity* framework, contributions are held to the framework's own rules. The fastest way to a merged PR is to read this page first.
+GAIO is an open standard for AI output integrity. Contributions are welcome, and because this is an *integrity* framework, contributions are held to the framework's own rules. The fastest way to a merged PR is to read this page first.
 
 ## What we accept
 
 | Contribution | Where it goes | Template |
 |---|---|---|
-| **New edge cases** | Section 7 (Edge Case Handling) | Section 7's submission template — includes the observed failure, the rule gap it exposes, and a proposed handling pattern |
-| **Domain / sub-domain profiles** | Section 8 (Domain Configuration Profiles) | Section 8's contribution template — parent defaults, sources, triggers, scope hints |
+| **New edge cases** | Section 7 (Edge Case Handling) | Section 7's submission template (includes the observed failure, the rule gap it exposes, and a proposed handling pattern) |
+| **Domain / sub-domain profiles** | Section 8 (Domain Configuration Profiles) | Section 8's contribution template: parent defaults, sources, triggers, scope hints |
 | **Verified source lists** | Section 2 / Section 8 source tiers | Sources must be official/primary and resolvable by a reader |
-| **Rule amendments and fixes** | The relevant section file | See "The propagation chain" below — a rule change is never a one-file change |
+| **Rule amendments and fixes** | The relevant section file | See "The propagation chain" below. A rule change is never a one-file change |
 | **Widget fixes** (code) | `widget/` | Apache 2.0; match existing conventions; include test evidence |
 | **Validation tests** | The owning section's Validation Criteria | Registered by reference in Section 12; the test total is recounted deterministically (see below) |
 | **Corrections to counts, citations, or claims** | Anywhere | The best kind of PR. Show the primary source |
@@ -17,8 +17,8 @@ GAIO is an open standard for AI output integrity. Contributions are welcome — 
 ## The non-negotiables (the framework's rules apply to contributions)
 
 1. **No fabricated authorities, statistics, or citations.** Every specific claim in a contribution must trace to a verifiable source, or be labeled as illustrative. A citation must point to the source that actually contains the claim.
-2. **No estimated counts presented as fact.** Framework statistics live in `framework/manifest.json` and are counted deterministically. If your change adds or removes validation tests, say so — the census is re-run at integration.
-3. **US English.** And never "audit-ready" — the framework uses "audit-aligned."
+2. **No estimated counts presented as fact.** Framework statistics live in `framework/manifest.json` and are counted deterministically. If your change adds or removes validation tests, say so. The census is re-run at integration.
+3. **US English.** And never "audit-ready" (the framework uses "audit-aligned").
 4. **No encoding artifacts.** UTF-8, LF line endings (enforced by `.gitattributes`). No mojibake, no smart-quote corruption.
 5. **Honest limitations over confident claims.** If your contribution has a known weakness, state it in the text. This framework documents its own limits (Section 15); contributions follow suit.
 
@@ -38,7 +38,7 @@ Also update per change:
 
 1. Fork, branch, make the change per the rules above.
 2. PR description states: what changed, why, the primary sources for any factual claims, and which downstream artifacts were updated or need regeneration.
-3. Expect an adversarial review — reviewers will try to refute the change before accepting it. That is the house style, not hostility.
+3. Expect an adversarial review: reviewers will try to refute the change before accepting it. That is the house style, not hostility.
 
 ## Licensing of contributions
 

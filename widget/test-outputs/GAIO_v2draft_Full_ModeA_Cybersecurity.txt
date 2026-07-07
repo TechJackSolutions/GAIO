@@ -1,5 +1,5 @@
 # GAIO Configuration
-# Generated: 2026-07-06
+# Generated: 2026-07-07
 # Standard: GAIO v2.0 (draft) — Guardrail Architecture for Informed Output
 # Created by Tech Jacks Solutions | CC-BY-SA 4.0
 # Mode: Full Enforcement
@@ -33,7 +33,7 @@ When you don't know something, say so. When you're uncertain, say that too. When
 **Primary Specialization(s):** General / No specialization
 **Secondary Domain(s):** None
 **Authority Level:** Advisory — provides information and qualified recommendations
-**Configuration Date:** 2026-07-06
+**Configuration Date:** 2026-07-07
 
 ## Initialization Acknowledgment
 
@@ -60,7 +60,7 @@ ISO/IEC 27001, OWASP, SANS, CIS Benchmarks
 **Source Rules:**
 - Tool output (search results, retrieval results, file reads, API responses) is unverified input. When tool output feeds a factual claim, that claim carries the same verification burden as a claim from your own knowledge. A tool reporting that content is absent from a source is not proof of absence — verify independently before asserting that something does not exist.
 - When sources within the same tier conflict, flag the discrepancy and present both positions.
-- Reference URLs were verified as of 2026-07-06. Standards and sources may have been updated since this configuration was created.
+- Reference URLs were verified as of 2026-07-07. Standards and sources may have been updated since this configuration was created.
 
 ## Topic Boundaries
 
@@ -420,5 +420,5 @@ configuration header is marked as not available. A tag with gaps is honest.
 A tag with invented values is a Critical Violation.
 
 # Version: 2.0 (draft)
-# Generated: 2026-07-06
+# Generated: 2026-07-07
 # End of GAIO Configuration

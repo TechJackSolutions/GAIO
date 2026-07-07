@@ -237,9 +237,10 @@ const MODE_LABELS = { 'mode_a': 'Full Enforcement', 'mode_b': 'Integrity Lock' }
 // enforces (limit minus observed platform overhead), before tag/user reserves.
 const PLATFORM_PROFILES = [
   { id: 'api', name: 'API system prompt / Claude Projects (no practical limit)', limit_chars: null, usable_chars: null, status: 'verified', as_of: '2026-07-06', notes: '' },
-  { id: 'copilot-studio', name: 'Microsoft Copilot Studio (agent Instructions)', limit_chars: 8000, usable_chars: 5000, status: 'verified', as_of: '2026-07-06', notes: 'Official per-field limit 8,000 chars (learn.microsoft.com quotas). CAUTION: an undocumented COMBINED budget across agent+topic+system instructions fails around ~5,300 chars observed (OpenAIAdditionalInstructionsLengthExceededLimit) — usable budget set to 5,000. Keep topic-level instructions minimal. Do NOT offload instructions into knowledge files on Microsoft surfaces: XPIA classifiers may sanitize directive-like knowledge at runtime.' },
+  { id: 'copilot-studio-instructions-only', name: 'Microsoft Copilot Studio: instructions-only agent (no topic prompts)', limit_chars: 8000, usable_chars: 7900, status: 'verified-field-limit', as_of: '2026-07-06', notes: 'RECOMMENDED PATH for Copilot Studio: the officially documented per-field limit is 8,000 chars, which holds a Micro configuration (~7,800) IF you (1) uncheck the tag reserve (keep the Configuration Tag in your records instead of embedding it), (2) add nothing else to the Instructions field, and (3) leave all topic-level prompt instructions empty. An undocumented COMBINED budget across agent+topic+system instructions has been observed failing around ~5,300 chars (secondary source), so this recipe may still be rejected at runtime. After deploying: confirm the "# End of GAIO Configuration" tail marker survived and ask the agent to state its loaded domain and mode. If the platform rejects or truncates it, fall back to the conservative profile below or the Integrity Excerpt. Do NOT offload instructions into knowledge files on Microsoft surfaces: XPIA classifiers may sanitize directive-like knowledge at runtime.' },
+  { id: 'copilot-studio', name: 'Microsoft Copilot Studio: conservative (combined-budget safe)', limit_chars: 8000, usable_chars: 5000, status: 'verified', as_of: '2026-07-06', notes: 'Official per-field limit 8,000 chars (learn.microsoft.com quotas). CAUTION: an undocumented COMBINED budget across agent+topic+system instructions fails around ~5,300 chars observed (OpenAIAdditionalInstructionsLengthExceededLimit). Usable budget set to 5,000, which is below the GAIO Micro floor (6,966): this profile offers the Integrity Excerpt only. If your agent uses no topic-level instructions, try the instructions-only profile above first. Do NOT offload instructions into knowledge files on Microsoft surfaces: XPIA classifiers may sanitize directive-like knowledge at runtime.' },
   { id: 'm365-agent-builder', name: 'Microsoft 365 Copilot agent builder (declarative agents)', limit_chars: 8000, usable_chars: 7600, status: 'verified', as_of: '2026-07-06', notes: '8,000-char manifest limit (HTTP 400 above). Same knowledge-file caution as Copilot Studio.' },
-  { id: 'chatgpt-custom-gpt', name: 'ChatGPT Custom GPT (Instructions)', limit_chars: 8000, usable_chars: 7600, status: 'secondary', as_of: '2026-07-06', notes: 'UI blocks saving above 8,000 (community-confirmed; no official doc). Knowledge-file offload possible but adherence is weaker — test.' },
+  { id: 'chatgpt-custom-gpt', name: 'ChatGPT Custom GPT (Instructions)', limit_chars: 8000, usable_chars: 7600, status: 'secondary', as_of: '2026-07-06', notes: 'UI blocks saving above 8,000 (community-confirmed; no official doc). Knowledge-file offload possible but adherence is weaker. Test.' },
   { id: 'chatgpt-custom-instructions', name: 'ChatGPT Custom Instructions (per box)', limit_chars: 1500, usable_chars: 1450, status: 'secondary', as_of: '2026-07-06', notes: '1,500 chars per box. No GAIO deployment fits; Integrity Excerpt only. Never split a config across boxes.' },
   { id: 'gemini-gems', name: 'Google Gemini Gems (instructions)', limit_chars: null, usable_chars: null, status: 'unverified', as_of: '2026-07-06', notes: 'No documented limit (official tips page states none). If the field rejects your config, use the Custom limit option with the observed capacity.' }
 ];
@@ -399,7 +400,7 @@ function populateSubDomains() {
 
   if (pd && DOMAINS[pd] && Object.keys(DOMAINS[pd].subDomains).length > 0) {
     card.classList.remove('hidden');
-    label.textContent = DOMAINS[pd].label + ' — Specialization(s)';
+    label.textContent = DOMAINS[pd].label + ': Specialization(s)';
     renderCheckboxGroup('primarySubDomain', DOMAINS[pd].subDomains, state.primarySubDomains);
   } else {
     card.classList.add('hidden');
@@ -560,7 +561,7 @@ let pendingModeEl = null;
 function showModeRefusal() {
   const n = document.getElementById('modeGateNotice');
   // Static string only — no user/state data interpolated (XSS-safe; dynamic content elsewhere goes through esc()).
-  n.innerHTML = '<strong>Integrity Lock is not available for this configuration.</strong> You selected a regulated domain (Healthcare, Financial Services, Legal, or Government &amp; Public Sector) and indicated that people other than you will use this AI. When an AI serves an audience in a regulated domain, the framework must make operational decisions (scope boundaries, escalation flags) on that audience\'s behalf — Integrity Lock makes those rules advisory, which removes protections from people who never chose to give them up. Please select <strong>Full Enforcement</strong>, which keeps every rule active. If you need a smaller configuration, choose the Compact weight below — weight changes size, not enforcement.';
+  n.innerHTML = '<strong>Integrity Lock is not available for this configuration.</strong> You selected a regulated domain (Healthcare, Financial Services, Legal, or Government &amp; Public Sector) and indicated that people other than you will use this AI. When an AI serves an audience in a regulated domain, the framework must make operational decisions (scope boundaries, escalation flags) on that audience\'s behalf. Integrity Lock makes those rules advisory, which removes protections from people who never chose to give them up. Please select <strong>Full Enforcement</strong>, which keeps every rule active. If you need a smaller configuration, choose the Compact weight below. Weight changes size, not enforcement.';
   n.classList.remove('hidden');
 }
 
@@ -733,8 +734,8 @@ function buildSummary() {
   const explanations = {
     full: 'Your configuration uses <strong>Full weight</strong> output. All sections are fully expanded with complete edge case coverage. Recommended for regulated and elevated-risk domains.',
     standard: 'Your configuration uses <strong>Standard weight</strong> output. Core sections are fully expanded; edge cases, drift prevention, and priority resolution are compressed. This balances thoroughness with prompt efficiency.',
-    compact: 'Your configuration uses <strong>Compact weight</strong> output. All rule classes — integrity and operational — are retained in compressed language; weight changes token size, not enforcement posture. Any rule class omitted for budget is disclosed in the generated header (currently: none).',
-    micro: 'Your configuration uses <strong>Micro weight</strong> output — the kernel-form Distilled Rendition for constrained instruction fields. Every Tier 1 integrity class is present; five Tier 2 detail classes are omitted and declared on the <code># Weight Omissions:</code> header line. Same rules, less reinforcement — adherence under kernel phrasing is untested until a Micro compatibility round runs.'
+    compact: 'Your configuration uses <strong>Compact weight</strong> output. All rule classes (integrity and operational) are retained in compressed language; weight changes token size, not enforcement posture. Any rule class omitted for budget is disclosed in the generated header (currently: none).',
+    micro: 'Your configuration uses <strong>Micro weight</strong> output: the kernel-form Distilled Rendition for constrained instruction fields. Every Tier 1 integrity class is present; five Tier 2 detail classes are omitted and declared on the <code># Weight Omissions:</code> header line. Same rules, less reinforcement. Adherence under kernel phrasing is untested until a Micro compatibility round runs.'
   };
   we.innerHTML = explanations[weight];
 }
@@ -1031,7 +1032,7 @@ function populateDeployTargets() {
     const opt = document.createElement('option');
     opt.value = p.id;
     const size = p.usable_chars ? '~' + p.usable_chars.toLocaleString() + ' usable chars' : 'no practical limit';
-    opt.textContent = p.name + ' — ' + size + ' · ' + p.status + ' as of ' + p.as_of;
+    opt.textContent = p.name + ' · ' + size + ' · ' + p.status + ' as of ' + p.as_of;
     if (p.id === state.deployTarget) opt.selected = true;
     sel.appendChild(opt);
   });
@@ -1077,9 +1078,9 @@ function renderDeployTargetInfo() {
   const lim = p.usable_chars != null
     ? 'Documented limit: ' + (p.limit_chars ? p.limit_chars.toLocaleString() : '—') + ' chars · usable budget: ' + p.usable_chars.toLocaleString() + ' chars.'
     : (p.id === 'custom' ? '' : 'No practical character limit.');
-  el.innerHTML = '<strong>' + esc(p.name) + '</strong> — ' + esc(p.status) + ', as of ' + esc(p.as_of) + '. ' + esc(lim)
+  el.innerHTML = '<strong>' + esc(p.name) + '</strong>: ' + esc(p.status) + ', as of ' + esc(p.as_of) + '. ' + esc(lim)
     + (p.notes ? '<br>' + esc(p.notes) : '')
-    + "<br><em>Platform limits change without notice — verify your field's current behavior at deploy.</em>";
+    + "<br><em>Platform limits change without notice. Verify your field's current behavior at deploy.</em>";
 }
 
 // Never-truncate guard: measured characters of the CURRENT output vs the
@@ -1119,15 +1120,15 @@ function updateSizeMeter() {
   const base = fit.chars.toLocaleString() + ' characters (~' + fit.tokens.toLocaleString() + ' tokens at chars/4)';
   if (fit.effective == null) {
     meter.className = 'gaio-size-meter visible fit';
-    meter.innerHTML = '✓ ' + esc(base) + ' — ' + esc(fit.profile.name) + ': no practical limit.';
+    meter.innerHTML = '✓ ' + esc(base) + '. ' + esc(fit.profile.name) + ': no practical limit.';
   } else if (!fit.blocked) {
     const pct = Math.max(2, Math.min(100, Math.round(fit.chars / fit.effective * 100)));
     meter.className = 'gaio-size-meter visible fit';
-    meter.innerHTML = '✓ ' + esc(base) + ' of ' + esc(fit.effective.toLocaleString()) + ' available (usable ' + esc(fit.usable.toLocaleString()) + ' − ' + esc(String(fit.tagReserve)) + ' tag reserve − ' + esc(String(fit.userReserve)) + ' your additions) — ' + esc((fit.effective - fit.chars).toLocaleString()) + ' chars headroom.'
+    meter.innerHTML = '✓ ' + esc(base) + ' of ' + esc(fit.effective.toLocaleString()) + ' available (usable ' + esc(fit.usable.toLocaleString()) + ' − ' + esc(String(fit.tagReserve)) + ' tag reserve − ' + esc(String(fit.userReserve)) + ' your additions). ' + esc((fit.effective - fit.chars).toLocaleString()) + ' chars headroom.'
       + '<div class="gaio-meter-bar"><div class="gaio-meter-fill" style="width:' + pct + '%"></div></div>';
   } else {
     meter.className = 'gaio-size-meter visible overbudget';
-    meter.innerHTML = '⚠ ' + esc(base) + ' — OVER the available budget for ' + esc(fit.profile.name) + ' by ' + esc(fit.over.toLocaleString()) + ' chars (usable ' + esc(fit.usable.toLocaleString()) + ' − ' + esc(String(fit.tagReserve)) + ' tag reserve − ' + esc(String(fit.userReserve)) + ' your additions = ' + esc(fit.effective.toLocaleString()) + '). Copy and download are blocked for this target — the platform would silently cut your rules. Step down below.'
+    meter.innerHTML = '⚠ ' + esc(base) + '. OVER the available budget for ' + esc(fit.profile.name) + ' by ' + esc(fit.over.toLocaleString()) + ' chars (usable ' + esc(fit.usable.toLocaleString()) + ' − ' + esc(String(fit.tagReserve)) + ' tag reserve − ' + esc(String(fit.userReserve)) + ' your additions = ' + esc(fit.effective.toLocaleString()) + '). Copy and download are blocked for this target. The platform would silently cut your rules. Step down below.'
       + '<div class="gaio-meter-bar"><div class="gaio-meter-fill" style="width:100%"></div></div>';
   }
   if (copyBtn) copyBtn.classList.toggle('blocked', !!fit.blocked);
@@ -1145,12 +1146,12 @@ function renderStepDownPanel(fit) {
   }
   panel.classList.remove('hidden');
   if (state.outputKind === 'excerpt') {
-    panel.innerHTML = '<strong>This surface cannot hold even the Integrity Excerpt (' + esc(fit.chars.toLocaleString()) + ' chars vs ' + esc(fit.effective.toLocaleString()) + ' available).</strong> No honest GAIO artifact fits this field — do not truncate it by hand.';
+    panel.innerHTML = '<strong>This surface cannot hold even the Integrity Excerpt (' + esc(fit.chars.toLocaleString()) + ' chars vs ' + esc(fit.effective.toLocaleString()) + ' available).</strong> No honest GAIO artifact fits this field. Do not truncate it by hand.';
     return;
   }
   const order = ['full', 'standard', 'compact'];
   const cur = order.indexOf(state.lastEmittedWeight);
-  let html = '<strong>Never truncate — step down a class instead:</strong><div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;">';
+  let html = '<strong>Never truncate. Step down a class instead:</strong><div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;">';
   if (cur !== -1) {
     for (let i = cur + 1; i < order.length; i++) {
       html += '<button class="gaio-btn gaio-btn-secondary" style="padding:8px 16px;" onclick="stepDownTo(\'' + order[i] + '\')">Regenerate at ' + order[i].charAt(0).toUpperCase() + order[i].slice(1) + '</button>';
@@ -1176,12 +1177,12 @@ function stepDownTo(weight) {
 
 function stepDownBudgetFit() {
   const fit = platformFit();
-  if (fit.effective == null) { showToast('No budget limit for this target — budget-fit is not needed.'); return; }
+  if (fit.effective == null) { showToast('No budget limit for this target. Budget-fit is not needed.'); return; }
   const res = budgetFitMicro(fit.effective);
   if (res.fit) {
     state.weight = 'micro';
     presentOutput(res.text, 'micro', { drops: res.drops });
-    if (res.drops.length) showToast('Budget-fit Micro: ' + res.drops.length + ' Tier-2 detail class(es) dropped — declared on the # Weight Omissions: header line.');
+    if (res.drops.length) showToast('Budget-fit Micro: ' + res.drops.length + ' Tier-2 detail class(es) dropped. Declared on the # Weight Omissions: header line.');
   } else {
     showSubFloor(res, fit);
   }
@@ -1191,8 +1192,8 @@ function showSubFloor(res, fit) {
   const panel = document.getElementById('stepDownPanel');
   panel.classList.remove('hidden');
   panel.innerHTML = '<strong>This surface is below the GAIO floor.</strong> Even after dropping all five declared Tier-2 detail classes, the smallest honest GAIO configuration for your inputs measures '
-    + esc(res.floorChars.toLocaleString()) + ' characters — over this target\'s available budget (' + esc(fit.effective.toLocaleString())
-    + '). This surface cannot hold a GAIO deployment, and this widget never truncates rules to force a fit. The only honest option is the <strong>GAIO Integrity Excerpt</strong> — a behavioral nudge, explicitly NOT a GAIO deployment (no tag, no mode, no enforcement claim).'
+    + esc(res.floorChars.toLocaleString()) + ' characters, over this target\'s available budget (' + esc(fit.effective.toLocaleString())
+    + '). This surface cannot hold a GAIO deployment, and this widget never truncates rules to force a fit. The only honest option is the <strong>GAIO Integrity Excerpt</strong>: a behavioral nudge, explicitly NOT a GAIO deployment (no tag, no mode, no enforcement claim).'
     + '<div style="margin-top:12px;"><button class="gaio-btn gaio-btn-secondary" style="padding:8px 16px;" onclick="useExcerpt()">Generate Integrity Excerpt</button></div>';
 }
 
@@ -1221,7 +1222,7 @@ function presentOutput(output, weightKind, opts) {
     metaEl.innerHTML = `
       <span class="gaio-output-badge">${esc(lineCount + ' lines')}</span>
       <span class="gaio-output-badge">${esc(charCount.toLocaleString() + ' chars')}</span>
-      <span class="gaio-output-badge">Integrity Excerpt — not a GAIO deployment</span>
+      <span class="gaio-output-badge">Integrity Excerpt (not a GAIO deployment)</span>
     `;
   } else {
     const dropsBadge = state.microDrops.length

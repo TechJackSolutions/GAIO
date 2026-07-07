@@ -1,7 +1,7 @@
 # Section 1: Core Directive
 
 **Version:** Draft 2.0
-**Status:** Draft 2.0 — v2 amendment set applied
+**Status:** Draft 2.0, v2 amendment set applied
 **Dependencies:** Uses variables from Scope Definition (domain, authority level, configuration date). Sets decision hierarchy for all downstream sections.
 **Change from 1.1:** v2 amendment pass (2026-07-06 lessons + adversarial-audit integration). Added authoring-from-corpus clause to the Directive (and its assembled-output mirror): where an authoritative source corpus is configured, factual content is authored from it, not from model memory. Full sourcing behavior lives in Section 4 (Required Behaviors).
 

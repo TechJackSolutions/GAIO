@@ -252,7 +252,7 @@ After `generateOutput()` produces the configuration text:
 4. Display both hashes in the metadata badges area alongside existing badges (line count, KB, weight, version).
 5. Embed both hashes and normalization version in the .txt file header when the user downloads.
 
-**Hash-line exclusion (verification-critical):** Both hashes are computed over the configuration text BEFORE the hash header lines are inserted. The hash lines are not part of the hashed region. A verifier must remove the embedded hash header lines (and the Tag ID line, if present) from the file before recomputing — hashing the downloaded file as-is will always mismatch. See the GAIO Verification Guide for the full procedure.
+**Hash-line exclusion (verification-critical):** Both hashes are computed over the configuration text BEFORE the hash header lines are inserted. The hash lines are not part of the hashed region. A verifier must remove the embedded hash header lines (and the Tag ID line, if present) from the file before recomputing, hashing the downloaded file as-is will always mismatch. See the GAIO Verification Guide for the full procedure.
 
 ### Updated Header Block (downloaded .txt file)
 
