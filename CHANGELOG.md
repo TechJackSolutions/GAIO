@@ -26,6 +26,7 @@ Major version. A lessons-and-research-grounded expansion of the framework, integ
 - Gate integrity: no short-circuited verdicts; gates apply to all artifacts (code, comments, config, translations). Citation-registry rule ("where a registry exists"). False-memory non-exception. (§06/§10)
 - §12 retitled "Evaluation & Enforcement Hooks" with gate-integrity meta-hooks (validator self-test, no-short-circuit, gate-population coverage). §13 renumbers the future Self-Audit module 14→16.
 - Example config re-tagged after the acknowledgment rewording (`GAIO-TAG-20260706-d590e082`); hub copy resynced.
+- **§12 finalized (2026-07-09):** the v1-baseline unique-test count reconciled to a computed value (174 categorized refs − 6 true-duplicate pairs = 168), replacing the self-contradicting "4 pairs (8 tests) / ~170." The six v2 MVT candidates (14-1/14-3/14-7, 15-1/15-4/15-5) were ratified and authored as MVT-34..MVT-39 (MVT 33→39); the suite pass/fail thresholds were rescaled to treat the six as no-fail critical. Section-test census unchanged at 270. Propagated to canonical + manifest.
 
 ### Enforcement / tooling
 - Deterministic validator kit is a separately-versioned deliverable; `scripts/gaio_tag.py` ships; the remaining checks (numerics/disclaimer/marker/counts/freshness) are the kit roadmap and do not gate framework rules (§15).
@@ -57,8 +58,8 @@ Trigger: a real deployment failure (Microsoft Copilot Studio rejected a regular 
 - **Honesty note**: kernel form = same rules, less instructional reinforcement; adherence untested until a Micro compatibility round runs (stated, not hidden).
 
 ### Remaining (post-tag or at maintainer's discretion; none block the text)
-- §12 v2 dedup mapping pass (unique-test count) and MVT ratification of the six v2 candidates (14-1/14-3/14-7, 15-1/15-4/15-5).
-- Regenerate the example config from the v2 widget at release (the shipped example is a valid, tagged v1.0 artifact until then).
+- ~~MVT ratification of the six v2 candidates (14-1/14-3/14-7, 15-1/15-4/15-5)~~: DONE 2026-07-09 (authored as MVT-34..MVT-39; MVT 33→39). The §12 v1-baseline unique-test count was also reconciled (to 168, computed). The **full v2 dedup mapping pass** (unique-after-dedup across the whole 270-test set) remains **not performed — not estimated**.
+- Regenerate the example config from the v2 widget at release (the shipped example is a valid, tagged v1.0 artifact until then). Note: the widget still stamps `GAIO v2.0 (draft)`; finalizing to `2.0.0` cascades into the widget version strings, then the example regen + re-tag.
 - ~~Platform-fit guidance follow-up~~: RESOLVED same release by the platform-distillation system above.
 - Micro compatibility round: kernel-form adherence is untested; run the compat/adversarial sequence against a Micro deployment (including one on Copilot Studio at the budget-fit size) before claiming effectiveness parity anywhere.
 
