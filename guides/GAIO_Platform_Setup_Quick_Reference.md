@@ -1,6 +1,6 @@
 # GAIO Platform Setup Guides: Quick Reference
 
-**GAIO v2.0 (draft) — Guardrail Architecture for Informed Output**
+**GAIO v2.0.0 — Guardrail Architecture for Informed Output**
 **Created by Tech Jacks Solutions**
 
 ---
@@ -74,5 +74,5 @@ Regardless of platform, the process is always:
 
 ---
 
-*GAIO v2.0 (draft) | Created and maintained by Tech Jacks Solutions*
+*GAIO v2.0.0 | Created and maintained by Tech Jacks Solutions*
 *Standard licensed under CC-BY-SA 4.0 | Widget licensed under Apache 2.0*

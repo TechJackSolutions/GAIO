@@ -9,7 +9,7 @@
      (e.g., a parent page) get them automatically via the font-family cascade. -->
 <style>
 /* ============================================================
-   GAIO WIDGET v2.0-draft — Styles
+   GAIO WIDGET v2.0.0 — Styles
    Tech Jacks Solutions | CC-BY-SA 4.0
    ============================================================ */
 
@@ -510,7 +510,7 @@
   <div class="gaio-header">
     <h1><span>GAIO</span> Configuration Generator</h1>
     <p>Guardrail Architecture for Informed Output</p>
-    <span class="gaio-version">v2.0-draft · Tech Jacks Solutions</span>
+    <span class="gaio-version">v2.0.0 · Tech Jacks Solutions</span>
   </div>
 
   <!-- Progress -->
@@ -779,7 +779,7 @@
           <div class="gaio-option-radio"></div>
           <div class="gaio-option-content">
             <div class="gaio-option-title">Micro</div>
-            <div class="gaio-option-desc">Kernel-form Distilled Rendition for constrained instruction fields (~8,000-character class: Copilot Studio, Custom GPT fields). Every Tier 1 integrity class is present; five Tier 2 detail classes are omitted and declared in the generated header. Same rules, less reinforcement. Adherence under kernel phrasing is untested until a Micro compatibility round runs.</div>
+            <div class="gaio-option-desc">Kernel-form Distilled Rendition for constrained instruction fields (~8,000-character class: Copilot Studio, Custom GPT fields). Every Tier 1 integrity class is present; five Tier 2 detail classes are omitted and declared in the generated header. Same rules, less reinforcement. Adherence under kernel phrasing was validated in the 2026-07-12 Micro compatibility round (6/6 Claude-family + 7/7 Copilot Studio, judgment-tier).</div>
           </div>
         </label>
       </div>
@@ -976,7 +976,7 @@
 
 <script>
 /* ============================================================
-   GAIO WIDGET v2.0-draft — JavaScript Engine
+   GAIO WIDGET v2.0.0 — JavaScript Engine
    Tech Jacks Solutions | CC-BY-SA 4.0 / Apache 2.0
    ============================================================ */
 
@@ -1711,7 +1711,7 @@ function buildSummary() {
     full: 'Your configuration uses <strong>Full weight</strong> output. All sections are fully expanded with complete edge case coverage. Recommended for regulated and elevated-risk domains.',
     standard: 'Your configuration uses <strong>Standard weight</strong> output. Core sections are fully expanded; edge cases, drift prevention, and priority resolution are compressed. This balances thoroughness with prompt efficiency.',
     compact: 'Your configuration uses <strong>Compact weight</strong> output. All rule classes (integrity and operational) are retained in compressed language; weight changes token size, not enforcement posture. Any rule class omitted for budget is disclosed in the generated header (currently: none).',
-    micro: 'Your configuration uses <strong>Micro weight</strong> output: the kernel-form Distilled Rendition for constrained instruction fields. Every Tier 1 integrity class is present; five Tier 2 detail classes are omitted and declared on the <code># Weight Omissions:</code> header line. Same rules, less reinforcement. Adherence under kernel phrasing is untested until a Micro compatibility round runs.'
+    micro: 'Your configuration uses <strong>Micro weight</strong> output: the kernel-form Distilled Rendition for constrained instruction fields. Every Tier 1 integrity class is present; five Tier 2 detail classes are omitted and declared on the <code># Weight Omissions:</code> header line. Same rules, less reinforcement. Adherence under kernel phrasing was validated in the 2026-07-12 Micro compatibility round (6/6 Claude-family + 7/7 Copilot Studio, judgment-tier).'
   };
   we.innerHTML = explanations[weight];
 }
@@ -1796,7 +1796,7 @@ function getHashHeaderLines() {
 // ============================================================
 // Micro tier (D-2) — kernel-form Distilled Rendition.
 // KERNEL SOURCE OF TRUTH: framework/templates/GAIO_Distilled_Rendition_v2_0.md
-// (v2.0 draft). Every string below MIRRORS that template verbatim — per the
+// (v2.0.0). Every string below MIRRORS that template verbatim — per the
 // dependency chain (sections → templates → widget), edit the template first,
 // then sync here. Fidelity is verified by execution in the test harness
 // (placeholder-literal emission must equal the template block byte-for-byte).
@@ -1840,7 +1840,7 @@ function buildMicroConfig(p, drops) {
 
   const header = [
     `# GAIO Configuration`,
-    `# Standard: GAIO v2.0 (draft)`,
+    `# Standard: GAIO v2.0.0`,
     `# Tech Jacks Solutions | CC-BY-SA 4.0`,
     `# Generated: ${p.date}`,
     `# Mode: ${A ? 'Full Enforcement' : 'Integrity Lock'}`,
@@ -1985,7 +1985,7 @@ function budgetFitMicro(budget) {
 // ---- Integrity Excerpt (D-4) — VERBATIM from the Distilled Rendition template.
 // Explicitly de-badged: no tag, no manifest, no mode label, no weight header.
 function buildExcerpt() {
-  return `GAIO Integrity Excerpt (from GAIO v2.0 draft) — Tech Jacks Solutions, CC-BY-SA 4.0
+  return `GAIO Integrity Excerpt (from GAIO v2.0.0) — Tech Jacks Solutions, CC-BY-SA 4.0
 
 Decision hierarchy when rules conflict: 1) integrity over helpfulness — never fabricate to fill a gap; 2) accuracy over completeness — partial verified answers beat comprehensive guesses; 3) scope over engagement; 4) clarity over complexity.
 
@@ -2209,7 +2209,7 @@ function presentOutput(output, weightKind, opts) {
       <span class="gaio-output-badge">${esc((charCount / 1024).toFixed(1) + ' KB')}</span>
       <span class="gaio-output-badge">Weight: ${esc(weightKind)}</span>
       <span class="gaio-output-badge">Mode: ${esc(MODE_LABELS[state.mode] || '')}</span>
-      <span class="gaio-output-badge">GAIO v2.0-draft</span>
+      <span class="gaio-output-badge">GAIO v2.0.0</span>
       ${dropsBadge}
       <span class="gaio-output-badge" id="hashBadgeCanonical" style="display:none"></span>
       <span class="gaio-output-badge" id="hashBadgeNormalized" style="display:none"></span>
@@ -2294,7 +2294,7 @@ function generateOutput() {
   // ---- Header ----
   out.push(`# GAIO Configuration`);
   out.push(`# Generated: ${configDate}`);
-  out.push(`# Standard: GAIO v2.0 (draft) — Guardrail Architecture for Informed Output`);
+  out.push(`# Standard: GAIO v2.0.0 — Guardrail Architecture for Informed Output`);
   out.push(`# Created by Tech Jacks Solutions | CC-BY-SA 4.0`);
   out.push(`# Mode: ${modeLabel}`);
   out.push(`# Weight: ${weight.charAt(0).toUpperCase() + weight.slice(1)}`);

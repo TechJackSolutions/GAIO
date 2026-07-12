@@ -1,6 +1,6 @@
 # How to Use GAIO with Google Gemini
 
-**GAIO v2.0 (draft) | Platform Setup Guide**
+**GAIO v2.0.0 | Platform Setup Guide**
 **Created by Tech Jacks Solutions**
 
 ---
@@ -123,5 +123,5 @@ For team deployment where individual Gem creation isn't practical, consider the 
 
 ---
 
-*GAIO v2.0 (draft) | Created and maintained by Tech Jacks Solutions*
+*GAIO v2.0.0 | Created and maintained by Tech Jacks Solutions*
 *Standard licensed under CC-BY-SA 4.0 | Widget licensed under Apache 2.0*

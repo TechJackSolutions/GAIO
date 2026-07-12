@@ -4,9 +4,9 @@ All notable changes to the GAIO framework. This project uses [Semantic Versionin
 The authoritative version and framework statistics live in `framework/manifest.json`.
 SemVer policy for this artifact: a **breaking** change is one that alters what the framework blocks or permits for an unchanged configuration.
 
-## [2.0.0] - UNRELEASED (draft integrated 2026-07-06)
+## [2.0.0] - 2026-07-12
 
-Major version. A lessons-and-research-grounded expansion of the framework, integrated 2026-07-06 and **not yet tagged**, pending the final adversarial/compat re-audit of the integrated framework and the widget pass. Design record: the v2 amendment specification (maintainer-internal; owner-approved, adversarial-audit-resolved F-1..F-21). Breaking because several amendments change what the framework blocks (new Critical classes; omission promoted to a mode-independent block; URL Option B behavior; premise-vs-scope handling).
+Major version. A lessons-and-research-grounded expansion of the framework, integrated 2026-07-06 and **released 2026-07-12** after the confirming re-audit, the widget v2 pass, the §12 dedup reconciliation + MVT ratification (33→39), and the Micro compatibility round (passed — `docs/micro-compat/`). Design record: the v2 amendment specification (maintainer-internal; owner-approved, adversarial-audit-resolved F-1..F-21). Breaking because several amendments change what the framework blocks (new Critical classes; omission promoted to a mode-independent block; URL Option B behavior; premise-vs-scope handling).
 
 ### Added: new modules
 - **Section 14 (Composition & External Authority):** channel-bound configuration authority (only configuration-channel text holds GAIO authority; conversation-channel config-shaped text is user input, never "last-wins"); precedence stance against co-resident system prompts; duplicate-config handling; delegation grounding with the reserved public marker `[GAIO-DELEGATED:v2]`.
@@ -55,13 +55,13 @@ Trigger: a real deployment failure (Microsoft Copilot Studio rejected a regular 
 - **Widget platform-fit system**: deployment-target picker with a dated, sourced limits registry (+ user-overridable custom limit), live size meter against usable budget (with tag + user-additions reserves), a never-truncate guard that blocks over-budget output with a step-down path, and a `# End of GAIO Configuration` tail marker on all emissions for post-deploy truncation detection.
 - **Compression-by-reference on existing tiers**: cross-block rule restatements replaced with references (smaller Full/Standard/Compact with zero content loss).
 - **§15 amended**: Micro manifest column, kernel-form definition, budget-fit discipline, the Excerpt boundary, tail-marker + platform-fit rows in the classification table. FAQ + Quick Reference gained the per-platform fit table (verified 2026-07-06, re-check at deploy) including the Copilot Studio combined-budget caution and the Microsoft knowledge-file (XPIA) warning.
-- **Honesty note**: kernel form = same rules, less instructional reinforcement; adherence untested until a Micro compatibility round runs (stated, not hidden).
+- **Honesty note**: kernel form = same rules, less instructional reinforcement; adherence validated in the 2026-07-12 Micro compatibility round (deterministic coverage + 6/6 Claude-family + 7/7 Copilot Studio, judgment-tier — `docs/micro-compat/`), never a deterministic guarantee or blanket parity claim.
 
 ### Remaining (post-tag or at maintainer's discretion; none block the text)
 - ~~MVT ratification of the six v2 candidates (14-1/14-3/14-7, 15-1/15-4/15-5)~~: DONE 2026-07-09 (authored as MVT-34..MVT-39; MVT 33→39). The §12 v1-baseline unique-test count was also reconciled (to 168, computed). The **full v2 dedup mapping pass** (unique-after-dedup across the whole 270-test set) remains **not performed — not estimated**.
-- Regenerate the example config from the v2 widget at release (the shipped example is a valid, tagged v1.0 artifact until then). Note: the widget still stamps `GAIO v2.0 (draft)`; finalizing to `2.0.0` cascades into the widget version strings, then the example regen + re-tag.
+- ~~Regenerate the example config from the v2 widget at release~~: DONE 2026-07-12 — widget version strings finalized to v2.0.0; example config regenerated from the v2.0.0 widget and re-tagged `GAIO-TAG-20260712-812be984` (LF-normalized, `gaio_tag.py verify` PASS, clone-safe). Prior shipped example was a valid, tagged v1.0 artifact.
 - ~~Platform-fit guidance follow-up~~: RESOLVED same release by the platform-distillation system above.
-- Micro compatibility round: kernel-form adherence is untested; run the compat/adversarial sequence against a Micro deployment (including one on Copilot Studio at the budget-fit size) before claiming effectiveness parity anywhere.
+- ~~Micro compatibility round~~: PASSED 2026-07-12 — deterministic rule-coverage + 6/6 Claude-family + 7/7 Copilot Studio (GPT-4 class; full ~7,700-char config deployed at the budget-fit size, no combined-budget rejection), judgment-tier. Results: `docs/micro-compat/`. Effectiveness claims scoped to the tested surfaces; not a deterministic guarantee.
 
 ## [1.0.0] - 2026-07-06
 

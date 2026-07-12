@@ -4,7 +4,7 @@
 
 **Created by:** Tech Jacks Solutions  
 **License:** CC-BY-SA 4.0  
-**Date:** July 6, 2026 (v2.0 draft; v1.0 dated February 12, 2026)  
+**Date:** July 6, 2026 (v2.0.0; v1.0 dated February 12, 2026)  
 **Change from v1.0:** Regenerated against the v2 amendment set (all framework sections at Draft 2.0). Module 01 gains the corpus-authoring clause. Module 02 gains the URL Option B retrieval-artifact standard (fail-closed to Option A) and the always-included tool-output rule. Module 03 adds the v2 Critical classes (quantity, attribution/coverage, actions/processes, regulatory data structures, inflated assessment) in both variants. Module 04 carries nine scenarios plus the Cross-Scenario Source Rules. Module 05's Mode B format carries the escalation-note floor. Module 06 adds the seven v2 Gate 1 checks, the citation-registry rule, the mode-independent Gate 2 omission checks, and the Gate Integrity Rules. New always-included Initialization Acknowledgment Block (Section 8, state-language, minimal). Module 09 adds the operationalized triggers, scope rationalization rule, and hypothetical persistence rule. Module 10 variants carry the v2 Session Persistence text (omission integrity, false-memory non-exception, Mode B note floor). Module 11 adds the false-premise-vs-scope rule. New Module 14 (Composition & External Authority) and Module 15 (Enforcement Architecture), assembled after Module 13. Header Block gains the Weight Omissions line. Weight is decoupled from enforcement mode: Compact no longer implies Mode B.  
 **Filename note:** The filename stays `GAIO_Modular_Section_Output_v1_0.md` until the v2.0.0 release tag. The rename happens at release, not in this draft.
 

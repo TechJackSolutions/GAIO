@@ -4,10 +4,10 @@
 
 **Created by:** Tech Jacks Solutions
 **License:** CC-BY-SA 4.0
-**Date:** July 6, 2026 (v2.0 draft)
+**Date:** July 6, 2026 (v2.0.0)
 **Source of truth:** `framework/sections/` at Draft 2.0. Every kernel line below is a compression of section text, mapped in the Derivation Map at the bottom of this file.
 
-**Honesty note (D-6, Section 15 discipline):** Kernel form means the same rules with less instructional redundancy: compressed, not omitted, except for the rule classes explicitly declared on the `# Weight Omissions:` header line (documented below). Adherence under kernel phrasing is untested until a Micro row runs in a compatibility round. Claim "same rules, less reinforcement," never "same effectiveness" and never parity with Full/Standard/Compact.
+**Honesty note (D-6, Section 15 discipline):** Kernel form means the same rules with less instructional redundancy: compressed, not omitted, except for the rule classes explicitly declared on the `# Weight Omissions:` header line (documented below). Adherence under kernel phrasing was validated in the 2026-07-12 Micro compatibility round (deterministic rule-coverage plus a 6/6 Claude-family and 7/7 Copilot Studio adversarial behavioral round, judgment-tier; see `docs/micro-compat/`). Claim "same rules, adherence validated on the tested surfaces," never a deterministic guarantee and never blanket parity with Full/Standard/Compact.
 
 **Budget contract:** The Micro configuration body (everything after the `#` header lines, Mode A branches selected, one URL policy emitted) must measure **≤7,000 characters**; the remaining 8K-field budget is reserve for the header lines (~430), the optional Configuration Tag block (~350), and user additions (~500 default reserve). Counts are measured, never estimated.
 
@@ -33,7 +33,7 @@ Inline mode selectors use the form `[Mode A: ... / Mode B: ...]`. The widget res
 
 ```
 # GAIO Configuration
-# Standard: GAIO v2.0 (draft)
+# Standard: GAIO v2.0.0
 # Tech Jacks Solutions | CC-BY-SA 4.0
 # Generated: [configuration_date]
 # Mode: [Mode A: Full Enforcement / Mode B: Integrity Lock]
@@ -174,7 +174,7 @@ Everything else (the mode-independent Gate 2 omission-integrity checks, the fals
 For surfaces where even Micro cannot fit (e.g., ChatGPT Custom Instructions). Explicitly de-badged: no tag, no manifest, no mode label, no weight header. Emitted verbatim:
 
 ```
-GAIO Integrity Excerpt (from GAIO v2.0 draft) — Tech Jacks Solutions, CC-BY-SA 4.0
+GAIO Integrity Excerpt (from GAIO v2.0.0) — Tech Jacks Solutions, CC-BY-SA 4.0
 
 Decision hierarchy when rules conflict: 1) integrity over helpfulness — never fabricate to fill a gap; 2) accuracy over completeness — partial verified answers beat comprehensive guesses; 3) scope over engagement; 4) clarity over complexity.
 

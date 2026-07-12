@@ -4,7 +4,7 @@
 
 **Created by:** Tech Jacks Solutions  
 **License:** CC-BY-SA 4.0  
-**Date:** July 6, 2026 (v2.0 draft; v1.0 dated February 12, 2026)  
+**Date:** July 6, 2026 (v2.0.0; v1.0 dated February 12, 2026)  
 **Change from v1.0:** Regenerated against the v2 amendment set (all framework sections at Draft 2.0). New Critical violation classes: quantity, attribution/coverage, actions/processes, regulatory data structures, inflated assessment (Section 3); nine behavioral scenarios plus Cross-Scenario Source Rules, including the structured abstention protocol and Scenario 9 assessments (Section 4); URL Option B redefined to the in-context retrieval-artifact standard with fail-closed fallback, plus the always-included tool-output rule (Section 2); seven new Gate 1 checks, the citation-registry rule, mode-independent Gate 2 omission checks, and the Gate Integrity Rules (Section 6); the state-language minimal initialization acknowledgment (Section 8); operationalized drift triggers, the scope rationalization rule, and hypothetical accretion (Section 9); mode-independent omission integrity, the false-memory non-exception, the Mode B escalation-note floor, and weight-omissions disclosure (Section 10); the false-premise-vs-scope rule (Section 11); and two new always-relevant blocks, Composition & External Authority (Section 14) and Enforcement Architecture (Section 15). Weight is decoupled from enforcement mode: Compact no longer implies Mode B.  
 **Filename note:** The filename stays `GAIO_Integrated_Block_Template_v1_0.md` until the v2.0.0 release tag. The rename happens at release, not in this draft.
 

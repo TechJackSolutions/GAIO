@@ -55,7 +55,7 @@ If you're using a platform or model tier with a smaller context window (16K–32
 
 **After deploying to any field-limited surface, run the truncation check:** confirm the final line `# End of GAIO Configuration` survived in the saved field, and ask the assistant to state its loaded domain and mode. A truncated config typically loses its tail.
 
-**Micro honesty note:** Micro renders every rule in kernel form: same rules, less instructional reinforcement. Adherence on kernel form is untested until a Micro compatibility round runs; for high-stakes deployments prefer a fuller weight on a surface that fits it.
+**Micro honesty note:** Micro renders every rule in kernel form: same rules, less instructional reinforcement. Adherence on kernel form was validated in the 2026-07-12 Micro compatibility round (6/6 Claude-family + 7/7 Copilot Studio, judgment-tier); for high-stakes deployments prefer a fuller weight on a surface that fits it.
 
 **Mode still matters at Compact size.** As of v2, Compact is available in both modes. Compact-Mode-A keeps scope and escalation enforced; Compact-Mode-B (Integrity Lock) keeps every anti-fabrication integrity rule (including omission integrity, which never relaxes) but makes scope boundaries and escalation triggers **advisory**. Mode B remains inappropriate for audience-facing or regulated deployments; the widget requires explicit confirmation before generating it, and refuses it outright for regulated multi-user configurations.
 
@@ -67,5 +67,5 @@ No. The GAIO widget generates your configuration behind a button click. You past
 
 ---
 
-*GAIO v2.0 (draft) | Created and maintained by Tech Jacks Solutions*
+*GAIO v2.0.0 | Created and maintained by Tech Jacks Solutions*
 *Licensed under CC-BY-SA 4.0*

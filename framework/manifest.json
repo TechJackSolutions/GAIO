@@ -1,9 +1,9 @@
 {
   "name": "GAIO",
   "full_name": "Guardrail Architecture for Informed Output",
-  "version": "2.0.0-draft",
-  "version_note": "v2 amendment set integrated 2026-07-06 (sections → canonical). Final adversarial re-audit ran 2026-07-06: 2 blockers (R-1 §12 v2-additions subsection missing; R-2 §13 weight-omissions tag field missing) + 4 minor findings — all resolved and closure deterministically verified. Not yet tagged: pending a confirming re-audit of the re-integrated text, the widget pass (Compact-Mode-A emission + deployment-audience question), template regeneration, and the deterministic test recount. Prior tagged release: v1.0.0 (2026-07-06).",
-  "release_date": null,
+  "version": "2.0.0",
+  "version_note": "v2.0.0 released 2026-07-12. v2 amendment set integrated 2026-07-06 (sections → canonical); adversarial re-audit resolved (2 blockers + 4 minor, closure deterministically verified); widget v2 pass, templates regenerated, deterministic test census 270; §12 dedup reconciled and the six v2 MVT candidates ratified (MVT 33→39); Micro compatibility round passed 2026-07-12 (deterministic coverage + 6/6 Claude-family + 7/7 Copilot Studio, judgment-tier). Prior tagged release: v1.0.0 (2026-07-06).",
+  "release_date": "2026-07-12",
   "prior_release": { "version": "1.0.0", "date": "2026-07-06" },
   "canonical_document": "framework/canonical/GAIO_Canonical_v1_0.md",
   "statistics": {

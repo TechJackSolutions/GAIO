@@ -177,7 +177,7 @@ GAIO/
 
 Repository releases represent the overall framework version. Individual sections carry their own draft numbers (e.g., Draft 1.3) reflecting internal revision history. The repository release version (recorded in `framework/manifest.json` and as a git tag) is the authoritative reference for compatibility and citation. See [CHANGELOG.md](CHANGELOG.md) for release history.
 
-This project uses [Semantic Versioning](https://semver.org/). Current tagged release: **v1.0.0**. The main branch carries the **v2.0.0 draft** (15 sections, the Micro tier and platform-fit system, and the enforcement-architecture module), pending its final validation steps listed in `CHANGELOG.md` before tagging. Framework statistics (test counts, domain counts, section counts) are maintained in `framework/manifest.json`. That file is the single source of truth; any conflicting count elsewhere in the repository is an error. Breaking, per this project's SemVer policy, means a change that alters what the framework blocks or permits for an unchanged configuration.
+This project uses [Semantic Versioning](https://semver.org/). Current release: **v2.0.0** (2026-07-12) — 15 sections, the Micro tier and platform-fit system, and the enforcement-architecture module; the Micro compatibility round passed 2026-07-12 (`docs/micro-compat/`). Prior tag: v1.0.0. Framework statistics (test counts, domain counts, section counts) are maintained in `framework/manifest.json`. That file is the single source of truth; any conflicting count elsewhere in the repository is an error. Breaking, per this project's SemVer policy, means a change that alters what the framework blocks or permits for an unchanged configuration.
 
 ---
 
@@ -230,4 +230,4 @@ All contributions must use verifiable sources only. No fabricated authorities, s
 
 ---
 
-*GAIO v2.0.0 (draft; latest tag v1.0.0). Created and maintained by Tech Jacks Solutions. Framework licensed under CC-BY-SA 4.0. Widget licensed under Apache 2.0.*
+*GAIO v2.0.0 (2026-07-12). Created and maintained by Tech Jacks Solutions. Framework licensed under CC-BY-SA 4.0. Widget licensed under Apache 2.0.*
