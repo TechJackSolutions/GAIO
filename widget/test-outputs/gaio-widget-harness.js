@@ -12,9 +12,9 @@ const fs = require('fs');
 const path = require('path');
 const { execFileSync } = require('child_process');
 
-const WIDGET = 'C:/dev/projects/GAIO/widget/GAIO_Widget_v1_0.html';
-const TEMPLATE = 'C:/dev/projects/GAIO/framework/templates/GAIO_Distilled_Rendition_v2_0.md';
-const OUTDIR = 'C:/dev/projects/GAIO/widget/test-outputs';
+const WIDGET = '/home/tjs/dev/projects/GAIO/widget/GAIO_Widget_v1_0.html';
+const TEMPLATE = '/home/tjs/dev/projects/GAIO/framework/templates/GAIO_Distilled_Rendition_v2_0.md';
+const OUTDIR = '/home/tjs/dev/projects/GAIO/widget/test-outputs';
 const html = fs.readFileSync(WIDGET, 'utf8');
 
 const m = html.match(/<script>([\s\S]*?)<\/script>/);
