@@ -3,7 +3,7 @@
 """GAIO Configuration Tag generator/verifier.
 
 Deterministic Python port of the hash + tag logic in
-/home/tjs/dev/projects/GAIO/widget/GAIO_Widget_v1_0.html (the reference
+C:/dev/projects/GAIO/widget/GAIO_Widget_v1_0.html (the reference
 implementation) and framework/sections/13-configuration-tag.md
 (Normalization Spec v1). Where prose and widget code disagree, the
 widget code wins -- it is what produced any real-world hashes.
